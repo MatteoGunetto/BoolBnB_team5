@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string("title", 64);
             $table->decimal('cost', 6, 2);
-            $table->unsignedTinyInteger("duration");
+            $table->unsignedTinyInteger("durationInDays");
             
             $table->timestamps();
         });
