@@ -18,15 +18,15 @@ return new class extends Migration
 
             $table->text('title');
             $table->text('description')->nullable();
-            $table->tinyint('rooms');
-            $table->tinyint('beds');
-            $table->tinyint('bathrooms');
-            $table->smallint('squareMeters');
-            $table->varchar('address', 255);
+            $table->unsignedTinyInteger('rooms');
+            $table->unsignedTinyInteger('beds');
+            $table->unsignedTinyInteger('bathrooms');
+            $table->smallInteger('squareMeters');
+            $table->string('address', 255);
             $table->decimal('latitude');
             $table->decimal('longitude');
-            $table->varchar('image', 255);
-            $table->tinyint('visible')->default;
+            $table->string('image', 255);
+            $table->unsignedTinyInteger('visible')->default;
 
             $table->timestamps();
         });
