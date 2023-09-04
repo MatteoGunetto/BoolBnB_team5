@@ -10,5 +10,10 @@ class Amenity extends Model
     //Snippet per associare il model alla tabella db corrispondente vista l'irregolarità della parola
     protected $table = 'amenities';
 
+
+    public function apartments() {
+        return $this->belongsToMany(Apartment::class);
+    }
+
     use HasFactory;
 }
