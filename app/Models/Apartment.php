@@ -45,7 +45,6 @@ class Apartment extends Model
         'latitude',
         'longitude',
         'image',
-        'description',
-        'icon',
+        'visible',
     ];
 }
