@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promotion extends Model
 {
+
+    protected $fillable = [
+        'title',
+        'cost',
+        'durationInDays',
+    ];
+
     use HasFactory;
     // Una promozione appartiene a più appartamenti.
     public function apartments() {
