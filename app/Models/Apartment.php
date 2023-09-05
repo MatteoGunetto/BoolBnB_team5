@@ -12,4 +12,8 @@ class Apartment extends Model
     public function amenities() {
         return $this->belongsToMany(Amenity::class);
     }
+
+    public function promotions() {
+        return $this->belongsToMany(Promotion::class);
+    }
 }
