@@ -25,6 +25,11 @@ class User extends Authenticatable
         'dateOfBirth',
     ];
 
+    // Un utente può avere diversi appartamenti.
+    public function apartments(){
+        return $this->hasMany(Apartment::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
