@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Promotion;
 
-use App\Models\Apartment;
 
-class ApartmentTableSeeder extends Seeder
+class PromotionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class ApartmentTableSeeder extends Seeder
      */
     public function run()
     {
-        Apartment::factory()->count(5)->create();
+        Promotion::factory()->count(3)->create();
     }
 }

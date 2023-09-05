@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+
             $table->text('Content');
             $table->string('Name');
             $table->string('SenderEmail', 128);
