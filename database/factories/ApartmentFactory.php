@@ -27,7 +27,7 @@ class ApartmentFactory extends Factory
             'latitude' => $fake()->random . uniform(-90, 90),
             'longitude' => $fake()->random . uniform(-180, 180),
             'image' => $fake()->imageUrl(640, 480, 'Apartment', true),
-            'icon' => $fake()->boolean(),
+            'visible' => $fake()->boolean(),
         ];
     }
 }
