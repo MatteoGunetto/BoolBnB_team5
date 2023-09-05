@@ -9,4 +9,8 @@ class Promotion extends Model
 {
     use HasFactory;
 
+    public function apartments() {
+        return $this->belongsToMany(Apartment::class);
+    }
+
 }

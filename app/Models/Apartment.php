@@ -16,7 +16,10 @@ class Apartment extends Model
     // Un determinato appartamento è posseduto da un solo utente.
     public function user() {
 
-        return $this -> belongsTo(User :: class);
+        return $this -> belongsTo(User::class);
     }
 
+    public function promotions() {
+        return $this->belongsToMany(Promotion::class);
+    }
 }
