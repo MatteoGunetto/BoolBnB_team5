@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ApartmentTableSeeder::class
+            ApartmentTableSeeder::class,
+            UserTableSeeder :: class ,
         ]);
     }
-    public function run() {
-        $this -> call([ UserTableSeeder :: class ]);
-        }
+
+
+
+
 }
