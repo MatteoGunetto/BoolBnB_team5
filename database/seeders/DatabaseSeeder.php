@@ -18,4 +18,7 @@ class DatabaseSeeder extends Seeder
             ApartmentTableSeeder::class
         ]);
     }
+    public function run() {
+        $this -> call([ UserTableSeeder :: class ]);
+        }
 }
