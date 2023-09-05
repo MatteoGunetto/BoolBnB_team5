@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('apartment_amenity', function (Blueprint $table) {
-            //$table->id();
+        Schema::create('amenity_apartment', function (Blueprint $table) {
+            $table->id();
 
-            $table->unsignedBigInteger('apartment_id');
+            $table->text('description');
+
             $table->unsignedBigInteger('amenity_id');
+            $table->unsignedBigInteger('apartment_id');
 
             //Definizione foreign keys
-            $table->foreign('apartment_id')->references('id')->on('amenities');
-            $table->foreign('amenity_id')->references('id')->on('apartments');
+            $table->foreign('apartment_id')->references('id')->on('apartments');
+            $table->foreign('amenity_id')->references('id')->on('amenities');
+
+            $table->timestamps();
         });
     }
 
@@ -32,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('apartment_amenity');
+       Schema::dropIfExists('amenity_apartment');
     }
 };
