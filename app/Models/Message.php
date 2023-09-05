@@ -14,4 +14,10 @@ class Message extends Model
         'name',
         'senderEmail'
     ];
+
+      // Un determinato messaggio è contenuto in un solo appartamento.
+      public function apartment() {
+
+        return $this -> belongsTo(Apartment::class);
+    }
 }
