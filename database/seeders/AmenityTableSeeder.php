@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Amenity;
 
-class AmenitiesTableSeeder extends Seeder
+class AmenityTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
