@@ -15,5 +15,11 @@ class Amenity extends Model
         return $this->belongsToMany(Apartment::class);
     }
 
+    protected $fillable = [
+        'name',
+        'description',
+        'icon',
+    ];
+
     use HasFactory;
 }

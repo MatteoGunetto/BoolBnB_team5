@@ -33,4 +33,19 @@ class Apartment extends Model
      public function messages(){
         return $this->hasMany(Message::class);
     }
+
+    protected $fillable = [
+        'title',
+        'description',
+        'rooms',
+        'beds',
+        'bathrooms',
+        'squareMeters',
+        'address',
+        'latitude',
+        'longitude',
+        'image',
+        'description',
+        'icon',
+    ];
 }
