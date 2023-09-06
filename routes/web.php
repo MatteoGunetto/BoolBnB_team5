@@ -23,7 +23,9 @@ Route::get('/', function () {
 Route::get('Apartment/show', [ApartmentController :: class, "show"]) -> name('Apartment.show');
 Route::get('Apartment/create', [ApartmentController :: class, "create"]) -> name('Apartment.create');
 Route::get('Apartment/edit', [ApartmentController :: class, "edit"]) -> name('Apartment.edit');
-Route::get('Apartment/store', [ApartmentController :: class, "store"]) -> name('Apartment.store');
+// aggiunto middleware per rendere rotta accessibile solo a utenti loggati
+Route::post('Apartment/store', [ApartmentController :: class, "store"]) -> name('Apartment.store')
+->middleware(['auth', 'verified']);
 
 
 Route::get('/dashboard', function () {

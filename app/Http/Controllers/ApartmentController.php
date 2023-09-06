@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Amenity;
+
+//questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -15,7 +19,8 @@ class ApartmentController extends Controller
 
     public function create()
     {
-        return view('Apartment.create');
+        $amenities = Amenity::all();
+        return view('Apartment.create',compact('amenities') );
     }
 
 
@@ -46,7 +51,7 @@ class ApartmentController extends Controller
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
             'image' => 'required|min:1|max:255',
-            'visible' => 'required|integer|numeric',
+            // 'visible' => 'required|integer|numeric',
         ]);
     }
 
@@ -75,10 +80,15 @@ class ApartmentController extends Controller
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
             'image' => 'required|min:1|max:255',
-            'visible' => 'required|integer|numeric',
+            // 'visible' => 'required|integer|numeric',
         ]);
 
-        $apartment = Apartment::create($request);
-        return redirect()->route('  Apartments.show', $apartment->id);
+        $data = $request->all();
+        $data["user_id"] = Auth::id(); 
+
+        Apartment::create($data);
+
+        return view('apartment.index');
+        //return redirect()->route('Apartments.show', $apartment->id);
     }
 }

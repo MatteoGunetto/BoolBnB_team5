@@ -12,6 +12,8 @@
                             </div>
                             @endforeach
                         @endif
+
+                        <!-- form -->
                     <form action="{{ route('Apartment.store') }}"
                         method="POST">
                         @csrf
@@ -44,7 +46,7 @@
                             class="form-control"
                             id="rooms"
                             placeholder="Inserisci numero stanze"
-                            value="{{ old('stanze') }}">
+                            value="{{ old('rooms') }}">
                         </div>
                         <div class="mb-3">
                             <label for="beds" class="form-label">Numero letti:</label>
@@ -55,7 +57,7 @@
                             class="form-control"
                             id="beds"
                             placeholder="Inserisci numero letti"
-                            value="{{ old('letti') }}">
+                            value="{{ old('beds') }}">
                         </div>
                         <div class="mb-3">
                             <label for="bathrooms" class="form-label">Numero bagni:</label>
@@ -66,7 +68,7 @@
                             class="form-control"
                             id="bathrooms"
                             placeholder="Inserisci numero bagni"
-                            value="{{ old('bagni') }}">
+                            value="{{ old('bathrooms') }}">
                         </div>
                         <div class="mb-3">
                             <label for="squareMeters" class="form-label"> dimensioni appartamento:</label>
@@ -77,7 +79,7 @@
                             class="form-control"
                             id="squareMeters"
                             placeholder="Inserisci dimensioni in mt quadri "
-                            value="{{ old('dimensioni appartamento') }}">
+                            value="{{ old('squareMeters') }}">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">indirizzo:</label>
@@ -119,11 +121,21 @@
                             placeholder="selezionare immagine"
                             value="{{ old('image') }}">
                         </div>
+                        <!-- amenities -->
+                        <div class="mb-3">
+                            <label for="amenities" class="form-label">Selezionare servizi aggiuntivi:</label>
+                                @foreach ($amenities as $amenity)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="amenities[]" id="amenity-{{ $amenity->id }}" value="{{ $amenity->id }}">
+                                        <label class="form-check-label" for="amenity-{{ $amenity->id }}">
+                                            {{ $amenity->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                        </div>
+                      
 
-
-
-
-
+                        <!-- submit button -->
                         <button type="submit" class="btn btn-primary">Inserisci appartamento</button>
                     </form>
                 </div>
