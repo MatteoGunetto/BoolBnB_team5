@@ -16,9 +16,13 @@ use App\Http\Controllers\ApartmentController;
 |
 */
 
-Route::get('/', function () {
-    return view('Apartment.index');
-});
+// Route::get('/', function () {
+//     return view('Apartment.index');
+// });
+
+
+
+Route::get('/', [ApartmentController::class, "index"])->name('Apartment.index');
 
 Route::get('Apartment/show', [ApartmentController::class, "show"])->name('Apartment.show');
 Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit');
