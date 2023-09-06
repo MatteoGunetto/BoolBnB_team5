@@ -61,7 +61,7 @@
 
         <div class="form-group">
             <label for="visible">Visibile:</label>
-            <select name="visible" class="form-control" required>
+            <select name="visible" class="form-control">
                 <option value="1" {{ $apartment->visible == 1 ? 'selected' : '' }}>Sì</option>
                 <option value="0" {{ $apartment->visible == 0 ? 'selected' : '' }}>No</option>
             </select>
