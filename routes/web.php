@@ -21,6 +21,9 @@ Route::get('/', function () {
 });
 
 Route::get('Apartment/show', [ApartmentController :: class, "show"]) -> name('Apartment.show');
+Route::get('Apartment/create', [ApartmentController :: class, "create"]) -> name('Apartment.create');
+Route::get('Apartment/edit', [ApartmentController :: class, "edit"]) -> name('Apartment.edit');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -15,7 +15,7 @@ class ApartmentController extends Controller
 
     public function create()
     {
-        return view('apartment.create');
+        return view('Apartment.create');
     }
 
 
@@ -50,11 +50,17 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $apartment = Apartment::findOrFail($id);
-        return view('apartments.edit', compact('apartment'));
+        return view('Apartment.edit');
     }
+
+
+    // public function edit($id)
+    // {
+    //     // $apartment = Apartment::findOrFail($id);
+    //     return view('apartments.edit', compact('apartment'));
+    // }
 
     public function store(Request $request)
     {
