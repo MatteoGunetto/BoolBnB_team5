@@ -9,8 +9,8 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        return view('apartment.index');
-        compact('Apartments');
+        $apartment = Apartment::all();
+        return view('apartment.index',compact('Apartments'));
     }
 
     public function create()
