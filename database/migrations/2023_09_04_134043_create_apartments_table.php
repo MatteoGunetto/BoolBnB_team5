@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('address', 255);
             $table->decimal('latitude', 8, 6);
             $table->decimal('longitude',  9, 6);
-            $table->string('image', 255);
+            $table->string('image', 255)->nullable();
             $table->unsignedTinyInteger('visible')->default(1);
 
             $table->timestamps();

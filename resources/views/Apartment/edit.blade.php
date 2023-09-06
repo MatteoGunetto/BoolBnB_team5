@@ -6,7 +6,7 @@
     <h1>
         Modifica Appartamento
     </h1>
-    <form action="{{ route('Apartment.update', $apartment->id}}" method="POST">
+    <form action="{{ route('Apartment.update', $apartment->id}}"method="POST">
         @csrf
         @method("PUT")
         <div class="form-group">

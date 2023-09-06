@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Amenity;
+use Illuminate\Support\Facades\Storage;
 
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
 use Illuminate\Support\Facades\Auth;
@@ -84,8 +85,10 @@ class ApartmentController extends Controller
         ]);
 
         $data = $request->all();
-        $data["user_id"] = Auth::id(); 
+        $data["user_id"] = Auth::id();
 
+        $img_path=Storage::put("uploads",$data["image"]);
+        $data["image"] = $img_path;
         Apartment::create($data);
 
         return view('apartment.index');

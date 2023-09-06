@@ -15,7 +15,7 @@
 
                         <!-- form -->
                     <form action="{{ route('Apartment.store') }}"
-                        method="POST">
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label">Titolo:</label>
@@ -114,7 +114,7 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">selezionare immagine:</label>
                             <input required
-                            type="text"
+                            type="file"
                             name="image"
                             class="form-control"
                             id="image"
@@ -133,7 +133,7 @@
                                     </div>
                                 @endforeach
                         </div>
-                      
+
 
                         <!-- submit button -->
                         <button type="submit" class="btn btn-primary">Inserisci appartamento</button>
