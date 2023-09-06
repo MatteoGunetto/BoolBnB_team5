@@ -3,32 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Apartment;
 
 class ApartmentController extends Controller
 {
     public function index()
     {
         return view('apartment.index');
-        compact('Apartment');
+        compact('Apartments');
     }
 
     public function create()
     {
         return view('apartment.create');
-        compact('Apartment');
     }
 
 
-    public function show()
+    public function show($id)
     {
-        return view('apartment.show');
-        compact('Apartment');
+        $apartment = Apartment::findOrFail($id);
+        return view('apartments.show', compact('apartment'));
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        return view('apartment.update');
-        compact('Apartment');
+        $request->validate([
+            'title' => 'required|min:1|max:255',
+            'description' => 'required|min:1',
+            'rooms' => 'required|integer|numeric|min:1|max:500',
+            'beds' => 'required|integer|numeric|min:1|max:500',
+            'bathrooms' => 'required|integer|numeric|min:1|max:500',
+            'squareMeters' => 'required|integer|numeric|min:1',
+            'address' => 'required|min:1|max:255',
+            'latitude' => 'required|numeric|min:1',
+            'longitude' => 'required|numeric|min:1',
+            'image' => 'required|min:1|max:255',
+            'visible' => 'required|integer|numeric',
+        ]);
     }
 
     public function edit()
