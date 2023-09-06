@@ -20,10 +20,11 @@ Route::get('/', function () {
     return view('Apartment.index');
 });
 
-Route::get('Apartment/show', [ApartmentController :: class, "show"]) -> name('Apartment.show');
-Route::get('Apartment/create', [ApartmentController :: class, "create"]) -> name('Apartment.create');
-Route::get('Apartment/edit', [ApartmentController :: class, "edit"]) -> name('Apartment.edit');
-Route::get('Apartment/store', [ApartmentController :: class, "store"]) -> name('Apartment.store');
+Route::get('Apartment/show', [ApartmentController::class, "show"])->name('Apartment.show');
+Route::get('Apartment/create', [ApartmentController::class, "create"])->name('Apartment.create');
+Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit');
+Route::get('Apartment/store', [ApartmentController::class, "store"])->name('Apartment.store');
+Route::get('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update');
 
 
 Route::get('/dashboard', function () {
@@ -36,4 +37,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
