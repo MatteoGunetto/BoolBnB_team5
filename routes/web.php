@@ -20,12 +20,13 @@ Route::get('/', function () {
     return view('Apartment.index');
 });
 
-Route::get('Apartment/show', [ApartmentController :: class, "show"]) -> name('Apartment.show');
-Route::get('Apartment/create', [ApartmentController :: class, "create"]) -> name('Apartment.create');
-Route::get('Apartment/edit', [ApartmentController :: class, "edit"]) -> name('Apartment.edit');
+Route::get('Apartment/show', [ApartmentController::class, "show"])->name('Apartment.show');
+Route::get('Apartment/create', [ApartmentController::class, "create"])->name('Apartment.create');
+Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit');
 // aggiunto middleware per rendere rotta accessibile solo a utenti loggati
-Route::post('Apartment/store', [ApartmentController :: class, "store"]) -> name('Apartment.store')
-->middleware(['auth', 'verified']);
+Route::post('Apartment/store', [ApartmentController::class, "store"])->name('Apartment.store')
+    ->middleware(['auth', 'verified']);
+Route::get('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update');
 
 
 Route::get('/dashboard', function () {
@@ -38,4 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
