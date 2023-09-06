@@ -42,15 +42,29 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('apartment.edit');
-        compact('Apartment');
+        $apartment = Apartment::findOrFail($id);
+        return view('apartments.edit', compact('apartment'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return view('apartment.store');
-        compact('Apartment');
+        $request->validate([
+            'title' => 'required|min:1|max:255',
+            'description' => 'required|min:1',
+            'rooms' => 'required|integer|numeric|min:1|max:500',
+            'beds' => 'required|integer|numeric|min:1|max:500',
+            'bathrooms' => 'required|integer|numeric|min:1|max:500',
+            'squareMeters' => 'required|integer|numeric|min:1',
+            'address' => 'required|min:1|max:255',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+            'image' => 'required|min:1|max:255',
+            'visible' => 'required|integer|numeric',
+        ]);
+
+        $apartment = Apartment::create($request);
+        return redirect()->route('apartments.show', $apartment->id);
     }
 }
