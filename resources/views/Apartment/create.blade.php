@@ -80,7 +80,7 @@
                             value="{{ old('dimensioni appartamento') }}">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">longitudine:</label>
+                            <label for="address" class="form-label">indirizzo:</label>
                             <input required
                             type="text"
                             name="address"
