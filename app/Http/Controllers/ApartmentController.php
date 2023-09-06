@@ -79,6 +79,6 @@ class ApartmentController extends Controller
         ]);
 
         $apartment = Apartment::create($request);
-        return redirect()->route('apartments.show', $apartment->id);
+        return redirect()->route('  Apartments.show', $apartment->id);
     }
 }
