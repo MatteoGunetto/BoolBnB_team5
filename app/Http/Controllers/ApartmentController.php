@@ -35,8 +35,8 @@ class ApartmentController extends Controller
             'bathrooms' => 'required|integer|numeric|min:1|max:500',
             'squareMeters' => 'required|integer|numeric|min:1',
             'address' => 'required|min:1|max:255',
-            'latitude' => 'required|numeric|min:1',
-            'longitude' => 'required|numeric|min:1',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
             'image' => 'required|min:1|max:255',
             'visible' => 'required|integer|numeric',
         ]);
