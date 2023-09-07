@@ -93,6 +93,38 @@ class ApartmentController extends Controller
         $img_path=Storage::put("uploads",$data["image"]);
         $data["image"] = $img_path;
 
+        // Chiamata tomtom per latitudine e longitudine
+        $address = $data['address'];
+        $apiKey = env('TOMTOM_API_KEY');
+        $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
+
+        $response = Http::get($endpoint);
+
+        if ($response->successful()) {
+            $apiData = $response->json();
+            if (!empty($apiData['results'])) {
+                $position = $apiData['results'][0]['position'];
+                $data['latitude'] = $position['lat'];
+                $data['longitude'] = $position['lon'];
+            } else {
+                // Potresti voler gestire l'errore: l'indirizzo non ha restituito risultati
+                return redirect()->back()->with('error', 'Indirizzo non trovato.');
+            }
+        } else {
+            // Potresti voler gestire l'errore: chiamata API fallita
+            return redirect()->back()->with('error', 'Errore nel recupero delle coordinate.');
+        }
+
+
+
+
+
+
+
+
+
+
+
         $apartment = Apartment::create($data);
 
         $apartment->amenities()->attach($data['amenities']);
