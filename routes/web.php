@@ -51,4 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//aggiunto per gestire "myApartments" in dashboard
+Route::get('/Apartment/myApartments', [ApartmentController::class, 'myApartments']);
+
 require __DIR__ . '/auth.php';
