@@ -10,9 +10,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('Apartment.index') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('Apartment.show') }}">I tuoi appartamenti</a>
-                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="{{ route('Apartment/show/{id}') }}">I tuoi appartamenti</a>
+                </li> --}}
                 <li>
                     <a class="nav-link" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>
                 </li>
