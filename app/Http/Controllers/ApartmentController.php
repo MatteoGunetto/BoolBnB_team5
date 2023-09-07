@@ -99,4 +99,8 @@ class ApartmentController extends Controller
         return redirect()->route('Apartment.index');
         //return redirect()->route('Apartments.show', $apartment->id);
     }
+
+    public function myApartments() {
+        return view('Apartment.myApartments');
+    }
 }
