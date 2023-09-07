@@ -29,17 +29,18 @@ class ApartmentController extends Controller
 
     //Codice che ci serve per prendere i dati filtrati per id dal database
 
-    // public function show($id)
-    // {
-    //     $apartment = Apartment::findOrFail($id);
-    //     return view('Apartment.show', compact('apartment'));
-    // }
+    public function show($id)
+    {
+        $apartment = Apartment::findOrFail($id);
+        return view('Apartment.show', compact('apartment'));
+    }
 
     //Show provvisoria di sviluppo
-    public function show()
-    {
-        return view('Apartment.show');
-    }
+    // public function show()
+    // {
+    //     $apartments = Apartment::all();
+    //     return view('Apartment.show',compact('apartments'));
+    // }
 
     public function update(Request $request, $id)
     {
