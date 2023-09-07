@@ -31,8 +31,13 @@
             @foreach ($apartments as $apartment)
                 <div class="card-deck mt-3 ">
                     <div class="card">
-                        <img src="{{ $apartment->image_url }}" class="card-img-top" alt="{{ $apartment->name }}">
+                        <img 
+                        src="{{ asset('storage/' . $apartment->image) }}" 
+                        class="card-img-top" 
+                        alt="{{ $apartment->name }}"
+                        height="150px">
                         <div class="card-body">
+
                             <h5 class="card-title">{{ $apartment->title }}</h5>
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
