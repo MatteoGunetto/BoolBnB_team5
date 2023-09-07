@@ -14,6 +14,12 @@
                         @endif
 
                         <!-- form -->
+                        <form method="POST" action="{{ route('coordinate.salva') }}">
+                            @csrf
+                            <label for="indirizzo">Indirizzo:</label>
+                            <input type="text" id="indirizzo" name="indirizzo" required>
+                            <button type="submit">Salva Coordinate</button>
+                        </form>
                     <form action="{{ route('Apartment.store') }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
@@ -91,7 +97,17 @@
                             placeholder="Inserisci indirizzo"
                             value="{{ old('address') }}">
                         </div>
-                        <div class="mb-3">
+
+
+
+
+
+
+
+
+
+
+                        {{-- <div class="mb-3">
                             <label for="address" class="form-label">latitudine:</label>
                             <input required
                             type="text"
@@ -110,7 +126,7 @@
                             id="longitude"
                             placeholder="Inserisci longitudine"
                             value="{{ old('longitude') }}">
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="image" class="form-label">selezionare immagine:</label>
                             <input required

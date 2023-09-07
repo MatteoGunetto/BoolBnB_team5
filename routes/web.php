@@ -40,7 +40,8 @@ Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartm
 
 Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
 ->middleware(['auth', 'verified']);
-
+Route::get('/coordinate/inserisci', [CoordinateController::class, 'inserisciForm']);
+Route::post('/coordinate/salva', [CoordinateController::class, 'salvaCoordinate'])->name('coordinate.salva');
 
 
 Route::get('/dashboard', function () {
