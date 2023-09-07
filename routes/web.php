@@ -24,7 +24,7 @@ use App\Http\Controllers\ApartmentController;
 
 Route::get('/', [ApartmentController::class, "index"])->name('Apartment.index');
 
-Route::get('Apartment/show', [ApartmentController::class, "show"])->name('Apartment.show');
+Route::get('Apartment/show/{id}', [ApartmentController::class, "show"])->name('Apartment.show');
 Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit');
 Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update');
 
