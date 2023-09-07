@@ -96,7 +96,7 @@ class ApartmentController extends Controller
 
         $apartment->amenities()->attach($data['amenities']);
 
-        return view('apartment.index');
+        return redirect()->route('Apartment.index');
         //return redirect()->route('Apartments.show', $apartment->id);
     }
 }
