@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
 use Illuminate\Support\Facades\Auth;
 
+//questo lo aggiungiamo per poter usare chiamate API
+
+use Illuminate\Support\Facades\Http;
+
+
 class ApartmentController extends Controller
 {
     public function index()
@@ -81,8 +86,9 @@ class ApartmentController extends Controller
             'bathrooms' => 'required|integer|numeric|min:1|max:500',
             'squareMeters' => 'required|integer|numeric|min:1',
             'address' => 'required|min:1|max:255',
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
+            //lat e lon non vanno validate perchè ci pensa direttamente Tomtom
+            //'latitude' => 'required|numeric|between:-90,90',
+            //'longitude' => 'required|numeric|between:-180,180',
             'image' => 'required|min:1|max:255',
             // 'visible' => 'required|integer|numeric',
         ]);
@@ -97,33 +103,20 @@ class ApartmentController extends Controller
         $address = $data['address'];
         $apiKey = env('TOMTOM_API_KEY');
         $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
-
+        
         $response = Http::get($endpoint);
+        
+        
+        //dd($response['results'][0]['position']);
 
-        if ($response->successful()) {
-            $apiData = $response->json();
-            if (!empty($apiData['results'])) {
-                $position = $apiData['results'][0]['position'];
-                $data['latitude'] = $position['lat'];
-                $data['longitude'] = $position['lon'];
-            } else {
-                // Potresti voler gestire l'errore: l'indirizzo non ha restituito risultati
-                return redirect()->back()->with('error', 'Indirizzo non trovato.');
-            }
-        } else {
-            // Potresti voler gestire l'errore: chiamata API fallita
-            return redirect()->back()->with('error', 'Errore nel recupero delle coordinate.');
-        }
+        //vedere se si può scrivere meglio il "path" per position
+        $position = $response['results'][0]['position'];
+ 
+        $latitude = $position["lat"];
+        $longitude = $position["lon"];
 
-
-
-
-
-
-
-
-
-
+        $data["latitude"] = $latitude;
+        $data["longitude"] = $longitude;
 
         $apartment = Apartment::create($data);
 
