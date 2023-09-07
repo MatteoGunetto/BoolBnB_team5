@@ -13,6 +13,19 @@
         </div>
     </form>
 
+    <div>
+        <!-- Barra di ricerca -->
+        <form @submit.prevent="search">
+            <div class="input-group mb-3">
+                <input v-model="address" type="text" class="form-control" placeholder="Cerca per località">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Cerca</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <!-- Elenco case vacanze in evidenza -->
     <h1 class="mt-4">Case Vacanze in Evidenza</h1>
 
