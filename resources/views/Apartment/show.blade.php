@@ -23,7 +23,12 @@
         <h3>Cosa troverai</h3>
 
         @foreach ($apartment->amenities as $amenity)
+        <div>
             <span>{{ $amenity->name }}</span>
+            <span>{!! $amenity->icon !!}</span>
+        </div>
+            
+
         @endforeach
 
 
