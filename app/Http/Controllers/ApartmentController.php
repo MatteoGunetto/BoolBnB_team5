@@ -91,7 +91,10 @@ class ApartmentController extends Controller
 
         $img_path=Storage::put("uploads",$data["image"]);
         $data["image"] = $img_path;
-        Apartment::create($data);
+
+        $apartment = Apartment::create($data);
+
+        $apartment->amenities()->attach($data['amenities']);
 
         return view('apartment.index');
         //return redirect()->route('Apartments.show', $apartment->id);
