@@ -12,7 +12,7 @@ class Amenity extends Model
 
     // Un servizio appartiene a più appartamenti.
     public function apartments() {
-        return $this->belongsToMany(Apartment::class);
+        return $this->belongsToMany(Apartment::class, 'amenity_apartment');
     }
 
     protected $fillable = [

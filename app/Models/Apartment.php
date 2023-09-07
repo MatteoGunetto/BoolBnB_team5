@@ -10,7 +10,7 @@ class Apartment extends Model
     use HasFactory;
     // Un appartamento può avere diversi servizi.
     public function amenities() {
-        return $this->belongsToMany(Amenity::class);
+        return $this->belongsToMany(Amenity::class,'amenity_apartment');
     }
 
     // Un determinato appartamento è posseduto da un solo utente.

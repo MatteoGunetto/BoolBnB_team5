@@ -14,12 +14,6 @@
                         @endif
 
                         <!-- form -->
-                        <form method="POST" action="{{ route('coordinate.salva') }}">
-                            @csrf
-                            <label for="indirizzo">Indirizzo:</label>
-                            <input type="text" id="indirizzo" name="indirizzo" required>
-                            <button type="submit">Salva Coordinate</button>
-                        </form>
                     <form action="{{ route('Apartment.store') }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
