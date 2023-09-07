@@ -53,7 +53,7 @@ class ApartmentController extends Controller
             //lat e lon non vanno validate perchè ci pensa direttamente Tomtom
             //'latitude' => 'required|numeric|between:-90,90',
             //'longitude' => 'required|numeric|between:-180,180',
-            'image' => 'required|min:1|max:255',
+            'image' => 'required|min:1',
             // questo nella fase di store non viene gestito dall'utente quindi non ha senso validarlo
             // 'visible' => 'required|integer|numeric',
         ]);
@@ -68,16 +68,16 @@ class ApartmentController extends Controller
         $address = $data['address'];
         $apiKey = env('TOMTOM_API_KEY');
         $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
-        
+
         // la chiamata API la facciamo partire direttamente con la classe
         $response = Http::get($endpoint);
-        
+
         //dd($response['results'][0]['position']);
 
         //vedere se si può scrivere meglio il "path" per position
         //position è un array associativo dentro alla response che ha 2 "proprietà" : "lat" e "lon" che andiamo a isolare nel passaggio dopo
         $position = $response['results'][0]['position'];
- 
+
         //isoliamo "lat" e "lon" come variabili per poterle inserire nel database, cosa che facciamo nel passaggio subito dopo
         $latitude = $position["lat"];
         $longitude = $position["lon"];
