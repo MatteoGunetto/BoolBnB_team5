@@ -21,11 +21,16 @@
 
         {{-- servizi aggiuntivi --}}
         <h3>Cosa troverai</h3>
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="list-group list-group-flush">
+                    @foreach ($apartment->amenities as $amenity)
+                        <li class="list-group-item">{{ $amenity->name }}</li>
+                    @endforeach
 
-        @foreach ($apartment->amenities as $amenity)
-            <span>{{ $amenity->name }}</span>
-        @endforeach
-
+                </ul>
+            </div>
+        </div>
 
     </div>
 @endsection
