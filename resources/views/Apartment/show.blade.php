@@ -25,7 +25,10 @@
             <div class="col-lg-3">
                 <ul class="list-group list-group-flush">
                     @foreach ($apartment->amenities as $amenity)
-                        <li class="list-group-item">{{ $amenity->name }}</li>
+                        <div>
+                            <li class="list-group-item">{{ $amenity->name }}</li>
+                            <span>{!! $amenity->icon !!}</span>
+                        </div>
                     @endforeach
 
                 </ul>
