@@ -19,6 +19,9 @@
                 <li>
                     <a class="nav-link" href="{{ route('Apartment.edit') }}">Modifica un appartamento</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="pagamento">Metti in evidenza</a>
+                </li>
             </ul>
             <!-- Ricerca avanzata -->
             <form class="form-inline ml-auto">
