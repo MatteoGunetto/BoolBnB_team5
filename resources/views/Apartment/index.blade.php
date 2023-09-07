@@ -22,13 +22,14 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($apartments as $apartment)
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card ">
                         {{-- se l'img è vuota allora mettine una di default --}}
                         @if (!empty($apartment->image))
                             <img src="{{ asset('storage/' . $apartment->image) }}" class="card-img-top"
                                 alt="Apartment Image">
                         @else
-                            <img src="{{ asset('storage/default_image.png') }}" class="card-img-top" alt="Default Image">
+                            <img src="{{ asset('storage/default_image.png') }}" class="card-img-top" style="height: 280px "
+                                alt="Default Image">
                         @endif
                         <div class="card-body">
 
