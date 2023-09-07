@@ -31,8 +31,13 @@
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <!-- Questo è il logo BoolBNB che si può cliccare -->
-                <a class="navbar-brand" href="{{ route('Apartment.index') }}">BoolBNB</a>
+                <a class="navbar-brand text-danger" href="{{ route('Apartment.index') }}">BoolBNB</a>
+
+                <div class="logo_laravel">
+
+                </div>
+                {{-- config('app.name', 'Laravel') --}}
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -41,6 +46,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            {{-- <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a> --}}
+                        </li>
+                    </ul>
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -81,10 +93,7 @@
         </nav>
 
         <main class="">
-            <div class="container">
             @yield('content')
-            </div>
-           
         </main>
     </div>
 </body>

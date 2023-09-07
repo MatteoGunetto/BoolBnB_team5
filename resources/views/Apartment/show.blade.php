@@ -1,64 +1,73 @@
 @extends('layouts.app')
 @section('content')
-
+    <div class="container">
         <h1 class="my-4">{{ $apartment->title }}</h1>
 
         <div class="row">
             <div class="col">
-                <img class="img-responsive" src="{{ asset('storage/' . $apartment->image) }}" alt="...">
+                @if (!empty($apartment->image))
+                    <img src="{{ asset('storage/' . $apartment->image) }}" class="card-img-top" alt="Apartment Image">
+                @else
+                    <img src="{{ asset('storage/default_image.png') }}" class="card-img-top" alt="Default Image">
+                @endif
             </div>
-
-            
-
-            <div class="col-4 ">
-            <iframe 
-                class="embed-responsive-item"
-                frameborder="0"
-                style="border:0" 
-                height="300px"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&q={{$apartment->latitude}},{{$apartment->longitude}}" 
-                allowfullscreen>
-            </iframe>
         </div>
-       
 
-        <div class="my-2">
+        {{-- stanze --}}
+        <section class="my-2">
             <div>
-                <h3>Host: {{$apartment->user->name}}</h3>
+                <h3>Host: {{ $apartment->user->name }}</h3>
             </div>
-            <span>Rooms: {{ $apartment->rooms }} -- </span>
-            <span>Beds: {{ $apartment->beds }} -- </span>
-            <span>Bathrooms: {{ $apartment->bathrooms }} -- </span>
-            <span>Square Meters: {{ $apartment->squareMeters }}</span>
-        </div>
+            <span>Rooms: {{ $apartment->rooms }} &middot; </span>
+            <span>Beds: {{ $apartment->beds }} &middot; </span>
+            <span>Bathrooms: {{ $apartment->bathrooms }} &middot; </span>
+            <span>{{ $apartment->squareMeters }} mq</span>
+        </section>
 
-        <h2>Description</h2>
-        <p>{{ $apartment->description }}.</p>
+        {{-- descrizione e mappa --}}
+        <section class="row justify-content-between">
+            <div class="col-lg-7">
+                <h2>Description</h2>
+                <p>{{ $apartment->description }}.</p>
+            </div>
+            {{-- mappa --}}
+            <div class="col text-end ">
+                <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="300px"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&q={{ $apartment->latitude }},{{ $apartment->longitude }}"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
 
         {{-- servizi aggiuntivi --}}
-        <h3>Cosa troverai</h3>
-        <div class="row">
-            <div class="col-lg-3">
-                <ul class="list-group list-group-flush">
-                    @foreach ($apartment->amenities as $amenity)
-                        <div>
-
-                            <li class="list-group-item"> {!! $amenity->icon !!} {{ $amenity->name }}</li>
-
-                        </div>
-                    @endforeach
-
-                </ul>
+        <section>
+            <h3>Cosa troverai</h3>
+            <div class="row py-4">
+                <div class="col-lg-3">
+                    <ul class="list-group list-group-flush">
+                        {{-- se non ci sono servizi allora non metterli --}}
+                        @if (count($apartment->amenities) > 0)
+                            @foreach ($apartment->amenities as $amenity)
+                                <div>
+                                    <li class="list-group-item"> {!! $amenity->icon !!} {{ $amenity->name }}</li>
+                                </div>
+                            @endforeach
+                        @else
+                            <!-- Nessuna amenità disponibile -->
+                            <span class="text-secondary">Servizi non disponibili al momento</span>
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
+        </section>
+    </div>
 
-    
 
     <style>
-        .img-responsive {
+        img {
             max-width: 100%;
-            height: 300px;
+            height: 550px;
+            object-fit: contain;
         }
     </style>
-
 @endsection
