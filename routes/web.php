@@ -26,8 +26,6 @@ Route::get('/', [ApartmentController::class, "index"])->name('Apartment.index');
 
 Route::get('Apartment/show/{id}', [ApartmentController::class, "show"])->name('Apartment.show');
 
-Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit');
-
 Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update');
 
 // aggiunto middleware per rendere rotta accessibile solo a utenti loggati
@@ -37,10 +35,10 @@ Route::get('Apartment/create', [ApartmentController::class, "create"])->name('Ap
 Route::post('Apartment/store', [ApartmentController::class, "store"])->name('Apartment.store')
 ->middleware(['auth', 'verified']);
 
-Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartment.edit')
+Route::get('Apartment/{id}/edit', [ApartmentController::class, "edit"])->name('Apartment.edit')
 ->middleware(['auth', 'verified']);
 
-Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
+Route::patch('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
 ->middleware(['auth', 'verified']);
 
 Route::get('Apartment/myApartments', [ApartmentController::class, "showOnlyYourApartments"])->name('Apartment.myApartments')

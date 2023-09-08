@@ -111,11 +111,18 @@ class ApartmentController extends Controller
         // Recupera tutti i servizi dal database
         $amenities = $apartment->amenities;
          // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
-         return view('Apartment.edit', compact('apartment', 'amenities'));
+        return view('Apartment.edit', compact('apartment', 'amenities'));
     }
 
-    public function update(Request $request, $id)
+    // public function edit($id)
+    // {
+    //     dd($id);
+    //     return view('Apartment.edit');
+    // }
+
+    public function update($id)
     {
+        $apartment = Apartment::findOrFail($id);
         $request->validate([
             'title' => 'required|min:1|max:255',
             'description' => 'required|min:1',
@@ -130,6 +137,26 @@ class ApartmentController extends Controller
             // 'visible' => 'required|integer|numeric',
         ]);
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'title' => 'required|min:1|max:255',
+    //         'description' => 'required|min:1',
+    //         'rooms' => 'required|integer|numeric|min:1|max:500',
+    //         'beds' => 'required|integer|numeric|min:1|max:500',
+    //         'bathrooms' => 'required|integer|numeric|min:1|max:500',
+    //         'squareMeters' => 'required|integer|numeric|min:1',
+    //         'address' => 'required|min:1|max:255',
+    //         // 'latitude' => 'required|numeric|between:-90,90',
+    //         // 'longitude' => 'required|numeric|between:-180,180',
+    //         'image' => 'required|min:1|max:255',
+    //         // 'visible' => 'required|integer|numeric',
+    //     ]);
+    // }
+
+
+
     public function destroy(Request $request,$id) {
 
         $apartment = Apartment :: findOrFail($id);

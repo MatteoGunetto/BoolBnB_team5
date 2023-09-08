@@ -29,6 +29,7 @@
 
                                 <input class="mx-3 btn btn-danger" type="submit" value="DELETE">
                             </form>
+                            <a href="{{ route('Apartment.edit', $apartment->id) }}" class="btn btn-danger">edit</a>
                         </div>
                     </div>
                 </div>

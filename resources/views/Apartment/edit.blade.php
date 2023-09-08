@@ -8,7 +8,7 @@
     </h1>
     <form action="{{ route('Apartment.update', $apartment)}}"method="POST">
         @csrf
-        @method("PUT")
+        @method("PATCH")
         <div class="form-group">
             <label for="title">Titolo:</label>
             <input type="text" name="title" id="title" value="{{ $apartment -> title }}">
