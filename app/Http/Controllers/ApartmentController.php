@@ -24,6 +24,14 @@ class ApartmentController extends Controller
         return view('Apartment.index',compact('apartments'));
 
     }
+    public function ituoi()
+    {
+        $apartments = Apartment::all();
+
+        return view('Apartment.ituoi',compact('apartments'));
+
+    }
+
 
     public function show($id)
     {
@@ -89,16 +97,17 @@ class ApartmentController extends Controller
 
         $apartment->amenities()->attach($data['amenities']);
 
+
         return redirect()->route('Apartment.index');
         //return redirect()->route('Apartments.show', $apartment->id);
     }
 
-    public function edit()
+    public function edit($id)
     {
         // Cerca l'appartamento nel database con l'ID specificato
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
-        $amenities = Amenity::all();
+        $amenities = $apartment->amenities;
          // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
          return view('Apartment.edit', compact('apartment', 'amenities'));
     }
@@ -113,8 +122,8 @@ class ApartmentController extends Controller
             'bathrooms' => 'required|integer|numeric|min:1|max:500',
             'squareMeters' => 'required|integer|numeric|min:1',
             'address' => 'required|min:1|max:255',
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
+            // 'latitude' => 'required|numeric|between:-90,90',
+            // 'longitude' => 'required|numeric|between:-180,180',
             'image' => 'required|min:1|max:255',
             // 'visible' => 'required|integer|numeric',
         ]);
