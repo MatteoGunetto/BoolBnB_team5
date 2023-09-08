@@ -19,10 +19,9 @@ use App\Http\Controllers\Api\ApartmentApiController;;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route :: prefix ('v1') -> group(function() {
+//Route :: prefix ('v1') -> group(function() {
 
     Route::get("/apartments", [ApartmentApiController::class, "apartmentsIndex"]);
 
     Route::get("/apartments/{id}", [ApartmentApiController::class, "apartmentsShow"] );
-});
-
+//});

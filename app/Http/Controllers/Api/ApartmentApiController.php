@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Http;
 
-class ApartmentController extends Controller
+class ApartmentApiController extends Controller
 {
     public function apartmentsIndex()
     {
