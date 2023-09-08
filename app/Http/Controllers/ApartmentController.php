@@ -22,8 +22,7 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::all();
 
-        return view('Apartment.index',compact('apartments'));
-
+        return view('Apartment.index', compact('apartments'));
     }
     public function showOnlyYourApartments()
     {
@@ -31,7 +30,6 @@ class ApartmentController extends Controller
         $apartments = Apartment::where('user_id', $user_id)->get();
 
         return view('Apartment.myApartments', ['apartments' => $apartments]);
-
     }
 
 
@@ -47,7 +45,7 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::all();
         $amenities = Amenity::all();
-        return view('Apartment.create',compact('apartments' , 'amenities') );
+        return view('Apartment.create', compact('apartments', 'amenities'));
     }
 
     public function store(Request $request)
@@ -71,7 +69,7 @@ class ApartmentController extends Controller
         $data = $request->all();
         $data["user_id"] = Auth::id();
 
-        $img_path=Storage::put("uploads",$data["image"]);
+        $img_path = Storage::put("uploads", $data["image"]);
         $data["image"] = $img_path;
 
         // Chiamata tomtom per latitudine e longitudine
@@ -110,8 +108,8 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
         $amenities = $apartment->amenities;
-         // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
-         return view('Apartment.edit', compact('apartment', 'amenities'));
+        // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
+        return view('Apartment.edit', compact('apartment', 'amenities'));
     }
 
     public function update(Request $request, $id)
@@ -130,17 +128,18 @@ class ApartmentController extends Controller
             // 'visible' => 'required|integer|numeric',
         ]);
     }
-    public function destroy(Request $request,$id) {
+    public function destroy(Request $request, $id)
+    {
 
-        $apartment = Apartment :: findOrFail($id);
+        $apartment = Apartment::findOrFail($id);
         $apartment->amenities()->sync($request->input('amenities'));
-        $apartment -> delete();
+        $apartment->delete();
 
-        return redirect() -> route('Apartment.myApartments');
-
+        return redirect()->route('Apartment.myApartments');
     }
 
-    public function myApartments() {
+    public function myApartments()
+    {
         return view('Apartment.myApartments');
     }
 }
