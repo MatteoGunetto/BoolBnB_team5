@@ -10,9 +10,11 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
-        'content',
-        'name',
-        'senderEmail'
+        'Content',
+        'Name',
+        'SenderEmail',
+        'apartment_id'
+
     ];
 
       // Un determinato messaggio è contenuto in un solo appartamento.
