@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApartmentApiController;;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route :: prefix ('v1') -> group(function() {
 
-    Route::get("/apartments", [Api\ApartmentController::class, "apartmentsIndex"]);
+    Route::get("/apartments", [ApartmentApiController::class, "apartmentsIndex"]);
 
-    Route::get("/apartments/{id}", [Api\ApartmentController::class, "apartmentsShow"] );
+    Route::get("/apartments/{id}", [ApartmentApiController::class, "apartmentsShow"] );
 });
 
