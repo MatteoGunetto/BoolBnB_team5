@@ -43,6 +43,9 @@ Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartm
 Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
 ->middleware(['auth', 'verified']);
 
+Route::get('Apartment/ituoi', [ApartmentController::class, "ituoi"])->name('Apartment.ituoi')
+->middleware(['auth', 'verified']);
+
 
 
 Route::get('/dashboard', function () {

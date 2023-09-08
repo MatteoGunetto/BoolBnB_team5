@@ -2,23 +2,7 @@
 @section('content')
     <div class="container">
 
-
-        {{-- <!-- Barra di ricerca -->
-        <div class="py-4">
-            <form @submit.prevent="search">
-                <div class="input-group mb-3">
-                    <input v-model="address" type="text" class="form-control"
-                        placeholder="Cerca un appartamento nelle tue vicinanze">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger mx-2" type="submit">Cerca</button>
-                    </div>
-                </div>
-            </form>
-        </div> --}}
-
-
         <!-- Elenco case vacanze in evidenza -->
-        <h1 class="mt-4">In Evidenza</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($apartments as $apartment)
                 <div class="col">

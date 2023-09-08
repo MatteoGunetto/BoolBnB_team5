@@ -55,36 +55,6 @@
                         <input required type="text" name="address" class="form-control" id="address"
                             placeholder="Inserisci indirizzo" value="{{ old('address') }}">
                     </div>
-
-
-
-
-
-
-
-
-
-
-                    {{-- <div class="mb-3">
-                            <label for="address" class="form-label">latitudine:</label>
-                            <input required
-                            type="text"
-                            name="latitude"
-                            class="form-control"
-                            id="latitude"
-                            placeholder="Inserisci latitudine"
-                            value="{{ old('latitude') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="longitude" class="form-label">longitudine:</label>
-                            <input required
-                            type="text"
-                            name="longitude"
-                            class="form-control"
-                            id="longitude"
-                            placeholder="Inserisci longitudine"
-                            value="{{ old('longitude') }}">
-                        </div> --}}
                     <div class="mb-3">
                         <label for="image" class="form-label">selezionare immagine:</label>
                         <input required type="file" name="image" class="form-control" id="image"
