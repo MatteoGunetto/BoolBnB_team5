@@ -60,6 +60,24 @@
                 </div>
             </div>
         </section>
+        @if(session('success'))
+        <p style="color:green">{{ session('success') }}</p>
+    @endif
+
+    <form method="POST" action="{{ route('message.store', $apartment) }}">
+        @csrf
+        <label for="email">Email:</label>
+        <input type="SenderEmail" name="SenderEmail" required><br>
+
+        <label for="Name">Nome:</label>
+        <input type="text" name="Name" required><br>
+
+        <label for="content">Contenuto:</label>
+        <textarea name="Content" required></textarea><br>
+
+
+        <button type="submit">Invia</button>
+    </form>
 
 
     </div>

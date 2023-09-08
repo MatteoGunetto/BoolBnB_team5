@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Amenity;
+use App\Models\Message;
 use Illuminate\Support\Facades\Storage;
 
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
@@ -67,6 +68,9 @@ class ApartmentController extends Controller
             // questo nella fase di store non viene gestito dall'utente quindi non ha senso validarlo
             // 'visible' => 'required|integer|numeric',
         ]);
+
+        // $apartment->messages()->attach($data['messages']);
+
 
         $data = $request->all();
         $data["user_id"] = Auth::id();
@@ -143,4 +147,6 @@ class ApartmentController extends Controller
     public function myApartments() {
         return view('Apartment.myApartments');
     }
+
+
 }
