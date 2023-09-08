@@ -149,10 +149,12 @@ class ApartmentController extends Controller
         
             // Aggiorna il path dell'immagine nel database
             //QUESTO NON FUNZIONA PERCHè DOPO RISOVRASCRIVO $APARTMENT CON $DATA
-            //QUINDI CIò CHE DEVO FARE QUA DENTRO  MODIFICARE $DATA IN MODO CHE POI AGGIORNO $APARTMENT CON $DATA GIUSTO
+            //QUINDI CIò CHE DEVO FARE QUA DENTRO è MODIFICARE $DATA IN MODO CHE POI AGGIORNO $APARTMENT CON $DATA GIUSTO
+            //questa riga qua sotto è sostanzialmente inutile, non ha senso modificare apartment se poi dopo lo rimodifico con i $data che non sono stati cambiati
+            //se la elimino o se la lascio è la stessa cosa, tanto dopo fuori dall'if $apartment viene sovrascritto quindi quello che faccio qua dentro con apartment non importa.
             $apartment->image = $path;
             
-            //MANCAVA QUESTO BASTARDO, PERCHè IO AGGIORNAVO 
+            //MANCAVA QUESTO BASTARDO, è il $data che devo aggiornare dentro al if, perchè fuori dall'if poi uso $data per aggiornare $apartment
             $data["image"] = $path;
 
         }
