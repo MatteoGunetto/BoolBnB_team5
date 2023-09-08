@@ -46,7 +46,8 @@ Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Ap
 Route::get('Apartment/myApartments', [ApartmentController::class, "showOnlyYourApartments"])->name('Apartment.myApartments')
 ->middleware(['auth', 'verified']);
 
-
+Route :: delete('Apartment/destroy/{id}', [ApartmentController :: class, 'destroy'])
+    -> name('Apartment.destroy')->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -130,6 +130,15 @@ class ApartmentController extends Controller
             // 'visible' => 'required|integer|numeric',
         ]);
     }
+    public function destroy(Request $request,$id) {
+
+        $apartment = Apartment :: findOrFail($id);
+        $apartment->amenities()->sync($request->input('amenities'));
+        $apartment -> delete();
+
+        return redirect() -> route('Apartment.myApartments');
+
+    }
 
     public function myApartments() {
         return view('Apartment.myApartments');
