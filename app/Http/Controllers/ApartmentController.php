@@ -109,7 +109,7 @@ class ApartmentController extends Controller
         // Cerca l'appartamento nel database con l'ID specificato
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
-        $amenities = $apartment->amenities;
+        $amenities = Amenity::all();
          // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
         return view('Apartment.edit', compact('apartment', 'amenities'));
     }
@@ -120,22 +120,34 @@ class ApartmentController extends Controller
     //     return view('Apartment.edit');
     // }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
+        $data = $request->all();
         $apartment = Apartment::findOrFail($id);
-        $request->validate([
-            'title' => 'required|min:1|max:255',
-            'description' => 'required|min:1',
-            'rooms' => 'required|integer|numeric|min:1|max:500',
-            'beds' => 'required|integer|numeric|min:1|max:500',
-            'bathrooms' => 'required|integer|numeric|min:1|max:500',
-            'squareMeters' => 'required|integer|numeric|min:1',
-            'address' => 'required|min:1|max:255',
-            // 'latitude' => 'required|numeric|between:-90,90',
-            // 'longitude' => 'required|numeric|between:-180,180',
-            'image' => 'required|min:1|max:255',
-            // 'visible' => 'required|integer|numeric',
-        ]);
+
+        
+        // $request->validate([
+        //     'title' => 'required|min:1|max:255',
+        //     'description' => 'required|min:1',
+        //     'rooms' => 'required|integer|numeric|min:1|max:500',
+        //     'beds' => 'required|integer|numeric|min:1|max:500',
+        //     'bathrooms' => 'required|integer|numeric|min:1|max:500',
+        //     'squareMeters' => 'required|integer|numeric|min:1',
+        //     'address' => 'required|min:1|max:255',
+        //     //lat e lon non vanno validate perchè ci pensa direttamente Tomtom
+        //     //'latitude' => 'required|numeric|between:-90,90',
+        //     //'longitude' => 'required|numeric|between:-180,180',
+        //     'image' => 'required|min:1',
+        //     // questo nella fase di store non viene gestito dall'utente quindi non ha senso validarlo
+        //     // 'visible' => 'required|integer|numeric',
+        // ]);
+
+
+        $apartment->amenities()->attach($data['amenities']);
+        $apartment = Apartment::update($data);
+
+        return redirect()->route('Apartment.index');
+
     }
 
     // public function update(Request $request, $id)

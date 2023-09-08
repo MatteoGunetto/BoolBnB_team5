@@ -6,9 +6,9 @@
     <h1>
         Modifica Appartamento
     </h1>
-    <form action="{{ route('Apartment.update', $apartment)}}"method="POST">
+    <form method="post" action="{{ route('Apartment.update', $apartment->id)}}">
         @csrf
-        @method("PATCH")
+        @method("PUT")
         <div class="form-group">
             <label for="title">Titolo:</label>
             <input type="text" name="title" id="title" value="{{ $apartment -> title }}">
@@ -56,8 +56,25 @@
 
         <div class="form-group">
             <label for="image">Scegli un'immagine</label>
-            <input type="file" id="image" name="image" class="form-control-file">
+            <input type="file" id="image" name="image" class="form-control-file" value="{{ asset('storage/' . $apartment->image) }}">
+            <img src="{{ asset('storage/' . $apartment->image) }}" class="img-thumbnail" alt="Apartment Image">
+
         </div>
+
+                            <!-- amenities -->
+                            <div class="mb-3">
+                        <label for="amenities" class="form-label">Selezionare servizi aggiuntivi:</label>
+                        @foreach ($amenities as $amenity)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenities[]"
+                                    id="amenity-{{ $amenity->id }}" value="{{ $amenity->id }}">
+                                {{ $apartment->amenities->contains('id', $amenity->id) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="amenity-{{ $amenity->id }}">
+                                    {{ $amenity->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
 
         <div class="form-group">
             <label for="visible">Visibile:</label>

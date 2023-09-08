@@ -21,7 +21,6 @@ use App\Http\Controllers\ApartmentController;
 // });
 
 
-
 Route::get('/', [ApartmentController::class, "index"])->name('Apartment.index');
 
 Route::get('Apartment/show/{id}', [ApartmentController::class, "show"])->name('Apartment.show');
@@ -35,10 +34,10 @@ Route::get('Apartment/create', [ApartmentController::class, "create"])->name('Ap
 Route::post('Apartment/store', [ApartmentController::class, "store"])->name('Apartment.store')
 ->middleware(['auth', 'verified']);
 
-Route::get('Apartment/{id}/edit', [ApartmentController::class, "edit"])->name('Apartment.edit')
+Route::put('Apartment/update/{id}', [ApartmentController::class, "update"])->name('Apartment.update')
 ->middleware(['auth', 'verified']);
 
-Route::patch('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
+Route::get('Apartment/edit/{id}', [ApartmentController::class, "edit"])->name('Apartment.edit')
 ->middleware(['auth', 'verified']);
 
 Route::get('Apartment/myApartments', [ApartmentController::class, "showOnlyYourApartments"])->name('Apartment.myApartments')
