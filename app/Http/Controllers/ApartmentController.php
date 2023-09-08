@@ -19,12 +19,11 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-
         $apartments = Apartment::all();
 
         return view('Apartment.index',compact('apartments'));
-
     }
+
     public function showOnlyYourApartments()
     {
         $user_id = Auth::id();
@@ -110,15 +109,9 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
         $amenities = Amenity::all();
-         // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
+         // Carica la vista 'edit' e passa l'appartamento e tutte le amenities alla vista
         return view('Apartment.edit', compact('apartment', 'amenities'));
     }
-
-    // public function edit($id)
-    // {
-    //     dd($id);
-    //     return view('Apartment.edit');
-    // }
 
     public function update(Request $request, $id)
     {
@@ -143,31 +136,27 @@ class ApartmentController extends Controller
         // ]);
 
 
-        $apartment->amenities()->attach($data['amenities']);
-        $apartment = Apartment::update($data);
+        $apartment->amenities()->sync($data['amenities']);
+        //dd($data['amenities']);
+
+        
+        //qua dopo aggiungo commento per spiegare perchè serve sta cosa
+        if($request->hasFile('image')) {
+            // Salva il nuovo file e ottieni il percorso
+            $path = $request->file('image')->store('uploads', 'public');
+            
+        
+            // Aggiorna il path dell'immagine nel database
+            $apartment->image = $path;
+            dd($request);
+        }
+        
+       
+
+        $apartment->update($data);
 
         return redirect()->route('Apartment.index');
-
     }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'title' => 'required|min:1|max:255',
-    //         'description' => 'required|min:1',
-    //         'rooms' => 'required|integer|numeric|min:1|max:500',
-    //         'beds' => 'required|integer|numeric|min:1|max:500',
-    //         'bathrooms' => 'required|integer|numeric|min:1|max:500',
-    //         'squareMeters' => 'required|integer|numeric|min:1',
-    //         'address' => 'required|min:1|max:255',
-    //         // 'latitude' => 'required|numeric|between:-90,90',
-    //         // 'longitude' => 'required|numeric|between:-180,180',
-    //         'image' => 'required|min:1|max:255',
-    //         // 'visible' => 'required|integer|numeric',
-    //     ]);
-    // }
-
-
 
     public function destroy(Request $request,$id) {
 
@@ -177,9 +166,5 @@ class ApartmentController extends Controller
 
         return redirect() -> route('Apartment.myApartments');
 
-    }
-
-    public function myApartments() {
-        return view('Apartment.myApartments');
     }
 }

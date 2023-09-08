@@ -25,8 +25,6 @@ Route::get('/', [ApartmentController::class, "index"])->name('Apartment.index');
 
 Route::get('Apartment/show/{id}', [ApartmentController::class, "show"])->name('Apartment.show');
 
-Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update');
-
 // aggiunto middleware per rendere rotta accessibile solo a utenti loggati
 Route::get('Apartment/create', [ApartmentController::class, "create"])->name('Apartment.create')
 ->middleware(['auth', 'verified']);
