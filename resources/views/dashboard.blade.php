@@ -10,7 +10,7 @@
                     </li>
                     <!-- La rotta che porta alla lista degli appartamenti degli utenti loggati è da rivedere, la lascio vuota -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('Apartment.ituoi') }}">I tuoi appartamenti</a>
+                        <a class="nav-link" href="{{ route('Apartment.myApartments') }}">I tuoi appartamenti</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>

@@ -19,16 +19,18 @@ class ApartmentController extends Controller
 {
     public function index()
     {
+
         $apartments = Apartment::all();
 
         return view('Apartment.index',compact('apartments'));
 
     }
-    public function ituoi()
+    public function showOnlyYourApartments()
     {
-        $apartments = Apartment::all();
+        $user_id = Auth::id();
+        $apartments = Apartment::where('user_id', $user_id)->get();
 
-        return view('Apartment.ituoi',compact('apartments'));
+        return view('Apartment.myApartments', ['apartments' => $apartments]);
 
     }
 
