@@ -55,16 +55,16 @@
         </div>
 
         <!-- Anteprima dell'immagine corrente -->
-<div class="form-group">
-    <label>Immagine attuale:</label>
-    <img src="{{ asset('storage/' . $apartment->image) }}" class="img-thumbnail" alt="Apartment Image">
-</div>
+        <div class="form-group">
+            <label>Immagine attuale:</label>
+            <img src="{{ asset('storage/' . $apartment->image) }}" class="img-thumbnail" alt="Apartment Image">
+        </div>
 
-<!-- Campo di input per il caricamento di una nuova immagine -->
-<div class="form-group">
-    <label for="image">Sostituisci l'immagine (lascia vuoto per mantenere l'immagine attuale):</label>
-    <input type="file" id="image" name="image" class="form-control-file">
-</div>
+        <!-- Campo di input per il caricamento di una nuova immagine -->
+        <div class="form-group">
+            <label for="image">Sostituisci l'immagine (lascia vuoto per mantenere l'immagine attuale):</label>
+            <input type="file" id="image" name="image" class="form-control-file">
+        </div>
 
 
         <!-- amenities -->

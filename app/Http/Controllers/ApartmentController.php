@@ -117,7 +117,6 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
         $apartment = Apartment::findOrFail($id);
-
         
         // $request->validate([
         //     'title' => 'required|min:1|max:255',
@@ -136,19 +135,26 @@ class ApartmentController extends Controller
         // ]);
 
 
+        //qua aggiorno le amenities in $apartment
         $apartment->amenities()->sync($data['amenities']);
-        //dd($data['amenities']);
 
         
         //qua dopo aggiungo commento per spiegare perchè serve sta cosa
         if($request->hasFile('image')) {
             // Salva il nuovo file e ottieni il percorso
-            $path = $request->file('image')->store('uploads', 'public');
             
+            $path = $request->file('image')->store('uploads', 'public');
+            //questo path è giusto ma in database me ne mette un altro......
+            //dd($path);
         
             // Aggiorna il path dell'immagine nel database
+            //QUESTO NON FUNZIONA PERCHè DOPO RISOVRASCRIVO $APARTMENT CON $DATA
+            //QUINDI CIò CHE DEVO FARE QUA DENTRO  MODIFICARE $DATA IN MODO CHE POI AGGIORNO $APARTMENT CON $DATA GIUSTO
             $apartment->image = $path;
-            dd($request);
+            
+            //MANCAVA QUESTO BASTARDO, PERCHè IO AGGIORNAVO 
+            $data["image"] = $path;
+
         }
         
        
