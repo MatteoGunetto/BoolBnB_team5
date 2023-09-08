@@ -43,7 +43,7 @@ Route::get('Apartment/edit', [ApartmentController::class, "edit"])->name('Apartm
 Route::put('Apartment/update', [ApartmentController::class, "update"])->name('Apartment.update')
 ->middleware(['auth', 'verified']);
 
-Route::get('Apartment/ituoi', [ApartmentController::class, "ituoi"])->name('Apartment.ituoi')
+Route::get('Apartment/myApartments', [ApartmentController::class, "showOnlyYourApartments"])->name('Apartment.myApartments')
 ->middleware(['auth', 'verified']);
 
 
@@ -58,7 +58,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//aggiunto per gestire "myApartments" in dashboard
-Route::get('/Apartment/myApartments', [ApartmentController::class, 'myApartments']);
 
 require __DIR__ . '/auth.php';
