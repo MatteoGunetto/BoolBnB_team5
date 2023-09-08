@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Amenity;
 use App\Models\Message;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Storage;
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
 use Illuminate\Support\Facades\Auth;
@@ -20,14 +22,15 @@ class ApartmentApiController extends Controller
     public function apartmentsIndex()
     {
 
+
         $apartments = Apartment::all();
 
         return response()->json([
             'apartments' => $apartments
         ]);
     }
-    public function apartmentShow($id) {
-        $apartment = Apartment:: findOrFail($id);
+    public function apartmentsShow($id) {
+        $apartment = Apartment::findOrFail($id);
 
         return response()->json([
             'apartment' => $apartment
