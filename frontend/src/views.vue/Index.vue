@@ -29,13 +29,12 @@ export default {
                                 <option value="Los Angeles">
                                 <option value="Chicago">
                             </datalist> -->
-                        <a class="btn btn-primary btn-lg px-4 gap-3" href="#" role="button">Cerca</a>
+                        <a class="btn btn-primary btn-lg px-4 gap-3 text-white" href="#" role="button">Cerca</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <RouterLink to="/show">Show</RouterLink>
     <!-- Fine Header -->
 
     <!-- In Evidenza -->

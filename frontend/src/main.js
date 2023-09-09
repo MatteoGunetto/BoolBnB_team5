@@ -1,5 +1,6 @@
 import './assets/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import '../scss/boolBnbStyle.scss'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
