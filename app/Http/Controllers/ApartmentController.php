@@ -20,11 +20,12 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-
         $apartments = Apartment::all();
 
-        return view('Apartment.index', compact('apartments'));
+        return view('Apartment.index',compact('apartments'));
+
     }
+
     public function showOnlyYourApartments()
     {
         $user_id = Auth::id();
@@ -112,8 +113,8 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
         $amenities = $apartment->amenities;
-        // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
-        return view('Apartment.edit', compact('apartment', 'amenities'));
+         // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
+         return view('Apartment.edit', compact('apartment', 'amenities'));
     }
 
     public function update(Request $request, $id)
@@ -132,8 +133,7 @@ class ApartmentController extends Controller
             // 'visible' => 'required|integer|numeric',
         ]);
     }
-    public function destroy(Request $request, $id)
-    {
+    public function destroy(Request $request,$id) {
 
         $apartment = Apartment::findOrFail($id);
         $apartment->amenities()->sync($request->input('amenities'));
@@ -142,10 +142,7 @@ class ApartmentController extends Controller
         return redirect()->route('Apartment.myApartments');
     }
 
-    public function myApartments()
-    {
+    public function myApartments() {
         return view('Apartment.myApartments');
     }
-
-
 }
