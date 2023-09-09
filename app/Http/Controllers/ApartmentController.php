@@ -112,60 +112,47 @@ class ApartmentController extends Controller
         // Cerca l'appartamento nel database con l'ID specificato
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
-        $amenities = $apartment->amenities;
+        $amenities = Amenity::all();
          // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
          return view('Apartment.edit', compact('apartment', 'amenities'));
     }
 
+
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        // Cerca il progetto nel database con l'ID specificato
         $apartment = Apartment::findOrFail($id);
-        
-        // $request->validate([
-        //     'title' => 'required|min:1|max:255',
-        //     'description' => 'required|min:1',
-        //     'rooms' => 'required|integer|numeric|min:1|max:500',
-        //     'beds' => 'required|integer|numeric|min:1|max:500',
-        //     'bathrooms' => 'required|integer|numeric|min:1|max:500',
-        //     'squareMeters' => 'required|integer|numeric|min:1',
-        //     'address' => 'required|min:1|max:255',
-        //     //lat e lon non vanno validate perchè ci pensa direttamente Tomtom
-        //     //'latitude' => 'required|numeric|between:-90,90',
-        //     //'longitude' => 'required|numeric|between:-180,180',
-        //     'image' => 'required|min:1',
-        //     // questo nella fase di store non viene gestito dall'utente quindi non ha senso validarlo
-        //     // 'visible' => 'required|integer|numeric',
-        // ]);
-
-
-        //qua aggiorno le amenities in $apartment
-        $apartment->amenities()->sync($data['amenities']);
-
-        //qua dopo aggiungo commento per spiegare perchè serve sta cosa
-        if($request->hasFile('image')) {
-            // Salva il nuovo file e ottieni il percorso
-            
-            $path = $request->file('image')->store('uploads', 'public');
-            //questo path è giusto ma in database me ne mette un altro......
-            //dd($path);
-        
-            // Aggiorna il path dell'immagine nel database
-            //QUESTO NON FUNZIONA PERCHè DOPO RISOVRASCRIVO $APARTMENT CON $DATA
-            //QUINDI CIò CHE DEVO FARE QUA DENTRO è MODIFICARE $DATA IN MODO CHE POI AGGIORNO $APARTMENT CON $DATA GIUSTO
-            //questa riga qua sotto è sostanzialmente inutile, non ha senso modificare apartment se poi dopo lo rimodifico con i $data che non sono stati cambiati
-            //se la elimino o se la lascio è la stessa cosa, tanto dopo fuori dall'if $apartment viene sovrascritto quindi quello che faccio qua dentro con apartment non importa.
-            $apartment->image = $path;
-            
-            //MANCAVA QUESTO BASTARDO, è il $data che devo aggiornare dentro al if, perchè fuori dall'if poi uso $data per aggiornare $apartment
-            $data["image"] = $path;
-
-        }
-        
+        // Recupera i dati dal form inviato
+        $data = $request->all();
+        // Aggiorna i dati del progetto con i nuovi dati forniti
         $apartment->update($data);
+        $apartment->amenities()->sync($request->input('amenities'));
+  //qua dopo aggiungo commento per spiegare perchè serve sta cosa
+  if($request->hasFile('image')) {
+    // Salva il nuovo file e ottieni il percorso
 
-        return redirect()->route('Apartment.index');
+    $path = $request->file('image')->store('uploads', 'public');
+    //questo path è giusto ma in database me ne mette un altro......
+    //dd($path);
+
+    // Aggiorna il path dell'immagine nel database
+    //QUESTO NON FUNZIONA PERCHè DOPO RISOVRASCRIVO $APARTMENT CON $DATA
+    //QUINDI CIò CHE DEVO FARE QUA DENTRO è MODIFICARE $DATA IN MODO CHE POI AGGIORNO $APARTMENT CON $DATA GIUSTO
+    //questa riga qua sotto è sostanzialmente inutile, non ha senso modificare apartment se poi dopo lo rimodifico con i $data che non sono stati cambiati
+    //se la elimino o se la lascio è la stessa cosa, tanto dopo fuori dall'if $apartment viene sovrascritto quindi quello che faccio qua dentro con apartment non importa.
+    $apartment->image = $path;
+
+    //MANCAVA QUESTO BASTARDO, è il $data che devo aggiornare dentro al if, perchè fuori dall'if poi uso $data per aggiornare $apartment
+    $data["image"] = $path;
+
+}
+// Salva le modifiche
+        $apartment->save();
+        // Reindirizza all'URL della vista 'show' per visualizzare il progetto modificato
+        return redirect()->route('Apartment.index', $apartment->id);
     }
+
+
 
 
     public function destroy(Request $request,$id) {
