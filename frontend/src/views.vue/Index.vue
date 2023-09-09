@@ -17,6 +17,7 @@ export default {
                     <div class="mb-4">
                         <div editable="rich">
                             <h2 class="display-2 fw-bold">Eccoci live<span class="text-primary"> Team 5!</span></h2>
+                            
                         </div>
                     </div>
                     <div class="d-flex justify-content-center gap-2 mb-5">
@@ -34,6 +35,7 @@ export default {
             </div>
         </div>
     </div>
+    <RouterLink to="/show">Show</RouterLink>
     <!-- Fine Header -->
 
     <!-- In Evidenza -->
