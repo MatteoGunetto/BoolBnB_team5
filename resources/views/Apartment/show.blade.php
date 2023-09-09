@@ -60,24 +60,24 @@
                 </div>
             </div>
         </section>
-        @if(session('success'))
-        <p style="color:green">{{ session('success') }}</p>
-    @endif
+        @if (session('success'))
+            <p style="color:green">{{ session('success') }}</p>
+        @endif
 
-    <form method="POST" action="{{ route('message.store', $apartment) }}">
-        @csrf
-        <label for="SennderEmail">Email:</label>
-        <input type="SenderEmail" name="SenderEmail" required><br>
+        <form method="POST" action="{{ route('message.store', $apartment) }}">
+            @csrf
+            <label for="SennderEmail">Email:</label>
+            <input type="SenderEmail" name="SenderEmail" required><br>
 
-        <label for="Name">Nome:</label>
-        <input type="text" name="Name" required><br>
+            <label for="Name">Nome:</label>
+            <input type="text" name="Name" required><br>
 
-        <label for="Content">Contenuto:</label>
-        <input type = "text" name="Content" required></input><br>
+            <label for="Content">Contenuto:</label>
+            <input type="text" name="Content" required>
 
 
-        <button type="submit">Invia</button>
-    </form>
+            <button type="submit">Invia</button>
+        </form>
 
 
     </div>

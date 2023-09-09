@@ -155,10 +155,27 @@ class ApartmentController extends Controller
 
 
 
-    public function destroy(Request $request,$id) {
+    // public function destroy(Request $request,$id) {
 
+    //     $apartment = Apartment::findOrFail($id);
+    //     $apartment->amenities()->sync($request->input('amenities'));
+    //     $apartment->messages()->sync($request->input('messages'));
+    //     $apartment->delete();
+
+    //     return redirect()->route('Apartment.myApartments');
+    // }
+
+
+    public function destroy(Request $request, $id) {
         $apartment = Apartment::findOrFail($id);
-        $apartment->amenities()->sync($request->input('amenities'));
+
+        // Elimina o dissociare le amenità associate all'appartamento
+        $apartment->amenities()->detach();
+
+        // Elimina o dissociare i messaggi associati all'appartamento
+        $apartment->messages()->delete();
+
+        // Elimina l'appartamento
         $apartment->delete();
 
         return redirect()->route('Apartment.myApartments');
