@@ -15,9 +15,6 @@
                 <li>
                     <a class="nav-link" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>
                 </li>
-                <li>
-                    <a class="nav-link" href="{{ route('Apartment.edit') }}">Modifica un appartamento</a>
-                </li>
             </ul>
         </div>
     </div>
