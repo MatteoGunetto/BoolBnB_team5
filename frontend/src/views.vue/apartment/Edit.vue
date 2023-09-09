@@ -12,7 +12,7 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Inserisci un Appartamento</h1>
+                <h1>Modifica il tuo Appartamento</h1>
             </div>
         </div>
     </div>
@@ -140,12 +140,12 @@ export default {
                         </div>
                     </div>
     
-                    <button type="submit" class="btn btn-danger">Inserisci appartamento</button>                </form>
+                    <button type="submit" class="btn btn-danger">Modifica appartamento</button>
+                </form>
             </div>
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped>
 
