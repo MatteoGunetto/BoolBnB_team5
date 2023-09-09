@@ -1,17 +1,16 @@
 <script>
+import Navbar from './elements/Navbar.vue'
 export default {
-    setup () {
-        
-
-        return {}
-    }
+    components: {
+    Navbar,
+  }
 }
 </script>
 
 <template>
-    <h1>Home
-    </h1>
+    <Navbar />
 </template>
+
 
 
 <style lang="scss" scoped>
