@@ -140,7 +140,7 @@ export default {
                         </div>
                     </div>
     
-                    <button type="submit" class="btn btn-danger">Modifica appartamento</button>
+                    <button type="submit" class="btn btn-primary text-white">Modifica appartamento</button>
                 </form>
             </div>
         </div>

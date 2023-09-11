@@ -74,7 +74,7 @@ export default {
                             <!-- register button -->
                             <div class="mb-4 row">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary text-white">
                                         Register
                                     </button>
                                 </div>

@@ -50,7 +50,7 @@ export default {
     
                             <div class="mb-4 row">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary text-white">
                                         Login
                                     </button>
     

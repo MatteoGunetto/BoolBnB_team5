@@ -76,7 +76,7 @@ export default {
                                 <textarea class="form-control" id="message" rows="5" placeholder="Scrivi qui il tuo messaggio"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-danger">Inserisci appartamento</button> 
+                            <button type="submit" class="btn btn-primary text-white">Inserisci appartamento</button> 
 
                         </form>
                     </div>
