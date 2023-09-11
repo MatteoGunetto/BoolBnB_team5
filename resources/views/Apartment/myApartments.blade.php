@@ -21,7 +21,7 @@
                             <h5 class="card-title">{{ $apartment->title }}</h5>
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
-                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-danger">Dettagli</a>
+                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-info">Dettagli</a>
                             <form class="d-inline" method="POST" action="{{ route('Apartment.destroy', $apartment->id) }}">
 
                                 @csrf
@@ -29,7 +29,7 @@
 
                                 <input class="mx-3 btn btn-danger" type="submit" value="DELETE">
                             </form>
-                            <a href="{{ route('Apartment.edit', $apartment->id) }}" class="btn btn-danger">edit</a>
+                            <a href="{{ route('Apartment.edit', $apartment->id) }}" class="btn btn-success">edit</a>
                         </div>
                     </div>
                 </div>

@@ -55,12 +55,12 @@
                         <label for="address" class="form-label">indirizzo:</label>
                         <input required type="text" name="address" class="form-control" id="address"
                             placeholder="Inserisci indirizzo" value="{{ old('address') }}">
-                            
-                            
+
+
                     </div>
 
                     <!-- suggerimenti address -->
-                    <div class="address-option">ciao</div>
+                    <div class="address-option" class="option_none">ciao</div>
                     <div class="address-option">ciao</div>
                     <div class="address-option">ciao</div>
 
@@ -90,8 +90,8 @@
                 </form>
             </div>
         </div>
-        </div>
-    </main>
+    </div>
+</main>
 @endsection
 
 <script>
@@ -104,49 +104,62 @@
 
         //questo è un controllo aggiuntivo che non serve nemmno, perchè sappiamo che esiste un id="address" nel nostro codice
         if (!searchBarDom) {
-        console.error("Elemento 'address' non trovato");
-        return; // Se l'elemento non esiste, esci dalla funzione
-    }
+            console.error("Elemento 'address' non trovato");
+            return; // Se l'elemento non esiste, esci dalla funzione
+        }
 
-    // Ottieni un riferimento agli elementi con la classe address-option
-    const addressOptionElements = document.querySelectorAll(".address-option");
+        // Ottieni un riferimento agli elementi con la classe address-option
+        const addressOptionElements = document.querySelectorAll(".address-option");
 
-    searchBarDom.addEventListener("input", function() {
-        if  (searchBarDom.value.length > 4 ) {
-            const addressSearched = searchBarDom.value;
+        // Imposta il testo consigliato come ricerca del indirizzo
+        addressOptionElements.forEach(function(indirizzo){
+            indirizzo.addEventListener("click", function(){
+                console.log(indirizzo.innerHTML);
+                searchBarDom.value=indirizzo.textContent
+            });
+        })
 
-            axios.get('/api/tomtom-proxy', { 
-                params: {
-                address: addressSearched
+
+
+        searchBarDom.addEventListener("input", function() {
+            if  (searchBarDom.value.length > 4 ) {
+                const addressSearched = searchBarDom.value;
+
+                axios.get('/api/tomtom-proxy', {
+                    params: {
+                        address: addressSearched
                 }
             })
-                .then(response => {
-                    console.log(response.data.results[0].address,response.data.results[1].address,response.data.results[2].address)
-                    let suggestedAddresses = response.data.results;
+            .then(response => {
+                console.log(response.data.results[0].address,response.data.results[1].address,response.data.results[2].address)
+                let suggestedAddresses = response.data.results;
 
-                    addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
-                    addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
-                    addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
-                })
-                .catch(error => {
-                    console.error("C'è stato un errore:", error);
-                });
+                addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
+                addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
+                addressOptionElements[2].innerHTML = suggestedAddresses[2] ? suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country : "Non ci sono indirizzi";
+            })
+            .catch(error => {
+                console.error("C'è stato un errore:", error);
+            });
 
             addressOptionElements.forEach(function(element) {
-            element.style.display = "block";
-            });
-            } 
+                    element.style.display = "block";
+                });
+            }
             else {
                 addressOptionElements.forEach(function(element) {
                     element.style.display = "none";
                 });
             }
         });
+
+
+
     });
 
 
 
-    
+
 
 </script>
 
@@ -154,5 +167,8 @@
     .address-option {
         display:none;
         border: var(--bs-border-width) solid var(--bs-border-color);
+    }
+    .option_none{
+        display:none;
     }
 </style>
