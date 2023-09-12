@@ -12,15 +12,12 @@ export default {
     components: {
         Card,
     },
-}
 
-methods: {
+    methods: {
 
         getApartment() {
 
-            let apartments = "http://127.0.0.1:8000/api/apartments";
-
-            axios.get(apartments)
+            axios.get(store.apartments)
                 .then(res => {
                     store.apartmentsArray = (res.data);
                 })
@@ -28,12 +25,18 @@ methods: {
                 .catch(err => {
                     console.log(err);
                 });
-        }
-    }
 
+                
+        }
+    },
+//     created() {
+// this.getApartment();
+// }
+}
 </script>
 
 <template>
+    <pre>{{store.apartmentsArray}}</pre>
     <!-- Hero -->
     <header class="container-fluid px-4 py-5 my-5 text-center">
         <div class="container">
@@ -49,16 +52,16 @@ methods: {
                             <span><i class="bi bi-geo-alt"></i></span>
     
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?">
-                            <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="#" role="button" @search="getApartment">Cerca</a>
+                            <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="" role="button" @click="getApartment">Cerca</a>
     
                         </div>
                         <!-- <datalist id="datalistOptions">
-                                    <option value="San Francisco">
-                                    <option value="New York">
-                                    <option value="Seattle">
-                                    <option value="Los Angeles">
-                                    <option value="Chicago">
-                                </datalist> -->
+                                        <option value="San Francisco">
+                                        <option value="New York">
+                                        <option value="Seattle">
+                                        <option value="Los Angeles">
+                                        <option value="Chicago">
+                                    </datalist> -->
                     </div>
                 </div>
             </div>
