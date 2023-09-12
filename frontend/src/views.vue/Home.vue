@@ -73,7 +73,7 @@ export default {
     <!-- Fine Header -->
 
     <!-- In Evidenza -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h1>In evidenza</h1>
@@ -82,11 +82,11 @@ export default {
                 <Card />
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Fine In Evidenza -->
 
     <!-- Inizio Consigliati -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h1>Consigliati</h1>
@@ -95,7 +95,7 @@ export default {
                 <Card />
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Fine consigliati -->
 </template>
 

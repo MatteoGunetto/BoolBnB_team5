@@ -121,8 +121,7 @@ export default {
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-md-6 g-3 p-3" v-for="apartment in  store.apartmentsArray.apartments">
-
-                        <Card />
+                        <Card :cardProp="apartment"/>
                     </div>
                 </div>
             </div>

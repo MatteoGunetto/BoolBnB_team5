@@ -1,18 +1,23 @@
 <script>
+import { store } from '../../store.js';
 export default {
-    // data () {
-
-    // }
+    data() {
+        return {
+            store,
+        }
+    },
+    props:{
+        cardProp: Object,
+    }
 }
 </script>
 
 <template>
     <div class="card">
-        <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+        <img :src="cardProp.image" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Spettacolare appartamento al quinto piano di una città stupenda, piena di attività per te e
-                la tua famiglia.
+            <h5 class="card-title">{{cardProp.title}}</h5>
+            <p class="card-text">{{cardProp.description}}
             </p>
         </div>
     </div>

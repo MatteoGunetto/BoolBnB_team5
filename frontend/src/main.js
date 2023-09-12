@@ -17,13 +17,13 @@ import AdvancedSearch from "./views.vue/AdvancedSearch.vue"
 
 //Creazione rotte
 const routes = [
-    { path: '/', component: Index },
+    { path: '/index', component: Index },
     // {  path: '/login', component: Login },
     // {  path: '/register', component: Register },
     { path: '/show', component: Show },
     // {  path: '/create', component: Create },
     // {  path: '/edit', component: Edit },
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
     {  path: '/list', component: AdvancedSearch },
 ]
 
