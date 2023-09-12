@@ -35,3 +35,14 @@ Route::get('/tomtom-proxy', function (Request $request) {
 
     return $response->json();
 });
+
+Route::get('/qualcosa', function(Request $request) {
+    $address= "via giulia 14, roma";
+    $apiKey = env('TOMTOM_API_KEY');
+    $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
+
+    $response = Http::get($endpoint);
+
+    dd($response);
+
+})
