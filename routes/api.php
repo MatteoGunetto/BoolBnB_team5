@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApartmentApiController;;
+use App\Http\Controllers\Api\ApartmentApiController;
+
+use App\Models\Apartment;
 
 
 /*
@@ -36,13 +38,26 @@ Route::get('/tomtom-proxy', function (Request $request) {
     return $response->json();
 });
 
-Route::get('/qualcosa', function(Request $request) {
-    $address= "via giulia 14, roma";
+Route::get('/qualcosa', function() {
+
+    //$address deve arrivare come input da frontend
+    $address = "Via del corso 14, Roma";
     $apiKey = env('TOMTOM_API_KEY');
     $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
-
     $response = Http::get($endpoint);
+    
+    // lat e lon ci serviranno nella query per trovare tutti gli appartmanenti nel raggio di x km
+    $lat = $response->json()["results"][0]["position"]["lat"];
+    $lon = $response->json()["results"][0]["position"]["lon"];
 
-    dd($response);
+    //$distance deve arrivare come input da frontend
+    $distance = 5000; // In km
 
-})
+    $apartments = Apartment::select(DB::raw("*, 
+    ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
+    ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
+    ->orderBy('distance')
+    ->get();
+
+    return $apartments;
+});
