@@ -26,9 +26,35 @@
 
                                 @csrf
                                 @method('DELETE')
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                                    Delete
+                                </button>
 
-                                <input class="mx-3 btn btn-danger" type="submit" value="DELETE">
+                                {{-- <input class="mx-3 btn btn-danger" type="submit" value="DELETE"> --}}
+                                <!-- Modal -->
+                                <div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="deleteModal">Delete</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        Sei sicuro di volere eliminare l'appartamento?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                        <button type="submit" class="btn btn-danger">Elimina</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </form>
+                            <!-- Button trigger modal -->
+
+
+
+
                             <a href="{{ route('Apartment.edit', $apartment->id) }}" class="btn btn-success">edit</a>
                         </div>
                     </div>
@@ -41,9 +67,22 @@
     </div>
 
 
+<script>
+
+    // Aggiungi un gestore di eventi al pulsante "Conferma"
+    document.getElementById("confirmDelete").addEventListener("click", function () {
+       // Qui inserisci il codice per l'eliminazione effettiva dell'elemento
+       // Puoi utilizzare AJAX, una richiesta HTTP, o qualsiasi altro metodo necessario per l'eliminazione.
+
+       // Chiudi la modale dopo l'eliminazione
+       $("#myModal").modal("hide");
+    });
+
+</script>
 
 
     </div>
 
     </div>
 @endsection
+

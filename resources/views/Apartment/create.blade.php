@@ -136,7 +136,7 @@
 
                 addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
                 addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
-                addressOptionElements[2].innerHTML = suggestedAddresses[2] ? suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country : "Non ci sono indirizzi";
+                addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
             })
             .catch(error => {
                 console.error("C'è stato un errore:", error);
@@ -170,5 +170,6 @@
     }
     .option_none{
         display:none;
+        cursor: pointer
     }
 </style>
