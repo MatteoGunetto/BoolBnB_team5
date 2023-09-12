@@ -12,6 +12,7 @@ import Index from  "./views.vue/Index.vue";
 import Show from "./views.vue/apartment/Show.vue"
 // import Create from "./views.vue/apartment/Create.vue"
 // import Edit from "./views.vue/apartment/Edit.vue"
+import AdvancedSearch from "./views.vue/AdvancedSearch.vue"
 
 //Creazione rotte
 const routes = [
@@ -21,6 +22,7 @@ const routes = [
     {  path: '/show', component: Show },
     // {  path: '/create', component: Create },
     // {  path: '/edit', component: Edit },
+    {  path: '/list', component: AdvancedSearch },
 ]
 
 const router = createRouter({
