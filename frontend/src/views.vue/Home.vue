@@ -1,10 +1,36 @@
 <script>
+import { store } from '../store';
+import axios from 'axios'
 import Card from '../components/elements/Card.vue';
+
 export default {
+    data() {
+        return {
+            store,
+        }
+    },
     components: {
         Card,
-    }
+    },
 }
+
+methods: {
+
+        getApartment() {
+
+            let apartments = "http://127.0.0.1:8000/api/apartments";
+
+            axios.get(apartments)
+                .then(res => {
+                    store.apartmentsArray = (res.data);
+                })
+
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }
+
 </script>
 
 <template>
@@ -21,27 +47,26 @@ export default {
                     <div class="d-flex justify-content-center gap-2 mb-5">
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
-
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
-                                placeholder="Dove vuoi andare?">
-                                <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="#" role="button">Cerca</a>
-
+    
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?">
+                            <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="#" role="button" @search="getApartment">Cerca</a>
+    
                         </div>
                         <!-- <datalist id="datalistOptions">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
-                            </datalist> -->
+                                    <option value="San Francisco">
+                                    <option value="New York">
+                                    <option value="Seattle">
+                                    <option value="Los Angeles">
+                                    <option value="Chicago">
+                                </datalist> -->
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
+    
     <!-- Fine Header -->
-
+    
     <!-- In Evidenza -->
     <div class="container">
         <div class="row">
@@ -54,7 +79,7 @@ export default {
         </div>
     </div>
     <!-- Fine In Evidenza -->
-
+    
     <!-- Inizio Consigliati -->
     <div class="container">
         <div class="row">
@@ -87,8 +112,8 @@ header {
     text-align: center;
 }
 
-.btn-search{
-    right:0;
-    top:0;
+.btn-search {
+    right: 0;
+    top: 0;
 }
 </style>
