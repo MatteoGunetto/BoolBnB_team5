@@ -23,7 +23,8 @@ class ApartmentApiController extends Controller
     {
 
 
-        $apartments = Apartment::all();
+        $apartments = Apartment::with('amenities')->get();
+    
 
         return response()->json([
             'apartments' => $apartments
@@ -31,6 +32,7 @@ class ApartmentApiController extends Controller
     }
     public function apartmentsShow($id) {
         $apartment = Apartment::findOrFail($id);
+        $apartment->load('amenities');
 
         return response()->json([
             'apartment' => $apartment
