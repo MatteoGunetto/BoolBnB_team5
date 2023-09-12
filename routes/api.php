@@ -39,7 +39,7 @@ Route::get('/tomtom-proxy', function (Request $request) {
 });
 
 
-Route::post('/vueAddress', 'ApartmentApiController@getVueAddress');
+Route::get('/vueAddress', [ApartmentApiController::class, "getVueAddress"]);
 
 Route::get('/qualcosa', function() {
 

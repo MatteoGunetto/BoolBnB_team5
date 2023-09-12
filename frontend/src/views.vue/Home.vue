@@ -16,21 +16,23 @@ export default {
 
     methods: {
 
+
+
         getApartment() {
 
-            //invio dell'indirizzo da vue a laravel
-            axios.post('http://127.0.0.1:8000/api/vueAddress', {
-                address: this.$data.searchAddress,
-            })
-                .then(res => {
-                    store.apartmentsArray = (res.data);
-                })
+            //chiamata per inviare l'indirizzo
+            const searchAddress = this.$data.searchAddress;
+            
 
-                .catch(err => {
-                    console.log(err);
+            // Effettua la chiamata API a Laravel e passa il valore come parametro
+            axios.get(`/api/vueAddress?searchAddress=${searchAddress}`)
+                .then(response => {
+                    // Gestisci la risposta qui
+                })
+                .catch(error => {
+                    console.error(err);
                 });
 
-                
             //chiamata per avere gli appartamenti della query
             axios.get(store.apartments)
                 .then(res => {
@@ -41,7 +43,7 @@ export default {
                     console.log(err);
                 });
 
-               
+
         }
     },
     //     created() {
@@ -65,53 +67,51 @@ export default {
                     <div class="d-flex justify-content-center gap-2 mb-5">
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
-
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
-                                placeholder="Dove vuoi andare?" v-model="searchAddress">
-
-                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search"
-                                role="button" @click.prevent="getApartment">Cerca</RouterLink>
-
+    
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress">
+    
+                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
+    
                         </div>
                         <!-- <datalist id="datalistOptions">
-                                        <option value="San Francisco">
-                                        <option value="New York">
-                                        <option value="Seattle">
-                                        <option value="Los Angeles">
-                                        <option value="Chicago">
-                                    </datalist> -->
+                                                <option value="San Francisco">
+                                                <option value="New York">
+                                                <option value="Seattle">
+                                                <option value="Los Angeles">
+                                                <option value="Chicago">
+                                            </datalist> -->
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
+    
     <!-- Fine Header -->
-
+    
     <!-- In Evidenza -->
     <!-- <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <h1>In evidenza</h1>
-            </div>
-            <div class="col-md-4" v-for="item in 3" :key="item.id">
-                <Card />
-            </div>
-        </div>
-    </div> -->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h1>In evidenza</h1>
+                    </div>
+                    <div class="col-md-4" v-for="item in 3" :key="item.id">
+                        <Card />
+                    </div>
+                </div>
+            </div> -->
     <!-- Fine In Evidenza -->
-
+    
     <!-- Inizio Consigliati -->
     <!-- <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <h1>Consigliati</h1>
-            </div>
-            <div class="col-md-4" v-for="item in 3" :key="item.id">
-                <Card />
-            </div>
-        </div>
-    </div> -->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h1>Consigliati</h1>
+                    </div>
+                    <div class="col-md-4" v-for="item in 3" :key="item.id">
+                        <Card />
+                    </div>
+                </div>
+            </div> -->
     <!-- Fine consigliati -->
 </template>
 

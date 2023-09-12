@@ -42,7 +42,11 @@ class ApartmentApiController extends Controller
     }
 
     public function getVueAddress(Request $request){
-        $vueAddress = $request->input('searchAddress');
+        $searchAddress = $request->query('searchAddress');
+
+        return response()->json([
+            'searchAddress' => $searchAddress
+        ]);
     }
 
 
