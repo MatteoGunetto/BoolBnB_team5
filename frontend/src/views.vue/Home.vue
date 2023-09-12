@@ -1,9 +1,37 @@
 <script>
+import { store } from '../store';
+import axios from 'axios'
 import Card from '../components/elements/Card.vue';
+
 export default {
+    data() {
+        return {
+            store,
+        }
+    },
     components: {
         Card,
-    }
+    },
+
+    methods: {
+
+        getApartment() {
+
+            axios.get(store.apartments)
+                .then(res => {
+                    store.apartmentsArray = (res.data);
+                })
+
+                .catch(err => {
+                    console.log(err);
+                });
+
+
+        }
+    },
+    //     created() {
+    // this.getApartment();
+    // }
 }
 </script>
 
@@ -24,16 +52,18 @@ export default {
 
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
                                 placeholder="Dove vuoi andare?">
-                                <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="#" role="button">Cerca</a>
+
+                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search"
+                                role="button" @click.prevent="getApartment">Cerca</RouterLink>
 
                         </div>
                         <!-- <datalist id="datalistOptions">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
-                            </datalist> -->
+                                        <option value="San Francisco">
+                                        <option value="New York">
+                                        <option value="Seattle">
+                                        <option value="Los Angeles">
+                                        <option value="Chicago">
+                                    </datalist> -->
                     </div>
                 </div>
             </div>
@@ -43,7 +73,7 @@ export default {
     <!-- Fine Header -->
 
     <!-- In Evidenza -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h1>In evidenza</h1>
@@ -52,11 +82,11 @@ export default {
                 <Card />
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Fine In Evidenza -->
 
     <!-- Inizio Consigliati -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h1>Consigliati</h1>
@@ -65,7 +95,7 @@ export default {
                 <Card />
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Fine consigliati -->
 </template>
 
@@ -87,8 +117,8 @@ header {
     text-align: center;
 }
 
-.btn-search{
-    right:0;
-    top:0;
+.btn-search {
+    right: 0;
+    top: 0;
 }
 </style>
