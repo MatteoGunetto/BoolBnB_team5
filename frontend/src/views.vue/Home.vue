@@ -26,12 +26,12 @@ export default {
                     console.log(err);
                 });
 
-                
+
         }
     },
-//     created() {
-// this.getApartment();
-// }
+    //     created() {
+    // this.getApartment();
+    // }
 }
 </script>
 
@@ -49,11 +49,13 @@ export default {
                     <div class="d-flex justify-content-center gap-2 mb-5">
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
-    
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?">
-                            
-                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
-    
+
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
+                                placeholder="Dove vuoi andare?">
+
+                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search"
+                                role="button" @click.prevent="getApartment">Cerca</RouterLink>
+
                         </div>
                         <!-- <datalist id="datalistOptions">
                                         <option value="San Francisco">
@@ -67,9 +69,9 @@ export default {
             </div>
         </div>
     </header>
-    
+
     <!-- Fine Header -->
-    
+
     <!-- In Evidenza -->
     <div class="container">
         <div class="row">
@@ -82,7 +84,7 @@ export default {
         </div>
     </div>
     <!-- Fine In Evidenza -->
-    
+
     <!-- Inizio Consigliati -->
     <div class="container">
         <div class="row">
