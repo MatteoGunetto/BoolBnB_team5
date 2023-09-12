@@ -9,6 +9,7 @@
             @foreach ($apartments as $apartment)
                 <div class="col">
                     <div class="card ">
+                       
                         {{-- se l'img è vuota allora mettine una di default --}}
                         @if (!empty($apartment->image))
                             <img src="{{ asset('storage/' . $apartment->image) }}" class="card-img-top" alt="Apartment Image">
@@ -21,47 +22,48 @@
                             <h5 class="card-title">{{ $apartment->title }}</h5>
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
+                            <!-- BOTTONE DETTAGLI -->
                             <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-info">Dettagli</a>
                             <form class="d-inline" method="POST" action="{{ route('Apartment.destroy', $apartment->id) }}">
-
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal">
+
+                                <!-- bottone collegato alla modale -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal_{{ $apartment->id }}">
                                     Delete
                                 </button>
 
-                                {{-- <input class="mx-3 btn btn-danger" type="submit" value="DELETE"> --}}
                                 <!-- Modal -->
-                                <div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                <div class="modal fade" id="delete_modal_{{ $apartment->id }}" tabindex="-1" aria-labelledby="deleteModal_{{ $apartment->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="deleteModal">Delete</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="deleteModal_{{ $apartment->id }}">Sei sicuro di voler eliminare l'appartamento:</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>
+                                                {{$apartment->title}}
+                                                </strong>
+                                              ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <!-- bottoni della modale -->
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                        Sei sicuro di volere eliminare l'appartamento?
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                        <button type="submit" class="btn btn-danger">Elimina</button>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
                             </form>
-                            <!-- Button trigger modal -->
 
 
-
-
+                            <!-- BOTTONE EDIT -->
                             <a href="{{ route('Apartment.edit', $apartment->id) }}" class="btn btn-success">edit</a>
                         </div>
                     </div>
                 </div>
             @endforeach
-
-
 
         </div>
     </div>
