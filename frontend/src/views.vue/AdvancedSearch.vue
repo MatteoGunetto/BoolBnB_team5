@@ -1,6 +1,12 @@
 <script>
 import Card from '../components/elements/Card.vue';
+import { store } from '../store';
 export default {
+    data() {
+        return {
+            store,
+        }
+    },
     components: {
         Card,
     }
@@ -8,6 +14,7 @@ export default {
 </script>
 
 <template>
+        <pre>{{store.apartmentsArray}}</pre>
     <div class="container">
         <div class="row justify-content-between">
             <h2 class="py-4">Filtra ricerca</h2>

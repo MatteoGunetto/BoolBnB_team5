@@ -36,7 +36,6 @@ export default {
 </script>
 
 <template>
-    <pre>{{store.apartmentsArray}}</pre>
     <!-- Hero -->
     <header class="container-fluid px-4 py-5 my-5 text-center">
         <div class="container">
@@ -52,7 +51,8 @@ export default {
                             <span><i class="bi bi-geo-alt"></i></span>
     
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?">
-                            <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="" role="button" @click="getApartment">Cerca</a>
+                            
+                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     
                         </div>
                         <!-- <datalist id="datalistOptions">
