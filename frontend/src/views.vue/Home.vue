@@ -53,6 +53,19 @@ export default {
         </div>
     </div>
     <!-- Fine In Evidenza -->
+
+    <!-- Inizio Consigliati -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <h1>Consigliati</h1>
+            </div>
+            <div class="col-md-4" v-for="item in 3" :key="item.id">
+                <Card />
+            </div>
+        </div>
+    </div>
+    <!-- Fine consigliati -->
 </template>
 
 
