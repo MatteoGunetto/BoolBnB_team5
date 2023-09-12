@@ -69,7 +69,6 @@ class ApartmentController extends Controller
 
         // $apartment->messages()->attach($data['messages']);
 
-
         $data = $request->all();
         $data["user_id"] = Auth::id();
 
@@ -99,7 +98,12 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::create($data);
 
-        $apartment->amenities()->attach($data['amenities']);
+        
+        // se esistono amenities me le "attacchi", se non esistono non fai niente
+        // La funzione isset() è progettata per verificare se una variabile (o una chiave di un array) esiste/ha un valore senza generare un avviso se non lo fa.
+        if (isset($data['amenities'])) {
+            $apartment->amenities()->attach($data['amenities']);
+        }
 
 
         return redirect()->route('Apartment.index');
