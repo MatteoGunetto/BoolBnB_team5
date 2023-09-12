@@ -60,9 +60,9 @@
                     </div>
 
                     <!-- suggerimenti address -->
-                    <div class="address-option" class="option_none">ciao</div>
-                    <div class="address-option">ciao</div>
-                    <div class="address-option">ciao</div>
+                    <div class="address-option" class="option_none"></div>
+                    <div class="address-option"></div>
+                    <div class="address-option"></div>
 
                     <!-- immagine -->
                     <div class="mb-3">
@@ -95,10 +95,10 @@
 @endsection
 
 <script>
-    // Variabile per l'elemento input.
+    // Variabile DOM per l'elemento input.
     let searchBarDom;
 
-    // Una volta che il DOM è caricato, inizializza la variabile searchBarDom.
+    // Una volta che il DOM è caricato, individua/inizializza la variabile searchBarDom.
     document.addEventListener("DOMContentLoaded", function() {
         searchBarDom = document.getElementById("address");
 
@@ -114,53 +114,59 @@
         // Imposta il testo consigliato come ricerca del indirizzo
         addressOptionElements.forEach(function(indirizzo){
             indirizzo.addEventListener("click", function(){
-                console.log(indirizzo.innerHTML);
                 searchBarDom.value=indirizzo.textContent
             });
         })
 
 
+        let debounceTimer;
 
+        //eventlistener che si attiva quando cambia il valore di searchBarDom che sarebbe il nostro campo input
         searchBarDom.addEventListener("input", function() {
-            if  (searchBarDom.value.length > 4 ) {
-                const addressSearched = searchBarDom.value;
+            clearTimeout(debounceTimer); // Cancella qualsiasi timer esistente
+            debounceTimer = setTimeout(() => { // Imposta un nuovo timer
 
-                axios.get('/api/tomtom-proxy', {
-                    params: {
-                        address: addressSearched
+                if  (searchBarDom.value.length > 4 ) {
+                    const addressSearched = searchBarDom.value;
+
+                    axios.get('/api/tomtom-proxy', {
+                        params: {
+                            address: addressSearched
+                        }
+                    })
+                    .then(response => {
+                        console.log(searchBarDom.value, "search value")
+                        let suggestedAddresses = response.data.results;
+
+                        addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
+                        addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
+                        addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
+                    })
+                    .catch(error => {
+                        console.error("C'è stato un errore:", error);
+                    });
+
+                    addressOptionElements.forEach(function(element) {
+                        element.style.display = "block";
+                    });
                 }
-            })
-            .then(response => {
-                console.log(response.data.results[0].address,response.data.results[1].address,response.data.results[2].address)
-                let suggestedAddresses = response.data.results;
 
-                addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
-                addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
-                addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
-            })
-            .catch(error => {
-                console.error("C'è stato un errore:", error);
-            });
+            
+                else {
+                    addressOptionElements.forEach(function(element) {
+                        element.style.display = "none";
 
-            addressOptionElements.forEach(function(element) {
-                    element.style.display = "block";
-                });
-            }
-            else {
-                addressOptionElements.forEach(function(element) {
-                    element.style.display = "none";
-                });
-            }
+                        // questa è una porcheria, per' "quasi" funziona, lascia i bordi dei div
+                        // addressOptionElements[0].innerHTML = ""
+                        // addressOptionElements[1].innerHTML = ""
+                        // addressOptionElements[2].innerHTML = ""
+                    });
+                }
+            }, 500); // Il timer è impostato per mezzo secondo (500 millisecondi)
+
         });
 
-
-
     });
-
-
-
-
-
 </script>
 
 <style>
