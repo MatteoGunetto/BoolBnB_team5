@@ -19,11 +19,13 @@ export default {
                         </div>
                     </div>
                     <div class="d-flex justify-content-center gap-2 mb-5">
-                        <div class="input-group">
+                        <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
 
-                            <input class="form-control w-50 rounded-3" list="datalistOptions" id="exampleDataList"
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
                                 placeholder="Dove vuoi andare?">
+                                <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" href="#" role="button">Cerca</a>
+
                         </div>
                         <!-- <datalist id="datalistOptions">
                                 <option value="San Francisco">
@@ -32,7 +34,6 @@ export default {
                                 <option value="Los Angeles">
                                 <option value="Chicago">
                             </datalist> -->
-                        <a class="btn btn-primary btn-lg px-4 gap-3 text-white rounded" href="#" role="button">Cerca</a>
                     </div>
                 </div>
             </div>
@@ -84,5 +85,10 @@ header {
     color: white;
     padding: 100px;
     text-align: center;
+}
+
+.btn-search{
+    right:0;
+    top:0;
 }
 </style>
