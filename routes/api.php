@@ -38,6 +38,9 @@ Route::get('/tomtom-proxy', function (Request $request) {
     return $response->json();
 });
 
+
+Route::post('/vueAddress', 'ApartmentApiController@getVueAddress');
+
 Route::get('/qualcosa', function() {
 
     //$address deve arrivare come input da frontend

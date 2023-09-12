@@ -7,6 +7,7 @@ export default {
     data() {
         return {
             store,
+            searchAddress: '',
         }
     },
     components: {
@@ -17,6 +18,20 @@ export default {
 
         getApartment() {
 
+            //invio dell'indirizzo da vue a laravel
+            axios.post('http://127.0.0.1:8000/api/vueAddress', {
+                address: this.$data.searchAddress,
+            })
+                .then(res => {
+                    store.apartmentsArray = (res.data);
+                })
+
+                .catch(err => {
+                    console.log(err);
+                });
+
+                
+            //chiamata per avere gli appartamenti della query
             axios.get(store.apartments)
                 .then(res => {
                     store.apartmentsArray = (res.data);
@@ -26,7 +41,7 @@ export default {
                     console.log(err);
                 });
 
-
+               
         }
     },
     //     created() {
@@ -37,6 +52,7 @@ export default {
 
 <template>
     <!-- Hero -->
+    <h1>{{ searchAddress }}</h1>
     <header class="container-fluid px-4 py-5 my-5 text-center">
         <div class="container">
             <div class="row">
@@ -51,7 +67,7 @@ export default {
                             <span><i class="bi bi-geo-alt"></i></span>
 
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList"
-                                placeholder="Dove vuoi andare?">
+                                placeholder="Dove vuoi andare?" v-model="searchAddress">
 
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search"
                                 role="button" @click.prevent="getApartment">Cerca</RouterLink>
