@@ -14,7 +14,7 @@ export default {
 
 <template>
     <div class="card">
-        <img :src="cardProp.image" class="card-img-top" alt="...">
+        <img :src="`${store.urlImg}${cardProp.image}`" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{cardProp.title}}</h5>
             <p class="card-text">{{cardProp.description}}

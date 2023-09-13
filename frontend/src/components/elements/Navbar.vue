@@ -27,10 +27,10 @@ export default {
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav gap-2">
         <li class="nav-item">
-            <RouterLink to="/login">Login<span class="visually-hidden">(current)</span></RouterLink>
+          <a href="http://127.0.0.1:8000/login">Login</a>
         </li>
         <li class="nav-item">
-            <RouterLink to="/register">Register<span class="visually-hidden">(current)</span></RouterLink>
+          <a href="http://127.0.0.1:8000/register">Register</a>
         </li>
       </ul>
     </div>
