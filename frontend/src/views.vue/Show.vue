@@ -26,7 +26,6 @@ export default {
 </script>
 
 <template>
-    <pre>{{ store.singleApartmentArray }}</pre>
     <section class="container-fluid hero d-flex align-items-end pb-4 text-white mb-5">
         <!-- <img :src="`${store.urlImg}${store.singleApartmentArray.image}`" alt=""> -->
         <div class="container">
@@ -59,7 +58,7 @@ export default {
     </section>
     <section class="container">
     
-        <pre>{{ store.singleApartmentArray }}</pre>
+        <!-- <pre>{{ store.singleApartmentArray }}</pre> -->
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
@@ -128,7 +127,7 @@ export default {
                 <div class="col-lg-3">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" v-for="amenity in store.singleApartmentArray.amenities ">
-                            {{ amenity.icon }}
+                            <font-awesome-icon :icon="`fa-solid ${ amenity.icon }`" />
                             {{amenity.name}}
                         </li>
                     </ul>
