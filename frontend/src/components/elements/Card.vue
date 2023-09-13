@@ -19,6 +19,14 @@ export default {
             <h5 class="card-title">{{cardProp.title}}</h5>
             <p class="card-text">{{cardProp.description}}
             </p>
+
+            <p>
+                <strong>
+                    distance: 
+                </strong>
+
+                {{cardProp.distance.toFixed(2)}} km
+            </p>
         </div>
     </div>
 </template>
