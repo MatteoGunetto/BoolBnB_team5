@@ -6,7 +6,7 @@ export default {
             store,
         }
     },
-    props:{
+    props: {
         cardProp: Object,
     }
 }
@@ -16,11 +16,45 @@ export default {
     <div class="card">
         <img :src="cardProp.image" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{cardProp.title}}</h5>
-            <p class="card-text">{{cardProp.description}}
-            </p>
+            <h5 class="text-primary">{{cardProp.title}}</h5>
+            <p class="card-text mb-4">{{cardProp.description}}</p>
+            <div class="icon-container d-flex position-relative mt-3">
+                <div class="icon d-flex align-items-center">
+                    <img src="../../../public/icon-bed.svg" alt="icona-letto">
+                    <span class="ms-2">{{ cardProp.beds }}</span>
+                </div>
+                <div class="icon d-flex align-items-center ms-2">
+                    <img src="../../../public/icon-bathroom.svg" alt="icona-bagno">
+                    <span class="ms-2">{{ cardProp.bathrooms }}</span>
+                </div>
+                <div class="icon d-flex align-items-center ms-2">
+                    <img src="../../../public/icon-rooms.svg" alt="icona-appartamento">
+                    <span class="ms-2">{{ cardProp.squareMeters }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    .icon img{
+        filter: brightness(0.8) ;
+    }
+
+    .icon{
+        color: #ADB5BD;
+    }
+
+    .icon-container:before{
+        content: "";
+        border: 0.5px solid #d2d5d7;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: -2px;
+    }
+
+    .icon-container{
+        padding: 16px 0px 4px 0px;
+    }
+</style>
