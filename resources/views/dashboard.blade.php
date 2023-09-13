@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link link-danger" href="{{ route('Apartment.index') }}">Home</a>
+                    <a class="nav-link link-danger" href="http://localhost:5173/">Home</a>
                 </li>
                 <!-- La rotta che porta alla lista degli appartamenti degli utenti loggati è da rivedere, la lascio vuota -->
                 <li class="nav-item">
