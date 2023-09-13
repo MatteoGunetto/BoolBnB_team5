@@ -230,9 +230,7 @@ export default {
                     <div class="col-md-6 g-3 p-3" v-for="apartment in store.apartmentsInXKmArray">
                         <router-link :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
-                            <!-- {{ apartment }} -->
                         </router-link>
-                        
                     </div>
                 </div>
             </div>

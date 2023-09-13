@@ -1,19 +1,38 @@
 <script>
+import { store } from '../store';
+import axios from 'axios'
+
 export default {
-    setup() {
-
-
-        return {}
+    data() {
+        return {
+            store,
+            dynamicId: this.$route.params.id,
+        }
     },
+
+    beforeMount() {
+
+        // chiamata per avere TUTTI gli appartamenti
+        axios.get(`${store.apartments}/${this.dynamicId}`)
+            .then(res => {
+                store.singleApartmentArray = (res.data.apartment);
+            })
+
+            .catch(err => {
+                console.log(err);
+            });
+    }
 }
 </script>
 
 <template>
+    <pre>{{ store.singleApartmentArray }}</pre>
     <section class="container-fluid hero d-flex align-items-end pb-4 text-white mb-5">
+        <!-- <img :src="`${store.urlImg}${store.singleApartmentArray.image}`" alt=""> -->
         <div class="container">
             <div class="row mb-3">
                 <div class="col-12">
-                    <h1 class="hero-title position-relative d-inline-block">Titolo Appartamento</h1>
+                    <h1 class="hero-title position-relative d-inline-block">{{ store.singleApartmentArray.title }}</h1>
                 </div>
             </div>
             <!-- Info camera -->
@@ -22,15 +41,15 @@ export default {
                     <div class="apt-icons d-flex gap-3 align-items-center">
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-bed.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{store.singleApartmentArray.beds}}</span>
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-bathroom.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{ store.singleApartmentArray.bathrooms }}</span>
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-rooms.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{ store.singleApartmentArray.rooms }}</span>
                         </div>
                     </div>
                 </div>
@@ -39,11 +58,13 @@ export default {
     
     </section>
     <section class="container">
+    
+        <pre>{{ store.singleApartmentArray }}</pre>
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
                 <h2>Description</h2>
-                <p>""defrwefregergregrere"".</p>
+                <p>{{ store.singleApartmentArray.description }}</p>
     
     
                 <!-- Mappa -->
@@ -102,22 +123,35 @@ export default {
             </div>
         </section>
     
+        <section>
+            <div class="row py-4">
+                <div class="col-lg-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" v-for="amenity in store.singleApartmentArray.amenities ">
+                            {{ amenity.icon }}
+                            {{amenity.name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    
     </section>
 </template>
 
 
 <style lang="scss" scoped>
 @import "../../scss/boolBnbStyle.scss";
-.icon-group img{
+.icon-group img {
     width: 28px;
 }
 
-.hero{
+.hero {
     height: 300px;
     background-color: $primary;
 }
 
-.hero-title:after{
+.hero-title:after {
     content: '';
     width: 100%;
     border-bottom: solid 2px #fff;
@@ -126,5 +160,4 @@ export default {
     bottom: -16px;
     z-index: 1;
 }
-
 </style>
