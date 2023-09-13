@@ -17,8 +17,8 @@ export default {
     },
     created() {
 
-            // Effettua una chiamata Axios per ottenere l'elenco delle amenities
-            axios.get(store.urlForAllAmenities)
+        // Effettua una chiamata Axios per ottenere l'elenco delle amenities
+        axios.get(store.urlForAllAmenities)
             .then(res => {
                 store.allAmenities = (res.data);
                 console.log(store.allAmenities); // Controlla i dati ottenuti
@@ -26,9 +26,9 @@ export default {
 
             .catch(err => {
                 console.log(err);
-            }); 
-            
-   
+            });
+
+
 
     },
     components: {
@@ -42,8 +42,8 @@ export default {
             //Filtra per il numero di stanze (roomsNumber)
             if (this.filtro.roomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    
-                    if(this.filtro.roomsNumber == 4){
+
+                    if (this.filtro.roomsNumber == 4) {
                         return apartment.rooms >= parseInt(this.filtro.roomsNumber);
                     }
                     // Restituisce true solo se il numero di stanze dell'appartamento è uguale a quello selezionato
@@ -54,7 +54,7 @@ export default {
             // Filtra per il numero di letti (bedsNumber)
             if (this.filtro.bedsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    if(this.filtro.bedsNumber == 4){
+                    if (this.filtro.bedsNumber == 4) {
                         return apartment.beds >= parseInt(this.filtro.bedsNumber);
                     }
                     // Restituisce true solo se il numero di letti dell'appartamento è uguale a quello selezionato
@@ -65,7 +65,7 @@ export default {
             // Filtra per il numero di bagni (bathroomsNumber)
             if (this.filtro.bathroomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    if(this.filtro.bathroomsNumber == 4){
+                    if (this.filtro.bathroomsNumber == 4) {
                         return apartment.bathrooms >= parseInt(this.filtro.bathroomsNumber);
                     }
                     // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
@@ -86,10 +86,10 @@ export default {
             // Restituisce la lista degli appartamenti filtrati
             console.log("filteredSearch:", filteredSearch);
             return filteredSearch;
-    }
+        }
     },
     computed: {
-        
+
     }
 }
 </script>
@@ -205,10 +205,10 @@ export default {
                             Distanza
                         </h4>
                     </label>
-                    <input type="range" class="form-range" min="1" max="20" step="1" id="customRange3" 
-                    v-model="filtro.selectedDistance" @change="filterApartments">
+                    <input type="range" class="form-range" min="1" max="20" step="1" id="customRange3"
+                        v-model="filtro.selectedDistance" @change="filterApartments">
                     <div>
-                        Distanza massima: {{filtro.selectedDistance}} km
+                        Distanza massima: {{ filtro.selectedDistance }} km
                     </div>
                 </section>
 
@@ -216,12 +216,12 @@ export default {
                 <section>
                     <h4>Servizi </h4>
                     <div class="form-check" v-for="amenity in store.allAmenities">
-                        <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                            {{amenity.id}}
-                        </label> -->
-                        
-                        {{amenity.name}} 
+                            {{ amenity.name }}
+                        </label>
+
+
 
 
                     </div>
