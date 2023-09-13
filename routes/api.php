@@ -39,12 +39,12 @@ Route::get('/tomtom-proxy', function (Request $request) {
 });
 
 
-Route::get('/vueAddress', [ApartmentApiController::class, "getVueAddress"]);
-
-Route::get('/qualcosa', function() {
+Route::get('/qualcosa', function(Request $request) {
 
     //$address deve arrivare come input da frontend
-    $address = "Via del corso 14, Roma";
+    // $address = "Via del corso 14, Roma";
+
+    $address = $request->input('address');
     $apiKey = env('TOMTOM_API_KEY');
     $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
     $response = Http::get($endpoint);
@@ -54,7 +54,7 @@ Route::get('/qualcosa', function() {
     $lon = $response->json()["results"][0]["position"]["lon"];
 
     //$distance deve arrivare come input da frontend
-    $distance = 5000; // In km
+    $distance = 20; // In km
 
     $apartments = Apartment::select(DB::raw("*, 
     ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))

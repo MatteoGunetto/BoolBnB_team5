@@ -15,37 +15,45 @@ export default {
     },
 
     methods: {
-
-
-
         getApartment() {
 
-            //chiamata per inviare l'indirizzo
-            const searchAddress = this.$data.searchAddress;
-            
+            //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
+            const addressToSend = this.$data.searchAddress;
 
             // Effettua la chiamata API a Laravel e passa il valore come parametro
-            axios.get(`/api/vueAddress?searchAddress=${searchAddress}`)
+            axios.get(store.urlForHomeSearch , {
+                        params: {
+                            address: addressToSend
+                        }
+                    })
                 .then(response => {
-                    // Gestisci la risposta qui
+
+                    console.log("risposta tornata con successo", response.data)
+                    store.apartmentsInXKmArray = (response.data);
+                    console.log("questo è l array nello store", store.apartmentsInXKmArray)
                 })
                 .catch(error => {
-                    console.error(err);
+                    console.error(error);
                 });
 
-            //chiamata per avere gli appartamenti della query
-            axios.get(store.apartments)
-                .then(res => {
-                    store.apartmentsArray = (res.data);
-                })
+            //chiamata per avere TUTTI gli appartamenti
+            // axios.get(store.apartments)
+            //     .then(res => {
+            //         store.apartmentsArray = (res.data);
+            //     })
 
-                .catch(err => {
-                    console.log(err);
-                });
+            //     .catch(err => {
+            //         console.log(err);
+            //     });
 
 
         }
+
+        
     },
+    mounted() {
+        //funzione per consigli indirizzi
+    }
     //     created() {
     // this.getApartment();
     // }
