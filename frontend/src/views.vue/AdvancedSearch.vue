@@ -1,5 +1,6 @@
 <script>
 import Card from '../components/elements/Card.vue';
+import axios from 'axios'
 import { store } from '../store';
 export default {
     data() {
@@ -12,6 +13,17 @@ export default {
 
             },
         };
+    },
+    created() {
+        // Effettua una chiamata Axios per ottenere l'elenco degli appartamenti
+        axios.get(store.apartments)
+            .then(res => {
+                store.apartmentsArray = (res.data);
+            })
+
+            .catch(err => {
+                console.log(err);
+            });
     },
     components: {
         Card,
@@ -32,7 +44,7 @@ export default {
     computed: {
         apartmentsFiltered() {
             // Inizia con la lista completa degli appartamenti
-            let filteredSearch = this.store.apartments;
+            let filteredSearch = this.store.apartmentsArray.apartments;
 
             // Filtra per il numero di stanze (roomsNumber)
             if (this.filtro.roomsNumber !== null) {
