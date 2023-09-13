@@ -19,6 +19,7 @@ export default {
         axios.get(store.apartments)
             .then(res => {
                 store.apartmentsArray = (res.data);
+                console.log(store.apartmentsArray); // Controlla i dati ottenuti
             })
 
             .catch(err => {
@@ -31,13 +32,13 @@ export default {
     methods: {
         filterApartments() {
 
-            // Reimposta le selezioni del filtro
-            this.filtro.stanze = null;
-            this.filtro.bagni = null;
-            this.filtro.servizi = [];
-            console.log("roomsNumber:", this.filtro.roomsNumber);
-            console.log("bedsNumber:", this.filtro.bedsNumber);
-            console.log("bathroomsNumber:", this.filtro.bathroomsNumber);
+            // // Reimposta le selezioni del filtro
+            // this.filtro.roomsNumber = null;
+            // this.filtro.bedsNumber = null;
+            // this.filtro.bathroomsNumber = null;
+            // console.log("roomsNumber:", this.filtro.roomsNumber);
+            // console.log("bedsNumber:", this.filtro.bedsNumber);
+            // console.log("bathroomsNumber:", this.filtro.bathroomsNumber);
 
         },
     },
@@ -45,6 +46,8 @@ export default {
         apartmentsFiltered() {
             // Inizia con la lista completa degli appartamenti
             let filteredSearch = this.store.apartmentsArray.apartments;
+
+
 
             // Filtra per il numero di stanze (roomsNumber)
             if (this.filtro.roomsNumber !== null) {
@@ -54,6 +57,8 @@ export default {
                 });
             }
 
+
+
             // Filtra per il numero di letti (bedsNumber)
             if (this.filtro.bedsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
@@ -61,6 +66,8 @@ export default {
                     return apartment.beds === this.filtro.bedsNumber;
                 });
             }
+
+
 
             // Filtra per il numero di bagni (bathroomsNumber)
             if (this.filtro.bathroomsNumber !== null) {
@@ -79,7 +86,6 @@ export default {
 </script>
 
 <template>
-    <pre>{{ store.apartmentsArray }}</pre>
     <div class="container">
         <div class="row justify-content-between">
             <h2 class="py-4">Filtra ricerca</h2>
@@ -216,7 +222,7 @@ export default {
             </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3" v-for="apartment in  store.apartmentsArray.apartments">
+                    <div class="col-md-6 g-3 p-3" v-for="apartment in apartmentsFiltered">
                         <Card :cardProp="apartment" />
                     </div>
                 </div>
