@@ -21,7 +21,7 @@ export default {
             <div class="icon-container d-flex position-relative mt-3">
                 <div class="icon d-flex align-items-center">
                     <img src="../../../public/icon-bed.svg" alt="icona-letto">
-                    <span class="ms-2">{{ cardProp.beds }}</span>
+                    <span class="ms-2"> beds: {{ cardProp.beds }}</span>
                 </div>
                 <div class="icon d-flex align-items-center ms-2">
                     <img src="../../../public/icon-bathroom.svg" alt="icona-bagno">

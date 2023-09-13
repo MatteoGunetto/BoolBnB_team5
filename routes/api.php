@@ -3,8 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentApiController;
+use App\Http\Controllers\Api\AmenityApiController;
+
 
 use App\Models\Apartment;
+use App\Models\Amenity;
 
 
 /*
@@ -64,3 +67,5 @@ Route::get('/qualcosa', function(Request $request) {
 
     return $apartments;
 });
+
+Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
