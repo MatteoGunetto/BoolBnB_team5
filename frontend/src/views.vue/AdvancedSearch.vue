@@ -30,6 +30,10 @@ export default {
         Card,
     },
     methods: {
+        // Passiamo i dati dell'istanza apartment alla view "show"
+        sharedata(){
+            this.$router.push({name:"Apartment", params:{data:this}})
+        },
         filterApartments() {
 
             // // Reimposta le selezioni del filtro
@@ -224,9 +228,12 @@ export default {
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-md-6 g-3 p-3" v-for="apartment in store.apartmentsInXKmArray">
-                        <Card :cardProp="apartment" />
+                        <router-link :to="`/show/${apartment.id}`">
+                            <Card :cardProp="apartment" />
+                            <!-- {{ apartment }} -->
+                        </router-link>
+                        
                     </div>
-
                 </div>
             </div>
         </div>

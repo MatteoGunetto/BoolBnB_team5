@@ -4,7 +4,7 @@ export default {
 
 
         return {}
-    }
+    },
 }
 </script>
 
@@ -39,7 +39,6 @@ export default {
     
     </section>
     <section class="container">
-    
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
@@ -108,7 +107,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "../../../scss/boolBnbStyle.scss";
+@import "../../scss/boolBnbStyle.scss";
 .icon-group img{
     width: 28px;
 }
