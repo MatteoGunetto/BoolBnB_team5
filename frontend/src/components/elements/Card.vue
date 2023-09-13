@@ -31,7 +31,16 @@ export default {
                     <img src="../../../public/icon-rooms.svg" alt="icona-appartamento">
                     <span class="ms-2">{{ cardProp.squareMeters }}</span>
                 </div>
+                
             </div>
+            <div class="icon d-flex align-items-center ms-2">
+                    <span class="ms-2">
+                        <span>
+                            Distance:
+                        </span>
+                        {{ cardProp.distance.toFixed(2) }} km
+                    </span>
+                </div>
         </div>
     </div>
 </template>

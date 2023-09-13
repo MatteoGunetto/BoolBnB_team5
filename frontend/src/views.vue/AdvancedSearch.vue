@@ -223,7 +223,7 @@ export default {
             </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3" v-for="apartment in apartmentsFiltered">
+                    <div class="col-md-6 g-3 p-3" v-for="apartment in store.apartmentsInXKmArray">
                         <Card :cardProp="apartment" />
                     </div>
 
