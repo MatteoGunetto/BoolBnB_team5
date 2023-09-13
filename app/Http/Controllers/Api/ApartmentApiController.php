@@ -30,6 +30,7 @@ class ApartmentApiController extends Controller
             'apartments' => $apartments
         ]);
     }
+
     public function apartmentsShow($id) {
         $apartment = Apartment::findOrFail($id);
         $apartment->load('amenities');
@@ -38,6 +39,14 @@ class ApartmentApiController extends Controller
             'apartment' => $apartment
         ]);
 
+    }
+
+    public function getVueAddress(Request $request){
+        $searchAddress = $request->query('searchAddress');
+
+        return response()->json([
+            'searchAddress' => $searchAddress
+        ]);
     }
 
 

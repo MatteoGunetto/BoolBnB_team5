@@ -14,8 +14,8 @@ export default {
 </script>
 
 <template>
-    <pre>{{ store.apartmentsArray }}</pre>
     <div class="container">
+
         <div class="row justify-content-between">
             <h2 class="py-4">Filtra ricerca</h2>
             <div class="col-lg-4">
@@ -120,9 +120,11 @@ export default {
             </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3" v-for="apartment in  store.apartmentsArray.apartments">
+                    <div class="col-md-6 g-3 p-3" v-for="apartment in  store.apartmentsInXKmArray">
                         <Card :cardProp="apartment"/>
+
                     </div>
+
                 </div>
             </div>
         </div>
