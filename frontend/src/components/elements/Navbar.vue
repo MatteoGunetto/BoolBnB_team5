@@ -27,7 +27,7 @@ export default {
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav gap-2">
         <li class="nav-item">
-          <a href="http://127.0.0.1:8000/Login">Login</a>
+          <a href="http://127.0.0.1:8000/login">Login</a>
         </li>
         <li class="nav-item">
           <a href="http://127.0.0.1:8000/register">Register</a>
