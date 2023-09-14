@@ -14,7 +14,7 @@ export default {
                 selectedDistance: 20, // Distanza massima selezionata
                 selectedAmenities: [],
             },
-
+            filteredApartments: [],
         };
     },
     created() {
@@ -23,6 +23,7 @@ export default {
             .then(res => {
                 store.allAmenities = (res.data); // Imposta l'elenco delle amenities nello store
                 console.log('queste sono gli id amenities', store.allAmenities); // Stampa i dati delle amenities ottenuti dalla chiamata
+                this.filterApartments();
             })
             .catch(err => {
                 console.log(err); // Gestisce gli errori se la chiamata fallisce
@@ -36,8 +37,8 @@ export default {
             // Inizia con la lista completa degli appartamenti
             let filteredSearch = this.store.apartmentsInXKmArray;
 
-           //Filtra per il numero di stanze (roomsNumber)
-           if (this.filtro.roomsNumber !== null) {
+            //Filtra per il numero di stanze (roomsNumber)
+            if (this.filtro.roomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
 
                     if (this.filtro.roomsNumber == 4) {
@@ -83,7 +84,9 @@ export default {
             if (this.filtro.selectedAmenities.length > 0) {
                 // Filtra gli appartamenti solo se ci sono amenità selezionate
                 filteredSearch = filteredSearch.filter(apartment => {
-                    return this.filtro.selectedAmenities.every(amenityId => apartment.amenities.includes(parseInt(amenityId)));
+
+
+                    return apartment.amenities.includes(parseInt(this.selectedAmenities));
 
                 });
             }
@@ -91,7 +94,7 @@ export default {
             // Restituisce la lista degli appartamenti filtrati
             console.log("filteredSearch:", filteredSearch);
 
-            return filteredSearch;
+            this.filteredApartments = filteredSearch;
         }
     },
     // computed: {
@@ -235,11 +238,12 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInXKmArray">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in filteredApartments">
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
                         </router-link>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -252,3 +256,4 @@ export default {
     --bs-list-group-border-color: none;
 }
 </style>
+
