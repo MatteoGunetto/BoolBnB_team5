@@ -167,17 +167,13 @@ export default {
                     
                     </div>
 
+                    <ul class="list-group">
+                        <li class="list-group-item suggestion" v-for="(suggestion, i) in store.suggestedAddresses" :key="i" @click.prevent="suggestionValue(i)">{{ suggestion.address.freeformAddress, suggestion.address.country }}</li>
+                    </ul>
+
                     <!-- <div v-for="suggestion in store.suggestedAddresses">
                         <input type="text" @click.prevent="suggestionValue" :value="`${ suggestion.address.freeformAddress }, ${ suggestion.address.country }`">
                     </div> -->
-
-                    <div class="form-check" v-for="(suggestion, i) in store.suggestedAddresses" :key="i">
-                        <input class="form-check-input" type="text"
-                            v-model="prova" @click.prevent="suggestionValue(i)">
-                        <label class="form-check-label suggestion">
-                            {{ suggestion.address.freeformAddress, suggestion.address.country }},
-                        </label>
-                    </div>
                     
                 </div>
             </div>
