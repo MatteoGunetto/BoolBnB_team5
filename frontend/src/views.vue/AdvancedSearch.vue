@@ -1,55 +1,44 @@
 <script>
-import Card from '../components/elements/Card.vue';
-import axios from 'axios'
-import { store } from '../store';
+import Card from '../components/elements/Card.vue'; // Importa il componente Card
+import axios from 'axios'; // Importa Axios per effettuare richieste HTTP
+import { store } from '../store'; // Importa lo store (presumibilmente Vuex) per gestire lo stato globale dell'app
+
 export default {
     data() {
         return {
-            store,
+            store, // Rende disponibile lo store nei dati del componente
             filtro: {
-                roomsNumber: null,
-                bedsNumber: null,
-                bathroomsNumber: null,
-                selectedDistance: 20,
-                //capire cosa va inserito per amenities, sarà probabimente un array con gli id
+                roomsNumber: null, // Numero di stanze selezionato
+                bedsNumber: null, // Numero di letti selezionato
+                bathroomsNumber: null, // Numero di bagni selezionato
+                selectedDistance: 20, // Distanza massima selezionata
+                selectedAmenities: [],
             },
+
         };
     },
     created() {
-
         // Effettua una chiamata Axios per ottenere l'elenco delle amenities
-        axios.get(store.urlForAllAmenities)
+        axios.get(store.urlForAllAmenities) // Effettua una richiesta GET all'URL delle amenities
             .then(res => {
-                store.allAmenities = (res.data);
-                console.log(store.allAmenities); // Controlla i dati ottenuti
+                store.allAmenities = (res.data); // Imposta l'elenco delle amenities nello store
+                console.log('queste sono gli id amenities', store.allAmenities); // Stampa i dati delle amenities ottenuti dalla chiamata
             })
-
             .catch(err => {
-                console.log(err);
+                console.log(err); // Gestisce gli errori se la chiamata fallisce
             });
-
-
-
     },
     components: {
-        Card,
+        Card, // Registra il componente Card per l'uso in questo componente
     },
     methods: {
-        // Passiamo i dati dell'istanza apartment alla view "show"
-        sharedata(){
-            this.$router.push({name:"Apartment", params:{data:this}})
-        },
         filterApartments() {
             // Inizia con la lista completa degli appartamenti
             let filteredSearch = this.store.apartmentsInXKmArray;
 
-            //Filtra per il numero di stanze (roomsNumber)
+            // Filtra per il numero di stanze (roomsNumber)
             if (this.filtro.roomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-
-                    if (this.filtro.roomsNumber == 4) {
-                        return apartment.rooms >= parseInt(this.filtro.roomsNumber);
-                    }
                     // Restituisce true solo se il numero di stanze dell'appartamento è uguale a quello selezionato
                     return apartment.rooms === parseInt(this.filtro.roomsNumber);
                 });
@@ -58,9 +47,6 @@ export default {
             // Filtra per il numero di letti (bedsNumber)
             if (this.filtro.bedsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bedsNumber == 4) {
-                        return apartment.beds >= parseInt(this.filtro.bedsNumber);
-                    }
                     // Restituisce true solo se il numero di letti dell'appartamento è uguale a quello selezionato
                     return apartment.beds === parseInt(this.filtro.bedsNumber);
                 });
@@ -69,32 +55,39 @@ export default {
             // Filtra per il numero di bagni (bathroomsNumber)
             if (this.filtro.bathroomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bathroomsNumber == 4) {
-                        return apartment.bathrooms >= parseInt(this.filtro.bathroomsNumber);
-                    }
                     // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
                     return apartment.bathrooms === parseInt(this.filtro.bathroomsNumber);
                 });
             }
 
-            //Filtra per distanza massima (da rivedere la condizione, BRUTTA MA FUNZIONALE)
+            // Filtra per distanza massima (filtro ancora da migliorare)
             if (this.filtro.selectedDistance !== 22) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
+                    // Restituisce true solo se la distanza dell'appartamento è minore o uguale alla distanza selezionata
                     return apartment.distance <= parseInt(this.filtro.selectedDistance);
                 });
             }
 
-            // Filtra per distanza massima (da rivedere la condizione, BRUTTA MA FUNZIONALE)
+            // Filtra per servizi (amenity)
+            if (this.filtro.selectedAmenities.length > 0) {
+                // Filtra gli appartamenti solo se ci sono amenità selezionate
+                filteredSearch = filteredSearch.filter(apartment => {
+                    // Restituisce true se l'appartamento ha almeno una delle amenità selezionate
+                    return this.filtro.selectedAmenities.some(selectedAmenity => {
+                        // Restituisce true se l'appartamento ha l'ID di una delle amenità selezionate
+                        return apartment.amenities.some(amenity => amenity.id === selectedAmenity);
+                    });
+                });
+            }
 
             // Restituisce la lista degli appartamenti filtrati
             console.log("filteredSearch:", filteredSearch);
             return filteredSearch;
         }
     },
-    computed: {
-
-    }
+    // computed: {
+    //     // Puoi aggiungere calcoli basati su dati reattivi qui, se necessario
+    // }
 }
 </script>
 
@@ -219,27 +212,24 @@ export default {
                 <!-- servizi -->
                 <section>
                     <h4>Servizi </h4>
-                    <div class="form-check" v-for="amenity in store.allAmenities">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                    <div class="form-check" v-for="amenity in store.allAmenities" :key="amenity.id">
+                        <input class="form-check-input" type="checkbox" :value="amenity.id" :id="'amenity' + amenity.id"
+                            v-model="filtro.selectedAmenities">
+                        <label class="form-check-label" :for="'amenity' + amenity.id">
                             {{ amenity.name }}
                         </label>
-
-
-
-
                     </div>
+
                 </section>
 
             </div>
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInXKmArray">
-                        <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
-                            <Card :cardProp="apartment" />
-                        </router-link>
+                    <div class="col-md-6 g-3 p-3" v-for="apartment in store.apartmentsInXKmArray">
+                        <Card :cardProp="apartment" />
                     </div>
+
                 </div>
             </div>
         </div>
