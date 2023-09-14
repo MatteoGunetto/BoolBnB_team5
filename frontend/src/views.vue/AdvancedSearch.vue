@@ -83,10 +83,8 @@ export default {
             if (this.filtro.selectedAmenities.length > 0) {
                 // Filtra gli appartamenti solo se ci sono amenità selezionate
                 filteredSearch = filteredSearch.filter(apartment => {
+                    return this.filtro.selectedAmenities.every(amenityId => apartment.amenities.includes(parseInt(amenityId)));
 
-
-                    return apartment.amenities.includes(parseInt(this.selectedAmenities));
-                
                 });
             }
 
