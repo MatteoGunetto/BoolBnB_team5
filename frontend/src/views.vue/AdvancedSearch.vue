@@ -2,6 +2,7 @@
 import Card from '../components/elements/Card.vue'; // Importa il componente Card
 import axios from 'axios'; // Importa Axios per effettuare richieste HTTP
 import { store } from '../store'; // Importa lo store (presumibilmente Vuex) per gestire lo stato globale dell'app
+import Searchbar from '../components/elements/Searchbar.vue';
 
 export default {
     data() {
@@ -30,8 +31,9 @@ export default {
             });
     },
     components: {
-        Card, // Registra il componente Card per l'uso in questo componente
-    },
+    Card,
+    Searchbar
+},
     methods: {
         filterApartments() {
             // Inizia con la lista completa degli appartamenti
@@ -110,14 +112,9 @@ export default {
             <h2 class="py-4">Filtra ricerca</h2>
             <div class="col-lg-4">
                 <!-- search bar -->
-                <nav class="navbar bg-body-tertiary">
-                    <div class="container-fluid">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
+                <Searchbar />
+
+                
 
                 <!-- FILTERS -->
 
@@ -237,7 +234,7 @@ export default {
             </div>
             <!-- card -->
             <div class="col-lg-8">
-                <div class="row">
+                <div class="row" v-if="store.apartmentsInXKmArray.length">
                     <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in filteredApartments">
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />

@@ -35,6 +35,7 @@ export default {
         
         getApartment() {
 
+            store.apartmentsInXKmArray.splice (0)
 
             //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
             const addressToSend = this.$data.searchAddress;
@@ -48,6 +49,7 @@ export default {
                 .then(response => {
 
                     console.log("risposta tornata con successo", response.data)
+
                     store.apartmentsInXKmArray = (response.data);
                     console.log("questo è l array nello store", store.apartmentsInXKmArray)
                 })
@@ -103,6 +105,7 @@ export default {
     
 },
     mounted() {
+        this.getApartment();
         //funzione per consigli indirizzi
     }
     //     created() {

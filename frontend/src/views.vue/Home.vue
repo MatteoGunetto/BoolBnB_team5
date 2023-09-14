@@ -38,10 +38,6 @@ export default {
         </div>
     </header>
     <!-- Fine Header -->
-
-    
-
-    <pre>{{ store.suggestedAddresses }}</pre>
     
     <!-- In Evidenza -->
     <!-- <div class="container">
