@@ -36,9 +36,13 @@ export default {
             // Inizia con la lista completa degli appartamenti
             let filteredSearch = this.store.apartmentsInXKmArray;
 
-            // Filtra per il numero di stanze (roomsNumber)
-            if (this.filtro.roomsNumber !== null) {
+           //Filtra per il numero di stanze (roomsNumber)
+           if (this.filtro.roomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
+
+                    if (this.filtro.roomsNumber == 4) {
+                        return apartment.rooms >= parseInt(this.filtro.roomsNumber);
+                    }
                     // Restituisce true solo se il numero di stanze dell'appartamento è uguale a quello selezionato
                     return apartment.rooms === parseInt(this.filtro.roomsNumber);
                 });
@@ -47,6 +51,9 @@ export default {
             // Filtra per il numero di letti (bedsNumber)
             if (this.filtro.bedsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
+                    if (this.filtro.bedsNumber == 4) {
+                        return apartment.beds >= parseInt(this.filtro.bedsNumber);
+                    }
                     // Restituisce true solo se il numero di letti dell'appartamento è uguale a quello selezionato
                     return apartment.beds === parseInt(this.filtro.bedsNumber);
                 });
@@ -55,33 +62,37 @@ export default {
             // Filtra per il numero di bagni (bathroomsNumber)
             if (this.filtro.bathroomsNumber !== null) {
                 filteredSearch = filteredSearch.filter(apartment => {
+                    if (this.filtro.bathroomsNumber == 4) {
+                        return apartment.bathrooms >= parseInt(this.filtro.bathroomsNumber);
+                    }
                     // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
                     return apartment.bathrooms === parseInt(this.filtro.bathroomsNumber);
                 });
             }
 
-            // Filtra per distanza massima (filtro ancora da migliorare)
+            //Filtra per distanza massima (da rivedere la condizione, BRUTTA MA FUNZIONALE)
             if (this.filtro.selectedDistance !== 22) {
                 filteredSearch = filteredSearch.filter(apartment => {
-                    // Restituisce true solo se la distanza dell'appartamento è minore o uguale alla distanza selezionata
+                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
                     return apartment.distance <= parseInt(this.filtro.selectedDistance);
                 });
             }
 
             // Filtra per servizi (amenity)
+            //questa condizione va rivista, se io deseleziono amenities questo filtro non riparte
             if (this.filtro.selectedAmenities.length > 0) {
                 // Filtra gli appartamenti solo se ci sono amenità selezionate
                 filteredSearch = filteredSearch.filter(apartment => {
-                    // Restituisce true se l'appartamento ha almeno una delle amenità selezionate
-                    return this.filtro.selectedAmenities.some(selectedAmenity => {
-                        // Restituisce true se l'appartamento ha l'ID di una delle amenità selezionate
-                        return apartment.amenities.some(amenity => amenity.id === selectedAmenity);
-                    });
+
+
+                    return apartment.amenities.includes(parseInt(this.selectedAmenities));
+                
                 });
             }
 
             // Restituisce la lista degli appartamenti filtrati
             console.log("filteredSearch:", filteredSearch);
+
             return filteredSearch;
         }
     },
@@ -214,7 +225,7 @@ export default {
                     <h4>Servizi </h4>
                     <div class="form-check" v-for="amenity in store.allAmenities" :key="amenity.id">
                         <input class="form-check-input" type="checkbox" :value="amenity.id" :id="'amenity' + amenity.id"
-                            v-model="filtro.selectedAmenities">
+                            v-model="filtro.selectedAmenities" @change="filterApartments">
                         <label class="form-check-label" :for="'amenity' + amenity.id">
                             {{ amenity.name }}
                         </label>

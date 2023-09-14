@@ -59,8 +59,8 @@ Route::get('/qualcosa', function(Request $request) {
     //$distance deve arrivare come input da frontend
     $distance = 20; // In km
 
-    $apartments = Apartment::select(DB::raw("*, 
-    ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
+    $apartments = Apartment::with('amenities')
+    ->select(DB::raw("*, ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
     ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
     ->orderBy('distance')
     ->get();
