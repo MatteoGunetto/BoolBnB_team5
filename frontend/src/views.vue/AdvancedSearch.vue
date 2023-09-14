@@ -226,10 +226,11 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3" v-for="apartment in store.apartmentsInXKmArray">
-                        <Card :cardProp="apartment" />
+                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInXKmArray">
+                        <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
+                            <Card :cardProp="apartment" />
+                        </router-link>
                     </div>
-
                 </div>
             </div>
         </div>
