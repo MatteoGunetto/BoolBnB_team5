@@ -16,6 +16,7 @@ export default {
         axios.get(`${store.apartments}/${this.dynamicId}`)
             .then(res => {
                 store.singleApartmentArray = (res.data.apartment);
+                console.log("singleApartmentArray", store.singleApartmentArray)
             })
 
             .catch(err => {
@@ -68,7 +69,9 @@ export default {
     
                 <!-- Mappa -->
                 <div class="map h-50">
-                    <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="100%" width="100%" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&amp;q=41.530560,14.391640" allowfullscreen=""> </iframe>
+                    <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="100%" width="100%" 
+                    :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&q=' + store.singleApartmentArray.latitude + ',' + store.singleApartmentArray.longitude"
+                    allowfullscreen=""> </iframe>
     
                 </div>
             </div>
