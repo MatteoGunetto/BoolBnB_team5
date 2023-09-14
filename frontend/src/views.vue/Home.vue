@@ -150,26 +150,28 @@ export default {
     <header class="container-fluid px-4 py-5 my-5 text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-6 mx-auto position-relative">
                     <div class="mb-4">
                         <div editable="rich">
                             <h2 class="display-2 fw-bold text-white">Scopri un Nuovo Modo di Abitare</h2>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center gap-2 mb-5">
-                        <div class="input-group position-relative">
+                    <div class="d-flex justify-content-center position-relative gap-2 mb-5">
+                        <div class="input-group">
                             <span><i class="bi bi-geo-alt"></i></span>
     
                                 <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="searchBarHome">
-                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
+                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white  btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     
                         </div>
+
+                        <ul class="list-group position-absolute w-100 pt-2 mt-5 shadow-lg text-start" v-if="searchAddress !== ''">
+                            <li class="list-group-item suggestion py-3" v-for="(suggestion, i) in store.suggestedAddresses" :key="i" @click.prevent="suggestionValue(i)">{{ suggestion.address.freeformAddress, suggestion.address.country }}</li>
+                            
+                        </ul>
                     
                     </div>
 
-                    <ul class="list-group">
-                        <li class="list-group-item suggestion" v-for="(suggestion, i) in store.suggestedAddresses" :key="i" @click.prevent="suggestionValue(i)">{{ suggestion.address.freeformAddress, suggestion.address.country }}</li>
-                    </ul>
 
                     <!-- <div v-for="suggestion in store.suggestedAddresses">
                         <input type="text" @click.prevent="suggestionValue" :value="`${ suggestion.address.freeformAddress }, ${ suggestion.address.country }`">
@@ -214,6 +216,7 @@ export default {
 
 
 <style lang="scss">
+@import "../../scss/boolBnbStyle.scss";
 body {
     padding: 0;
     margin: 0;
@@ -231,7 +234,18 @@ header {
 }
 
 .btn-search {
-    right: 0;
-    top: 0;
+    z-index: 100;
 }
+
+.suggestion{
+    border-bottom: 1px solid $light;
+}
+
+.suggestion:hover{
+   background-color: $primary;
+   opacity: $primary-bg-subtle;
+   color: $white;
+   cursor: pointer;
+}
+
 </style>
