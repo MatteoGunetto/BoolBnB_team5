@@ -23,7 +23,7 @@ export default {
             .then(res => {
                 store.allAmenities = (res.data); // Imposta l'elenco delle amenities nello store
                 console.log('queste sono gli id amenities', store.allAmenities); // Stampa i dati delle amenities ottenuti dalla chiamata
-                this.filterApartments();
+                //this.filterApartments();
             })
             .catch(err => {
                 console.log(err); // Gestisce gli errori se la chiamata fallisce
@@ -34,67 +34,25 @@ export default {
     },
     methods: {
         filterApartments() {
-            // Inizia con la lista completa degli appartamenti
-            let filteredSearch = this.store.apartmentsInXKmArray;
+            axios.get(store.urlForFilteredSearch ,  {
+                params: {
+                    roomsNumber: this.filtro.roomsNumber,
+                    bedsNumber: this.filtro.bedsNumber,
+                    bathroomsNumber: this.filtro.bathroomsNumber,
+                    selectedDistance: this.filtro.selectedDistance,
+                    selectedAmenities: JSON.stringify(this.filtro.selectedAmenities), // se desideri inviare un array come parametro, potrebbe essere utile trasformarlo in stringa
+                    
+                }
+            })
+            .then(response => {
 
-            //Filtra per il numero di stanze (roomsNumber)
-            if (this.filtro.roomsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-
-                    if (this.filtro.roomsNumber == 4) {
-                        return apartment.rooms >= parseInt(this.filtro.roomsNumber);
-                    }
-                    // Restituisce true solo se il numero di stanze dell'appartamento è uguale a quello selezionato
-                    return apartment.rooms === parseInt(this.filtro.roomsNumber);
-                });
-            }
-
-            // Filtra per il numero di letti (bedsNumber)
-            if (this.filtro.bedsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bedsNumber == 4) {
-                        return apartment.beds >= parseInt(this.filtro.bedsNumber);
-                    }
-                    // Restituisce true solo se il numero di letti dell'appartamento è uguale a quello selezionato
-                    return apartment.beds === parseInt(this.filtro.bedsNumber);
-                });
-            }
-
-            // Filtra per il numero di bagni (bathroomsNumber)
-            if (this.filtro.bathroomsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bathroomsNumber == 4) {
-                        return apartment.bathrooms >= parseInt(this.filtro.bathroomsNumber);
-                    }
-                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
-                    return apartment.bathrooms === parseInt(this.filtro.bathroomsNumber);
-                });
-            }
-
-            //Filtra per distanza massima (da rivedere la condizione, BRUTTA MA FUNZIONALE)
-            if (this.filtro.selectedDistance !== 22) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
-                    return apartment.distance <= parseInt(this.filtro.selectedDistance);
-                });
-            }
-
-            // Filtra per servizi (amenity)
-            //questa condizione va rivista, se io deseleziono amenities questo filtro non riparte
-            if (this.filtro.selectedAmenities.length > 0) {
-                // Filtra gli appartamenti solo se ci sono amenità selezionate
-                filteredSearch = filteredSearch.filter(apartment => {
-
-
-                    return apartment.amenities.includes(parseInt(this.selectedAmenities));
-
-                });
-            }
-
-            // Restituisce la lista degli appartamenti filtrati
-            console.log("filteredSearch:", filteredSearch);
-
-            this.filteredApartments = filteredSearch;
+                console.log("AAArisposta tornata con successo", response.data)
+                //store.filteredApartments = (response.data);
+                //console.log("questo è l array nello store", store.filteredApartments)
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
     },
     // computed: {

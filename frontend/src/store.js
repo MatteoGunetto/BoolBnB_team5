@@ -10,8 +10,11 @@ export const store = reactive({
     singleApartmentArray: [],
 
     urlForHomeSearch: "http://localhost:8000/api/qualcosa",
-    apartmentsInXKmArray:[],
+    apartmentsForAdvancedSearch:[],
 
     urlForAllAmenities: "http://localhost:8000/api/allAmenities",
-    allAmenities: []
+    allAmenities: [],
+
+    urlForFilteredSearch: "http://localhost:8000/api/filteredApartments",
+    filteredApartments: [],
 });

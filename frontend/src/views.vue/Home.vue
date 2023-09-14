@@ -29,8 +29,8 @@ export default {
                 .then(response => {
 
                     console.log("risposta tornata con successo", response.data)
-                    store.apartmentsInXKmArray = (response.data);
-                    console.log("questo è l array nello store", store.apartmentsInXKmArray)
+                    store.apartmentsForAdvancedSearch = (response.data);
+                    console.log("questo è l array nello store", store.apartmentsForAdvancedSearch)
                 })
                 .catch(error => {
                     console.error(error);

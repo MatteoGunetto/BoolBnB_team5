@@ -49,27 +49,51 @@ class ApartmentApiController extends Controller
         ]);
     }
 
+    public function filterApartments(Request $request){
 
+        // Converti la stringa 'selectedAmenities' in un array
+        $amenities = json_decode($request->selectedAmenities, true);
 
+        // Costruisci la query
+        $query = Apartment::query();
 
+    
+
+        if ($request->roomsNumber == 4) {
+            $query->where('rooms', '>=', 4);
+        } else {
+            $query->where('rooms', $request->roomsNumber);
+        }
+
+        if ($request->bedsNumber == 4) {
+            $query->where('beds', '>=', 4);
+        } else {
+            $query->where('beds', $request->bedsNumber);
+        }
+
+        if ($request->bathroomsNumber == 4) {
+            $query->where('bathrooms', '>=', 4);
+        } else {
+            $query->where('bathrooms', $request->bathroomsNumber);
+        }
+           
+
+        
+        
+        // Ottieni i risultati
+        $apartments = $query->get();
+
+        //manda i risultati
+        return response()->json($apartments);
+
+    }
 }
-// class ProjectController extends Controller
-// {
-//     public function projectsIndex() {
-//         $projects = Project::all();
 
-//         return response()->json([
-//             'projects' => $projects
-//         ]);
-//     }
 
-//     public function projectShow($id) {
-//         $project = Project :: with("type", "technologies")
-//         -> findOrFail($id);
+        
 
-//         return response()->json([
-//             'project' => $project
-//         ]);
 
-//     }
-// }
+
+
+    
+

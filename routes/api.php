@@ -69,3 +69,5 @@ Route::get('/qualcosa', function(Request $request) {
 });
 
 Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
+
+Route::get("/filteredApartments", [ApartmentApiController::class, "filterApartments"]);
