@@ -13,5 +13,7 @@ export const store = reactive({
     apartmentsInXKmArray:[],
 
     urlForAllAmenities: "http://localhost:8000/api/allAmenities",
-    allAmenities: []
+    allAmenities: [],
+
+    suggestedAddresses: [],
 });

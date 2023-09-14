@@ -8,6 +8,8 @@ export default {
         return {
             store,
             searchAddress: '',
+            prova: ''
+            
         }
     },
     components: {
@@ -15,6 +17,21 @@ export default {
     },
 
     methods: {
+
+        suggestionValue(i){
+
+
+            var elements = document.getElementsByClassName("suggestion");
+
+            console.log(elements);
+
+
+            // console.log(elements[i].textContent);
+
+            this.$data.searchAddress = elements[i].textContent;
+            
+        },
+        
         getApartment() {
 
 
@@ -58,30 +75,34 @@ export default {
         // Imposta il testo consigliato come ricerca del indirizzo
         addressOptionElements.forEach(function(indirizzo){
             indirizzo.addEventListener("click", function(){
-                this.$data.searchAddress.value=indirizzo.textContent
+                this.$data.searchAddress=indirizzo.textContent
             });
         })
         // /api/tomtom-proxy
 
         if  (this.$data.searchAddress.length > 4 ) {
-                    const addressSearched = this.$data.searchAddress.value;
+                    const addressSearched = this.$data.searchAddress;
 
-                    axios.get('https://api.tomtom.com/search/2/geocode/${this.$data.searchAddress}', {
-                        params: {
-                            address: addressSearched
-                        }
-                    })
+                    //variabili per chiamata axios dei suggerimenti in home
+                    let valueEncoded = encodeURIComponent(this.$data.searchAddress);
+                    let tomtomKey = 'deapGsJZBuBGHOlGUsntPZ7nSfOrRLYK';
+
+                    let axiosUrl = `https://api.tomtom.com/search/2/geocode/${valueEncoded}.json?key=${tomtomKey}`;
+
+                    axios.get(axiosUrl)
                     .then(response => {
-                        console.log(this.$data.searchAddress.value, "search value")
-                        let suggestedAddresses = response.data.results;
-
-                        addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
-                        addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
-                        addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
+                        store.suggestedAddresses = response.data.results;
                     })
                     .catch(error => {
                         console.error("C'è stato un errore:", error);
                     });
+
+
+
+
+
+
+
 
                     addressOptionElements.forEach(function(element) {
                         element.style.display = "block";
@@ -139,26 +160,34 @@ export default {
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
     
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="searchBarHome">
-                            
-    
+                                <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="searchBarHome">
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     
                         </div>
-                        <!-- <datalist id="datalistOptions">
-                                                <option value="San Francisco">
-                                                <option value="New York">
-                                                <option value="Seattle">
-                                                <option value="Los Angeles">
-                                                <option value="Chicago">
-                                            </datalist> -->
+                    
                     </div>
+
+                    <!-- <div v-for="suggestion in store.suggestedAddresses">
+                        <input type="text" @click.prevent="suggestionValue" :value="`${ suggestion.address.freeformAddress }, ${ suggestion.address.country }`">
+                    </div> -->
+
+                    <div class="form-check" v-for="(suggestion, i) in store.suggestedAddresses" :key="i">
+                        <input class="form-check-input" type="text"
+                            v-model="prova" @click.prevent="suggestionValue(i)">
+                        <label class="form-check-label suggestion">
+                            {{ suggestion.address.freeformAddress, suggestion.address.country }},
+                        </label>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </header>
-    
     <!-- Fine Header -->
+
+    
+
+    <pre>{{ store.suggestedAddresses }}</pre>
     
     <!-- In Evidenza -->
     <!-- <div class="container">
