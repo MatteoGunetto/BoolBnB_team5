@@ -7,6 +7,8 @@ export const store = reactive({
     urlImg: "http://127.0.0.1:8000/storage/",
     apartmentsArray: [],
 
+    singleApartmentArray: [],
+
     urlForHomeSearch: "http://localhost:8000/api/qualcosa",
     apartmentsInXKmArray:[],
 

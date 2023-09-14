@@ -1,19 +1,37 @@
 <script>
+import { store } from '../store';
+import axios from 'axios'
+
 export default {
-    setup() {
+    data() {
+        return {
+            store,
+            dynamicId: this.$route.params.id,
+        }
+    },
 
+    beforeMount() {
 
-        return {}
+        // chiamata per avere TUTTI gli appartamenti
+        axios.get(`${store.apartments}/${this.dynamicId}`)
+            .then(res => {
+                store.singleApartmentArray = (res.data.apartment);
+            })
+
+            .catch(err => {
+                console.log(err);
+            });
     }
 }
 </script>
 
 <template>
-    <section class="container-fluid hero d-flex align-items-end pb-4 text-white mb-5">
-        <div class="container">
+    <section class="container-fluid hero d-flex align-items-end text-white mb-5 p-0">
+        <img class="cover" :src="`${store.urlImg}${store.singleApartmentArray.image}`" alt="cover-apartment">
+        <div class="container pb-4">
             <div class="row mb-3">
                 <div class="col-12">
-                    <h1 class="hero-title position-relative d-inline-block">Titolo Appartamento</h1>
+                    <h1 class="hero-title position-relative d-inline-block">{{ store.singleApartmentArray.title }}</h1>
                 </div>
             </div>
             <!-- Info camera -->
@@ -22,15 +40,15 @@ export default {
                     <div class="apt-icons d-flex gap-3 align-items-center">
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-bed.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{store.singleApartmentArray.beds}}</span>
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-bathroom.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{ store.singleApartmentArray.bathrooms }}</span>
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-rooms.svg">
-                            <span class="ms-2">3</span>
+                            <span class="ms-2">{{ store.singleApartmentArray.rooms }}</span>
                         </div>
                     </div>
                 </div>
@@ -40,15 +58,19 @@ export default {
     </section>
     <section class="container">
     
+        <!-- <pre>{{ store.singleApartmentArray }}</pre> -->
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
                 <h2>Description</h2>
-                <p>""defrwefregergregrere"".</p>
+                <p>{{ store.singleApartmentArray.description }}</p>
     
     
                 <!-- Mappa -->
-                <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="300px" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&amp;q=41.530560,14.391640" allowfullscreen=""> </iframe>
+                <div class="map h-50">
+                    <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="100%" width="100%" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&amp;q=41.530560,14.391640" allowfullscreen=""> </iframe>
+    
+                </div>
             </div>
     
     
@@ -92,12 +114,9 @@ export default {
             <div class="row py-4">
                 <div class="col-lg-3">
                     <ul class="list-group list-group-flush">
-                        <div>
-                            <li class="list-group-item"> <i class="fa-solid fa-wifi"></i> Wifi</li>
-                        </div>
-                        <div>
-                            <li class="list-group-item"> <i class="fa-solid fa-square-parking"></i> Parking</li>
-                        </div>
+                        <li class="list-group-item" v-for="amenity in store.singleApartmentArray.amenities ">
+                            <font-awesome-icon :icon="`fa-solid ${ amenity.icon }`" /> {{amenity.name}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -108,24 +127,50 @@ export default {
 
 
 <style lang="scss" scoped>
-@import "../../../scss/boolBnbStyle.scss";
-.icon-group img{
+@import "../../scss/boolBnbStyle.scss";
+.icon-group img {
     width: 28px;
 }
 
-.hero{
+.hero {
+    position: relative;
     height: 300px;
-    background-color: $primary;
 }
 
-.hero-title:after{
+.hero .container:first-of-type {
+    z-index: 10;
+}
+
+.hero:after {
+    content: ""; // ::before and ::after both require content
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(30deg, #000000e0, #ffffff00);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+.hero .cover {
+    object-fit: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.hero-title:after {
     content: '';
     width: 100%;
     border-bottom: solid 2px #fff;
     position: absolute;
     left: 0;
-    bottom: -16px;
+    bottom: -12px;
     z-index: 1;
 }
 
+.map{
+    border-radius: 16px!important;
+}
 </style>

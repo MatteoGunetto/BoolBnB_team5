@@ -36,15 +36,15 @@ export default {
                     console.error(error);
                 });
 
-            //chiamata per avere TUTTI gli appartamenti
-            // axios.get(store.apartments)
-            //     .then(res => {
-            //         store.apartmentsArray = (res.data);
-            //     })
+        //     // chiamata per avere TUTTI gli appartamenti
+        //     axios.get(store.apartments)
+        //         .then(res => {
+        //             store.apartmentsArray = (res.data);
+        //         })
 
-            //     .catch(err => {
-            //         console.log(err);
-            //     });
+        //         .catch(err => {
+        //             console.log(err);
+        //         });
 
 
         }

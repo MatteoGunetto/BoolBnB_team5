@@ -42,4 +42,8 @@ export default {
 
 <style lang="scss" scoped>
 
+nav{
+  z-index: 10000;
+}
+
 </style>
