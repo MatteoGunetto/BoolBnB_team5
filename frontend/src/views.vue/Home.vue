@@ -28,9 +28,9 @@ export default {
                     })
                 .then(response => {
 
-                    console.log("risposta tornata con successo", response.data)
+                    console.log("array che viene popolato quando eseguo ricerca su home", response.data)
                     store.apartmentsForAdvancedSearch = (response.data);
-                    console.log("questo è l array nello store", store.apartmentsForAdvancedSearch)
+                    console.log("questo è l array nello store, sempre popolato da barra di ricerca", store.apartmentsForAdvancedSearch)
                 })
                 .catch(error => {
                     console.error(error);
