@@ -17,6 +17,7 @@ export default {
     methods: {
         getApartment() {
 
+
             //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
             const addressToSend = this.$data.searchAddress;
 
@@ -47,16 +48,78 @@ export default {
         //         });
 
 
-        }
+        },
 
-        
-    },
+        searchBarHome(){
+
+        // Ottieni un riferimento agli elementi con la classe address-option
+        const addressOptionElements = document.querySelectorAll(".address-option");
+
+        // Imposta il testo consigliato come ricerca del indirizzo
+        addressOptionElements.forEach(function(indirizzo){
+            indirizzo.addEventListener("click", function(){
+                this.$data.searchAddress.value=indirizzo.textContent
+            });
+        })
+        // /api/tomtom-proxy
+
+        if  (this.$data.searchAddress.length > 4 ) {
+                    const addressSearched = this.$data.searchAddress.value;
+
+                    axios.get('https://api.tomtom.com/search/2/geocode/${this.$data.searchAddress}', {
+                        params: {
+                            address: addressSearched
+                        }
+                    })
+                    .then(response => {
+                        console.log(this.$data.searchAddress.value, "search value")
+                        let suggestedAddresses = response.data.results;
+
+                        addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
+                        addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
+                        addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
+                    })
+                    .catch(error => {
+                        console.error("C'è stato un errore:", error);
+                    });
+
+                    addressOptionElements.forEach(function(element) {
+                        element.style.display = "block";
+                    });
+                }
+
+            
+                else {
+                    addressOptionElements.forEach(function(element) {
+                        element.style.display = "none";
+
+                        // questa è una porcheria, per' "quasi" funziona, lascia i bordi dei div
+                        // addressOptionElements[0].innerHTML = ""
+                        // addressOptionElements[1].innerHTML = ""
+                        // addressOptionElements[2].innerHTML = ""
+                    });
+                }
+
+
+        let debounceTimer;
+
+        //eventlistener che si attiva quando cambia il valore di searchAddress che sarebbe il nostro campo input
+        // searchAddress.addEventListener("input", function() {
+        //     clearTimeout(debounceTimer); // Cancella qualsiasi timer esistente
+        //     debounceTimer = setTimeout(() => { // Imposta un nuovo timer
+
+                
+        //     }, 500); // Il timer è impostato per mezzo secondo (500 millisecondi)
+
+        // })     
+},
     mounted() {
         //funzione per consigli indirizzi
     }
     //     created() {
     // this.getApartment();
     // }
+}
 }
 </script>
 
@@ -76,7 +139,8 @@ export default {
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
     
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress">
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="searchBarHome">
+                            
     
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     
