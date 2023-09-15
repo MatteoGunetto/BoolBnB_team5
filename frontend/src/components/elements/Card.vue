@@ -8,6 +8,9 @@ export default {
     },
     props: {
         cardProp: Object,
+    },
+    methods: {
+
     }
 }
 </script>
@@ -21,7 +24,7 @@ export default {
             <div class="icon-container d-flex position-relative mt-3">
                 <div class="icon d-flex align-items-center">
                     <img src="../../../public/icon-bed.svg" alt="icona-letto">
-                    <span class="ms-2"> beds: {{ cardProp.beds }}</span>
+                    <span class="ms-2">{{ cardProp.beds }}</span>
                 </div>
                 <div class="icon d-flex align-items-center ms-2">
                     <img src="../../../public/icon-bathroom.svg" alt="icona-bagno">
@@ -29,11 +32,9 @@ export default {
                 </div>
                 <div class="icon d-flex align-items-center ms-2">
                     <img src="../../../public/icon-rooms.svg" alt="icona-appartamento">
-                    <span class="ms-2">{{ cardProp.squareMeters }}</span>
+                    <span class="ms-2">{{ cardProp.rooms }}</span>
                 </div>
-                
-            </div>
-            <div class="icon d-flex align-items-center ms-2">
+                <div class="icon d-flex align-items-center ms-2 align-self-end">
                     <span class="ms-2">
                         <span>
                             Distance:
@@ -41,6 +42,7 @@ export default {
                         {{ cardProp.distance.toFixed(2) }} km
                     </span>
                 </div>
+            </div>
         </div>
     </div>
 </template>
