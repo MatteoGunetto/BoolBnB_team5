@@ -71,4 +71,4 @@ Route::get('/qualcosa', function(Request $request) {
 });
 
 Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
-Route::get("/allMessages", [MessageController::class, "messagesIndex"]);
+Route::post("/allMessages", [MessageController::class, "messagesIndex"]);
