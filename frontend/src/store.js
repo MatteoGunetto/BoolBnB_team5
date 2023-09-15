@@ -15,6 +15,7 @@ export const store = reactive({
 
     //url che viene chiamato quando viene cercato un indirizzo in homepage
     urlForHomeSearch: "http://localhost:8000/api/qualcosa",
+    //questo in realtà non mi serve, posso usare direttamente apartmentsInAdvancedSearch
     apartmentsAfterHomeSearch:[],
 
     // questa mi serve per popolare 
@@ -23,7 +24,9 @@ export const store = reactive({
 
     //url che viene chiamato quando cambiano gli input/filtri nell AdvancedSearch
     urlForFilteredSearch: "http://localhost:8000/api/filteredApartments",
-    filteredApartments: [],
+    //con questo arry faccio le card,
+    //questo array viene popolato dopo ricerca dalla home e aggionrato dopo filtraggio
+    apartmentsInAdvancedSearch: [],
 
     addressSelected : ""
 

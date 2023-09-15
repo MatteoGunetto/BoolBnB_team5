@@ -29,7 +29,7 @@ export default {
                 .then(response => {
 
                     console.log("dati che mi tornano dal backend dopo ricerca in home", response.data)
-                    store.apartmentsAfterHomeSearch = (response.data);
+                    store.apartmentsInAdvancedSearch = (response.data);
                     console.log("questo è l array nello store, sempre popolato da barra di ricerca", store.apartmentsAfterHomeSearch)
                 })
                 .catch(error => {

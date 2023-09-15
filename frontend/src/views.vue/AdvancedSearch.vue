@@ -8,6 +8,7 @@ export default {
         return {
             store, // Rende disponibile lo store nei dati del componente
             filtro: {
+                addressSelected: store.addressSelected,
                 roomsNumber: null, // Numero di stanze selezionato
                 bedsNumber: null, // Numero di letti selezionato
                 bathroomsNumber: null, // Numero di bagni selezionato
@@ -47,7 +48,7 @@ export default {
             .then(response => {
 
                 console.log("AAArisposta tornata con successo", response.data)
-                //store.filteredApartments = (response.data);
+                store.apartmentsInAdvancedSearch = (response.data);
                 //console.log("questo è l array nello store", store.filteredApartments)
             })
             .catch(error => {
@@ -74,8 +75,11 @@ export default {
                 <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
                         <form class="d-flex" role="search">
+
                             <input class="form-control me-2" type="search" v-model="store.addressSelected" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            
+                            <button class="btn btn-outline-success" type="submit" @click.prevent="filterApartments">Search</button>
+                        
                         </form>
                     </div>
                 </nav>
@@ -199,7 +203,7 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in filteredApartments">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInAdvancedSearch">
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
                         </router-link>
