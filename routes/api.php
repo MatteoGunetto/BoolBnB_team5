@@ -4,10 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentApiController;
 use App\Http\Controllers\Api\AmenityApiController;
+use App\Http\Controllers\Api\MessageController;
 
 
 use App\Models\Apartment;
 use App\Models\Amenity;
+use App\Models\Message;
 
 
 /*
@@ -51,7 +53,7 @@ Route::get('/qualcosa', function(Request $request) {
     $apiKey = env('TOMTOM_API_KEY');
     $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
     $response = Http::get($endpoint);
-    
+
     // lat e lon ci serviranno nella query per trovare tutti gli appartmanenti nel raggio di x km
     $lat = $response->json()["results"][0]["position"]["lat"];
     $lon = $response->json()["results"][0]["position"]["lon"];
@@ -69,3 +71,4 @@ Route::get('/qualcosa', function(Request $request) {
 });
 
 Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
+Route::get("/allMessages", [MessageController::class, "messagesIndex"]);

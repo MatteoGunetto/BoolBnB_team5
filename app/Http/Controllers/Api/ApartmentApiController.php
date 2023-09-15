@@ -24,11 +24,20 @@ class ApartmentApiController extends Controller
 
 
         $apartments = Apartment::with('amenities')->get();
-    
+
 
         return response()->json([
             'apartments' => $apartments
         ]);
+
+
+        $apartments = Apartment::with('messages')->get();
+
+
+        return response()->json([
+            'apartments' => $apartments
+        ]);
+
     }
 
     public function apartmentsShow($id) {
