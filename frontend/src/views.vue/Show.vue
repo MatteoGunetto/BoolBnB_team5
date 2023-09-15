@@ -7,6 +7,12 @@ export default {
         return {
             store,
             dynamicId: this.$route.params.id,
+            message:{
+                Content: '',
+                Name:'',
+                SenderEmail:'',
+                apartment_id: this.$route.params.id,
+            } ,
         }
     },
 
@@ -22,8 +28,26 @@ export default {
             .catch(err => {
                 console.log(err);
             });
+
+    },
+
+    methods: {
+        sendmessage(){
+
+            console.log(this.message)
+            
+            axios.post("http://127.0.0.1:8000/api/allMessages", this.message)
+            .then(res => {
+                console.log("log di messaggi in database: ", res.data)
+
+            })
+                    .catch(error => {
+                        console.error("C'è stato un errore nell'invio:", error);
+                    });
+        }
     }
 }
+
 </script>
 
 <template>
@@ -88,22 +112,22 @@ export default {
                             <!-- Nome form -->
                             <div class="mb-3">
                                 <label for="name" class="form-label">Il tuo nome</label>
-                                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Inserisci nome">
+                                <input v-model="message.Name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Inserisci nome">
                             </div>
     
                             <!-- Mail Form -->
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">La tua mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Inserisci mail">
+                                <input v-model="message.SenderEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Inserisci mail">
                             </div>
     
                             <!-- Descrizione messaggio-->
                             <div class="mb-3">
                                 <label for="message">Messaggio</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Scrivi qui il tuo messaggio"></textarea>
+                                <textarea v-model="message.Content" class="form-control" id="message" rows="5" placeholder="Scrivi qui il tuo messaggio"></textarea>
                             </div>
     
-                            <button type="submit" class="btn btn-primary text-white">Inserisci appartamento</button>
+                            <button type="submit" class="btn btn-primary text-white" @click.prevent="sendmessage">Invia messaggio</button>
     
                         </form>
                     </div>
@@ -124,7 +148,6 @@ export default {
                 </div>
             </div>
         </section>
-    
     </section>
 </template>
 
@@ -177,3 +200,5 @@ export default {
     border-radius: 16px!important;
 }
 </style>
+
+
