@@ -9,12 +9,24 @@ export const store = reactive({
 
     singleApartmentArray: [],
 
-    urlForHomeSearch: "http://localhost:8000/api/qualcosa",
-    apartmentsForAdvancedSearch:[],
 
+
+
+
+    //url che viene chiamato quando viene cercato un indirizzo in homepage
+    urlForHomeSearch: "http://localhost:8000/api/qualcosa",
+    apartmentsAfterHomeSearch:[],
+
+    // questa mi serve per popolare 
     urlForAllAmenities: "http://localhost:8000/api/allAmenities",
     allAmenities: [],
 
+    //url che viene chiamato quando cambiano gli input/filtri nell AdvancedSearch
     urlForFilteredSearch: "http://localhost:8000/api/filteredApartments",
     filteredApartments: [],
+
+    addressSelected : ""
+
+
+
 });

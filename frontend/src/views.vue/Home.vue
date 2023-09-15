@@ -18,7 +18,7 @@ export default {
         getApartment() {
 
             //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
-            const addressToSend = this.$data.searchAddress;
+            const addressToSend = store.addressSelected;
 
             // Effettua la chiamata API a Laravel e passa il valore come parametro
             axios.get(store.urlForHomeSearch , {
@@ -28,9 +28,9 @@ export default {
                     })
                 .then(response => {
 
-                    console.log("array che viene popolato quando eseguo ricerca su home", response.data)
-                    store.apartmentsForAdvancedSearch = (response.data);
-                    console.log("questo è l array nello store, sempre popolato da barra di ricerca", store.apartmentsForAdvancedSearch)
+                    console.log("dati che mi tornano dal backend dopo ricerca in home", response.data)
+                    store.apartmentsAfterHomeSearch = (response.data);
+                    console.log("questo è l array nello store, sempre popolato da barra di ricerca", store.apartmentsAfterHomeSearch)
                 })
                 .catch(error => {
                     console.error(error);
@@ -76,7 +76,7 @@ export default {
                         <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
     
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress">
+                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected">
     
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     

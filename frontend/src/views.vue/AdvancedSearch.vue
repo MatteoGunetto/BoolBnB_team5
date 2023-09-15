@@ -67,11 +67,14 @@ export default {
         <div class="row justify-content-between">
             <h2 class="py-4">Filtra ricerca</h2>
             <div class="col-lg-4">
-                <!-- search bar -->
+
+
+                
+                <!-- address -->
                 <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control me-2" type="search" v-model="store.addressSelected" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>

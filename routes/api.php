@@ -24,14 +24,14 @@ use App\Models\Amenity;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route :: prefix ('v1') -> group(function() {
+
 
     Route::get("/apartments", [ApartmentApiController::class, "apartmentsIndex"]);
 
     Route::get("/apartments/{id}", [ApartmentApiController::class, "apartmentsShow"] );
-//});
 
-Route::get('/tomtom-proxy', function (Request $request) {
+
+    Route::get('/tomtom-proxy', function (Request $request) {
     $address = $request->input('address');
     $apiKey = env('TOMTOM_API_KEY');
     $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
