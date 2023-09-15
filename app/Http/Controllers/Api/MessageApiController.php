@@ -12,14 +12,15 @@ class MessageApiController extends Controller
 {
     public function messagesIndex(Request $request)
     {
-        $messages = Message::all();
-        // dd($request->all());
-        $response = Message::create($messages);
+        // Ottieni i dati inviati dalla richiesta
+        $data = $request->all();
 
-        return response()-> json([
+        // Crea un nuovo messaggio con i dati ricevuti
+        $message = Message::create($data);
+
+        return response()->json([
             "status" => 'success',
-            "data" => $response,
-        ])
-    ;
+            "data" => $message,  // Restituisci il messaggio creato come parte della risposta
+        ]);
     }
 }
