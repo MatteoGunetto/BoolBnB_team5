@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentApiController;
 use App\Http\Controllers\Api\AmenityApiController;
-use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\MessageApiController;
 
 
 use App\Models\Apartment;
