@@ -86,14 +86,13 @@ class ApartmentApiController extends Controller
         }
 
         // Usa un indirizzo statico
-        $address = "via del corso 14, roma";
+        $address = $request->addressInAdvancedSearch;
         $apiKey = env('TOMTOM_API_KEY');
         $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
         $response = Http::get($endpoint);
 
         $lat = $response->json()["results"][0]["position"]["lat"];
         $lon = $response->json()["results"][0]["position"]["lon"];
-
 
         $distance = $maxDistanceSelected;
         $query->select(DB::raw("*, ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))

@@ -8,7 +8,9 @@ export default {
         return {
             store, // Rende disponibile lo store nei dati del componente
             filtro: {
-                addressSelected: store.addressSelected,
+                //questo non funziona se lo passo al backend, quindi al backend gli passo direttamente store.addressSelected
+                //addressInAdvancedSearch: store.addressSelected,
+               
                 roomsNumber: null, // Numero di stanze selezionato
                 bedsNumber: null, // Numero di letti selezionato
                 bathroomsNumber: null, // Numero di bagni selezionato
@@ -37,6 +39,7 @@ export default {
         filterApartments() {
             axios.get(store.urlForFilteredSearch ,  {
                 params: {
+                    addressInAdvancedSearch: this.store.addressSelected,
                     roomsNumber: this.filtro.roomsNumber,
                     bedsNumber: this.filtro.bedsNumber,
                     bathroomsNumber: this.filtro.bathroomsNumber,
