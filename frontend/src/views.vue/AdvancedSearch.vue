@@ -17,7 +17,6 @@ export default {
                 selectedDistance: 20, // Distanza massima selezionata
                 selectedAmenities: [],
             },
-            filteredApartments: [],
         };
     },
     created() {
@@ -52,7 +51,7 @@ export default {
 
                 console.log("AAArisposta tornata con successo", response.data)
                 store.apartmentsInAdvancedSearch = (response.data);
-                //console.log("questo è l array nello store", store.filteredApartments)
+                
             })
             .catch(error => {
                 console.error(error);

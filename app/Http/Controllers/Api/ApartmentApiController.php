@@ -85,7 +85,7 @@ class ApartmentApiController extends Controller
             }
         }
 
-        // Usa un indirizzo statico
+
         $address = $request->addressInAdvancedSearch;
         $apiKey = env('TOMTOM_API_KEY');
         $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
@@ -99,8 +99,6 @@ class ApartmentApiController extends Controller
         ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
         ->orderBy('distance');
 
-
-    
         // Filtro per le amenities
         if (!empty($amenityIds)) {
             foreach ($amenityIds as $id) {

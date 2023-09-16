@@ -25,9 +25,10 @@ export const store = reactive({
     //url che viene chiamato quando cambiano gli input/filtri nell AdvancedSearch
     urlForFilteredSearch: "http://localhost:8000/api/filteredApartments",
     //con questo arry faccio le card,
-    //questo array viene popolato dopo ricerca dalla home e aggionrato dopo filtraggio
+    //questo array viene popolato dopo ricerca dalla home e aggiornato dopo filtraggio
     apartmentsInAdvancedSearch: [],
 
+    //questo viene popolato dalla home
     addressSelected : ""
 
 
