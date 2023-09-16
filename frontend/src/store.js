@@ -29,8 +29,9 @@ export const store = reactive({
     apartmentsInAdvancedSearch: [],
 
     //questo viene popolato dalla home
-    addressSelected : ""
+    addressSelected : "",
 
 
 
+    suggestedAddresses: [],
 });

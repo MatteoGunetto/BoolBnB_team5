@@ -2,6 +2,7 @@
 import Card from '../components/elements/Card.vue'; // Importa il componente Card
 import axios from 'axios'; // Importa Axios per effettuare richieste HTTP
 import { store } from '../store'; // Importa lo store (presumibilmente Vuex) per gestire lo stato globale dell'app
+import Searchbar from '../components/elements/Searchbar.vue';
 
 export default {
     data() {
@@ -32,8 +33,9 @@ export default {
             });
     },
     components: {
-        Card, // Registra il componente Card per l'uso in questo componente
-    },
+    Card,
+    Searchbar
+},
     methods: {
         filterApartments() {
             axios.get(store.urlForFilteredSearch ,  {
@@ -85,6 +87,10 @@ export default {
                         </form>
                     </div>
                 </nav>
+                <!-- search bar
+                <Searchbar /> -->
+
+                
 
                 <!-- FILTERS -->
 

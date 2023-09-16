@@ -2,16 +2,20 @@
 import { store } from '../store';
 import axios from 'axios'
 import Card from '../components/elements/Card.vue';
+import Searchbar from '../components/elements/Searchbar.vue';
 
 export default {
     data() {
         return {
             store,
             searchAddress: '',
+            prova: ''
+            
         }
     },
     components: {
         Card,
+        Searchbar,
     },
 
     methods: {
@@ -66,21 +70,21 @@ export default {
     <header class="container-fluid px-4 py-5 my-5 text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-6 mx-auto position-relative">
                     <div class="mb-4">
                         <div editable="rich">
                             <h2 class="display-2 fw-bold text-white">Scopri un Nuovo Modo di Abitare</h2>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center gap-2 mb-5">
-                        <div class="input-group position-relative">
+                        <!-- <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
     
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected">
     
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
     
-                        </div>
+                        </div> -->
                         <!-- <datalist id="datalistOptions">
                                                 <option value="San Francisco">
                                                 <option value="New York">
@@ -89,11 +93,11 @@ export default {
                                                 <option value="Chicago">
                                             </datalist> -->
                     </div>
+                    <Searchbar />                    
                 </div>
             </div>
         </div>
     </header>
-    
     <!-- Fine Header -->
     
     <!-- In Evidenza -->
@@ -125,6 +129,7 @@ export default {
 
 
 <style lang="scss">
+@import "../../scss/boolBnbStyle.scss";
 body {
     padding: 0;
     margin: 0;
@@ -139,10 +144,5 @@ header {
     color: white;
     padding: 100px;
     text-align: center;
-}
-
-.btn-search {
-    right: 0;
-    top: 0;
 }
 </style>
