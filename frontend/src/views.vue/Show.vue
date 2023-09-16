@@ -35,7 +35,7 @@ export default {
         sendmessage(){
 
             console.log(this.message)
-            
+
             axios.post("http://127.0.0.1:8000/api/allMessages", this.message)
             .then(res => {
                 console.log("log di messaggi in database: ", res.data)
@@ -79,28 +79,28 @@ export default {
                 </div>
             </div>
         </div>
-    
+
     </section>
     <section class="container">
-    
+
         <!-- <pre>{{ store.singleApartmentArray }}</pre> -->
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
                 <h2>Description</h2>
                 <p>{{ store.singleApartmentArray.description }}</p>
-    
-    
+
+
                 <!-- Mappa -->
                 <div class="map h-50">
-                    <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="100%" width="100%" 
+                    <iframe class="embed-responsive-item" frameborder="0" style="border:0" height="100%" width="100%"
                     :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyAwWLnZ3JzfvFKPo307-Yq0aYrkNTig4Zk&q=' + store.singleApartmentArray.latitude + ',' + store.singleApartmentArray.longitude"
                     allowfullscreen=""> </iframe>
-    
+
                 </div>
             </div>
-    
-    
+
+
             <div class="col">
                 <!-- Messaggio -->
                 <div class="card">
@@ -114,27 +114,27 @@ export default {
                                 <label for="name" class="form-label">Il tuo nome</label>
                                 <input v-model="message.Name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Inserisci nome">
                             </div>
-    
+
                             <!-- Mail Form -->
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">La tua mail</label>
                                 <input v-model="message.SenderEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Inserisci mail">
                             </div>
-    
+
                             <!-- Descrizione messaggio-->
                             <div class="mb-3">
                                 <label for="message">Messaggio</label>
                                 <textarea v-model="message.Content" class="form-control" id="message" rows="5" placeholder="Scrivi qui il tuo messaggio"></textarea>
                             </div>
-    
+
                             <button type="submit" class="btn btn-primary text-white" @click.prevent="sendmessage">Invia messaggio</button>
-    
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-    
+
         <!-- Amenities -->
         <section>
             <h3>Cosa troverai</h3>
