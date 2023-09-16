@@ -8,13 +8,15 @@ export default {
         return {
             store, // Rende disponibile lo store nei dati del componente
             filtro: {
+                //questo non funziona se lo passo al backend, quindi al backend gli passo direttamente store.addressSelected
+                //addressInAdvancedSearch: store.addressSelected,
+               
                 roomsNumber: null, // Numero di stanze selezionato
                 bedsNumber: null, // Numero di letti selezionato
                 bathroomsNumber: null, // Numero di bagni selezionato
                 selectedDistance: 20, // Distanza massima selezionata
                 selectedAmenities: [],
             },
-            filteredApartments: [],
         };
     },
     created() {
@@ -23,7 +25,7 @@ export default {
             .then(res => {
                 store.allAmenities = (res.data); // Imposta l'elenco delle amenities nello store
                 console.log('queste sono gli id amenities', store.allAmenities); // Stampa i dati delle amenities ottenuti dalla chiamata
-                this.filterApartments();
+                //this.filterApartments();
             })
             .catch(err => {
                 console.log(err); // Gestisce gli errori se la chiamata fallisce
@@ -34,67 +36,26 @@ export default {
     },
     methods: {
         filterApartments() {
-            // Inizia con la lista completa degli appartamenti
-            let filteredSearch = this.store.apartmentsInXKmArray;
+            axios.get(store.urlForFilteredSearch ,  {
+                params: {
+                    addressInAdvancedSearch: this.store.addressSelected,
+                    roomsNumber: this.filtro.roomsNumber,
+                    bedsNumber: this.filtro.bedsNumber,
+                    bathroomsNumber: this.filtro.bathroomsNumber,
+                    selectedDistance: this.filtro.selectedDistance,
+                    selectedAmenities: JSON.stringify(this.filtro.selectedAmenities), // se desideri inviare un array come parametro, potrebbe essere utile trasformarlo in stringa
+                    
+                }
+            })
+            .then(response => {
 
-            //Filtra per il numero di stanze (roomsNumber)
-            if (this.filtro.roomsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-
-                    if (this.filtro.roomsNumber == 4) {
-                        return apartment.rooms >= parseInt(this.filtro.roomsNumber);
-                    }
-                    // Restituisce true solo se il numero di stanze dell'appartamento è uguale a quello selezionato
-                    return apartment.rooms === parseInt(this.filtro.roomsNumber);
-                });
-            }
-
-            // Filtra per il numero di letti (bedsNumber)
-            if (this.filtro.bedsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bedsNumber == 4) {
-                        return apartment.beds >= parseInt(this.filtro.bedsNumber);
-                    }
-                    // Restituisce true solo se il numero di letti dell'appartamento è uguale a quello selezionato
-                    return apartment.beds === parseInt(this.filtro.bedsNumber);
-                });
-            }
-
-            // Filtra per il numero di bagni (bathroomsNumber)
-            if (this.filtro.bathroomsNumber !== null) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    if (this.filtro.bathroomsNumber == 4) {
-                        return apartment.bathrooms >= parseInt(this.filtro.bathroomsNumber);
-                    }
-                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
-                    return apartment.bathrooms === parseInt(this.filtro.bathroomsNumber);
-                });
-            }
-
-            //Filtra per distanza massima (da rivedere la condizione, BRUTTA MA FUNZIONALE)
-            if (this.filtro.selectedDistance !== 22) {
-                filteredSearch = filteredSearch.filter(apartment => {
-                    // Restituisce true solo se il numero di bagni dell'appartamento è uguale a quello selezionato
-                    return apartment.distance <= parseInt(this.filtro.selectedDistance);
-                });
-            }
-
-            // Filtra per servizi (amenity)
-            //questa condizione va rivista, se io deseleziono amenities questo filtro non riparte
-            if (this.filtro.selectedAmenities.length > 0) {
-                // Filtra gli appartamenti solo se ci sono amenità selezionate
-                filteredSearch = filteredSearch.filter(apartment => {
-
-
-                    return apartment.amenities.includes(parseInt(this.selectedAmenities));
-
-                });
-            }
-
-            // Restituisce la lista degli appartamenti filtrati
-            console.log("filteredSearch:", filteredSearch);
-
-            this.filteredApartments = filteredSearch;
+                console.log("AAArisposta tornata con successo", response.data)
+                store.apartmentsInAdvancedSearch = (response.data);
+                
+            })
+            .catch(error => {
+                console.error(error);
+            });
         }
     },
     // computed: {
@@ -109,12 +70,18 @@ export default {
         <div class="row justify-content-between">
             <h2 class="py-4">Filtra ricerca</h2>
             <div class="col-lg-4">
-                <!-- search bar -->
+
+
+                
+                <!-- address -->
                 <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+
+                            <input class="form-control me-2" type="search" v-model="store.addressSelected" aria-label="Search">
+                            
+                            <button class="btn btn-outline-success" type="submit" @click.prevent="filterApartments">Search</button>
+                        
                         </form>
                     </div>
                 </nav>
@@ -238,7 +205,7 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in filteredApartments">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInAdvancedSearch">
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
                         </router-link>

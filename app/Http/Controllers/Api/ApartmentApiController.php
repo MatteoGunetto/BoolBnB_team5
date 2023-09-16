@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
@@ -58,27 +60,77 @@ class ApartmentApiController extends Controller
         ]);
     }
 
+    public function filterApartments(Request $request) {
+
+        // Converti la stringa 'selectedAmenities' in un array
+        $amenityIds = json_decode($request->selectedAmenities, true);
+
+        $maxDistanceSelected = $request->selectedDistance;
+        // Costruisci la query
+        $query = Apartment::query();
+    
+        // Filtri per numero di stanze, letti e bagni
+        if (isset($request->roomsNumber)) {
+            if ($request->roomsNumber == 4) {
+                $query->where('rooms', '>=', 4);
+            } else {
+                $query->where('rooms', $request->roomsNumber);
+            }
+        }
+    
+        if (isset($request->bedsNumber)) {
+            if ($request->bedsNumber == 4) {
+                $query->where('beds', '>=', 4);
+            } else {
+                $query->where('beds', $request->bedsNumber);
+            }
+        }
+    
+        if (isset($request->bathroomsNumber)) {
+            if ($request->bathroomsNumber == 4) {
+                $query->where('bathrooms', '>=', 4);
+            } else {
+                $query->where('bathrooms', $request->bathroomsNumber);
+            }
+        }
 
 
+        $address = $request->addressInAdvancedSearch;
+        $apiKey = env('TOMTOM_API_KEY');
+        $endpoint = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json?key={$apiKey}";
+        $response = Http::get($endpoint);
 
+        $lat = $response->json()["results"][0]["position"]["lat"];
+        $lon = $response->json()["results"][0]["position"]["lon"];
+
+        $distance = $maxDistanceSelected;
+        $query->select(DB::raw("*, ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
+        ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
+        ->orderBy('distance');
+
+        // Filtro per le amenities
+        if (!empty($amenityIds)) {
+            foreach ($amenityIds as $id) {
+                $query->whereHas('amenities', function ($q) use ($id) {
+                    $q->where('amenities.id', $id);
+                });
+            }
+        }
+    
+        // Ottieni i risultati e dammi anche le associazioni con amenities
+        $apartments = $query->with('amenities')->get();
+
+        // Manda i risultati
+        return response()->json($apartments);
+    }
+    
 }
-// class ProjectController extends Controller
-// {
-//     public function projectsIndex() {
-//         $projects = Project::all();
 
-//         return response()->json([
-//             'projects' => $projects
-//         ]);
-//     }
 
-//     public function projectShow($id) {
-//         $project = Project :: with("type", "technologies")
-//         -> findOrFail($id);
+        
 
-//         return response()->json([
-//             'project' => $project
-//         ]);
 
-//     }
-// }
+
+
+    
+

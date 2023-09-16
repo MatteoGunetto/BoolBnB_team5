@@ -9,9 +9,28 @@ export const store = reactive({
 
     singleApartmentArray: [],
 
-    urlForHomeSearch: "http://localhost:8000/api/qualcosa",
-    apartmentsInXKmArray:[],
 
+
+
+
+    //url che viene chiamato quando viene cercato un indirizzo in homepage
+    urlForHomeSearch: "http://localhost:8000/api/qualcosa",
+    //questo in realtà non mi serve, posso usare direttamente apartmentsInAdvancedSearch
+    apartmentsAfterHomeSearch:[],
+
+    // questa mi serve per popolare 
     urlForAllAmenities: "http://localhost:8000/api/allAmenities",
-    allAmenities: []
+    allAmenities: [],
+
+    //url che viene chiamato quando cambiano gli input/filtri nell AdvancedSearch
+    urlForFilteredSearch: "http://localhost:8000/api/filteredApartments",
+    //con questo arry faccio le card,
+    //questo array viene popolato dopo ricerca dalla home e aggiornato dopo filtraggio
+    apartmentsInAdvancedSearch: [],
+
+    //questo viene popolato dalla home
+    addressSelected : ""
+
+
+
 });
