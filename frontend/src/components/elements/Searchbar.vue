@@ -27,7 +27,7 @@ export default {
 
             // console.log(elements[i].textContent);
 
-            this.$data.searchAddress = elements[i].textContent;
+            store.addressSelected = elements[i].textContent;
 
             this.showDialog = true;
             
@@ -35,10 +35,9 @@ export default {
         
         getApartment() {
 
-            store.apartmentsInXKmArray.splice (0)
 
             //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
-            const addressToSend = this.$data.searchAddress;
+            const addressToSend = store.addressSelected;
 
             // Effettua la chiamata API a Laravel e passa il valore come parametro
             axios.get(store.urlForHomeSearch , {
@@ -50,8 +49,8 @@ export default {
 
                     console.log("risposta tornata con successo", response.data)
 
-                    store.apartmentsInXKmArray = (response.data);
-                    console.log("questo è l array nello store", store.apartmentsInXKmArray)
+                    store.apartmentsInAdvancedSearch = (response.data);
+                    console.log("questo è l array nello store", store.apartmentsInAdvancedSearch)
                 })
                 .catch(error => {
                     console.error(error);
@@ -70,7 +69,7 @@ export default {
 
         },
 
-        searchBarHome(){
+        getHints(){
 
         // Ottieni un riferimento agli elementi con la classe address-option
         const addressOptionElements = document.querySelectorAll(".address-option");
@@ -78,16 +77,16 @@ export default {
         // Imposta il testo consigliato come ricerca del indirizzo
         addressOptionElements.forEach(function(indirizzo){
             indirizzo.addEventListener("click", function(){
-                this.$data.searchAddress=indirizzo.textContent
+                store.addressSelected = indirizzo.textContent
             });
         })
         // /api/tomtom-proxy
 
-        if  (this.$data.searchAddress.length > 4 ) {
-                    const addressSearched = this.$data.searchAddress;
+        if  (store.addressSelected.length > 4 ) {
+                    const addressSearched = store.addressSelected;
 
                     //variabili per chiamata axios dei suggerimenti in home
-                    let valueEncoded = encodeURIComponent(this.$data.searchAddress);
+                    let valueEncoded = encodeURIComponent(store.addressSelected);
                     let tomtomKey = 'deapGsJZBuBGHOlGUsntPZ7nSfOrRLYK';
 
                     let axiosUrl = `https://api.tomtom.com/search/2/geocode/${valueEncoded}.json?key=${tomtomKey}`;
@@ -121,12 +120,12 @@ export default {
         <div class="input-group">
             <span><i class="bi bi-geo-alt"></i></span>
 
-                <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="searchAddress" @input="searchBarHome">
+                <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected" @input="getHints">
             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white  btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
 
         </div>
 
-        <ul class="list-group position-absolute w-100 pt-2 mt-5 shadow-lg text-start" v-if="searchAddress !== '' && !showDialog">
+        <ul class="list-group position-absolute w-100 pt-2 mt-5 shadow-lg text-start" v-if="store.addressSelected !== '' && !showDialog">
             <li class="list-group-item suggestion py-3" v-for="(suggestion, i) in store.suggestedAddresses" :key="i" @click.prevent="suggestionValue(i)">{{ suggestion.address.freeformAddress, suggestion.address.country }}</li>
             
         </ul>
