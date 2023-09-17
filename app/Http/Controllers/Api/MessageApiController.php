@@ -24,3 +24,4 @@ class MessageApiController extends Controller
         ]);
     }
 }
+

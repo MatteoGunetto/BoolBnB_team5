@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\ApartmentApiController;
 use App\Http\Controllers\Api\AmenityApiController;
 use App\Http\Controllers\Api\MessageApiController;
 
-
 use App\Models\Apartment;
 use App\Models\Amenity;
 use App\Models\Message;
@@ -71,6 +70,6 @@ Route::get('/qualcosa', function(Request $request) {
 });
 
 Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
-Route::post("/allMessages", [MessageController::class, "messagesIndex"]);
+Route::post("/allMessages", [MessageApiController::class, "messagesIndex"]);
 
 Route::get("/filteredApartments", [ApartmentApiController::class, "filterApartments"]);
