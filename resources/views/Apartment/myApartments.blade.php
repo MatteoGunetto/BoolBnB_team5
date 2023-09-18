@@ -4,11 +4,26 @@
 
         <h1>I tuoi appartamenti</h1>
 
+        <!-- messaggio conferma pagamento -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <!-- messaggio errore pagamento -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        
 
             @foreach ($apartments as $apartment)
                 <div class="col">
-                    <div class="card ">
+                    <div class="card {{ $apartment->promotions->isNotEmpty() ? 'sponsored' : '' }}">
                        
                     <!-- IMMAGINE -->
                         {{-- se l'img è vuota allora mettine una di default --}}
@@ -96,8 +111,10 @@
 </script>
 
 
-    </div>
-
-    </div>
+    <style>
+        .sponsored {
+    border: 2px solid gold;
+}
+    </style>
 @endsection
 

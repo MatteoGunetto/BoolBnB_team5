@@ -69,4 +69,9 @@ Route::get('Apartment/selectSponsorship/{id}', [ApartmentController::class, "sel
 Route::get('Apartment/sponsorApartment/{apartment_id}/{promotion_id}', [ApartmentController::class, "sponsorApartment"])->name('Apartment.sponsorApartment')
 ->middleware(['auth', 'verified']);
 
+//rotta per creare promozione per appartamento dopo il pagamento
+Route::post('Apartment/payPromotion', [ApartmentController::class, "payPromotion"])->name('Apartment.payPromotion')
+->middleware(['auth', 'verified']);
+
+
 require __DIR__ . '/auth.php';

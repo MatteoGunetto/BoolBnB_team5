@@ -21,17 +21,21 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::all();
+        //$apartments = Apartment::all();
+        //mi passo solo gli appartamenti sponsorizzati
+        $sponsoredApartments = Apartment::has('promotions')->get();
 
-        return view('Apartment.index',compact('apartments'));
+        //return view('Apartment.index',compact('apartments'));
+        return view('Apartment.index', ['sponsoredApartments' => $sponsoredApartments]);
+       
 
     }
 
     public function showOnlyYourApartments()
     {
         $user_id = Auth::id();
-        $apartments = Apartment::where('user_id', $user_id)->get();
-
+        $apartments = Apartment::where('user_id', $user_id)->with('promotions')->get();
+    
         return view('Apartment.myApartments', ['apartments' => $apartments]);
     }
 
@@ -208,4 +212,34 @@ class ApartmentController extends Controller
 
         return view('Apartment.sponsorApartment', compact('apartment', 'promotion') );
     }
+
+    public function payPromotion(Request $request)
+    {
+        // Validazione dei dati inviati (es. controllare la lunghezza del numero della carta, la data di scadenza, ecc.)
+        $validated = $request->validate([
+            'card_number' => 'required|size:16',
+            'expiry_date' => 'required|size:5', // formato MM/AA
+            'cvv' => 'required|size:3',
+        ]);
+    
+        // Simula l'elaborazione del pagamento. 
+        // In un'applicazione reale, qui chiameresti un gateway di pagamento come Stripe, PayPal, ecc.
+        $paymentSuccess = true;  // Assumiamo che il pagamento abbia successo per questa simulazione.
+    
+        if($paymentSuccess) {
+            // Aggiungi un record nella tua tabella ponte apartment_promotion
+            // Assumiamo che tu abbia i modelli Apartment e Promotion e una relazione many-to-many tra di loro.
+            $apartment = Apartment::findOrFail($request->input('apartment_id'));
+            $promotion = Promotion::findOrFail($request->input('promotion_id'));
+            $startDate = $request->input('startDate');
+    
+            // Associa l'appartamento alla promozione
+            $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate]);
+    
+            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo e promozione applicata!');
+        } else {
+            return redirect()->back()->with('error', 'Qualcosa è andato storto durante il pagamento.');
+        }
+    }
+    
 }
