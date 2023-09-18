@@ -118,10 +118,18 @@ class ApartmentApiController extends Controller
         }
     
         // Ottieni i risultati e dammi anche le associazioni con amenities
-        $apartments = $query->with('amenities')->get();
+        $apartments = $query->with('amenities')->with('promotions')->get();
 
         // Manda i risultati
         return response()->json($apartments);
+    }
+
+    public function promoApartmentsForHome () {
+
+        $sponsoredApartments = Apartment::has('promotions')->get();
+
+    
+        return response()->json($sponsoredApartments);
     }
     
 }

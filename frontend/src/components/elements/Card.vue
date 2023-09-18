@@ -34,14 +34,19 @@ export default {
                     <img src="../../../public/icon-rooms.svg" alt="icona-appartamento">
                     <span class="ms-2">{{ cardProp.rooms }}</span>
                 </div>
-                <div class="icon d-flex align-items-center ms-2 align-self-end">
+                
+              
+                <div v-if="cardProp.distance" class="icon d-flex align-items-center ms-2 align-self-end">
                     <span class="ms-2">
                         <span>
                             Distance:
                         </span>
-                        <!-- {{ cardProp.distance.toFixed(2) }} km -->
+                        {{ cardProp.distance.toFixed(2) }} km
                     </span>
                 </div>
+                
+
+
             </div>
         </div>
     </div>

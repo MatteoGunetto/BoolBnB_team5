@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\MessageApiController;
 use App\Models\Apartment;
 use App\Models\Amenity;
 use App\Models\Message;
+use App\Models\Promotion;
 
 
 /*
@@ -64,6 +65,7 @@ Route::get('/qualcosa', function(Request $request) {
     ->select(DB::raw("*, ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
     ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
     ->orderBy('distance')
+    ->with('promotions')
     ->get();
 
     return $apartments;
@@ -73,3 +75,6 @@ Route::get("/allAmenities", [AmenityApiController::class, "amenitiesIndex"]);
 Route::post("/allMessages", [MessageApiController::class, "messagesIndex"]);
 
 Route::get("/filteredApartments", [ApartmentApiController::class, "filterApartments"]);
+
+//rotta per mandare al frontend solo appartamenti sponsorizzati per la home
+Route::get("/promoApartmentsForHome", [ApartmentApiController::class, "promoApartmentsForHome"]);

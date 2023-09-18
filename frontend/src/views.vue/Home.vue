@@ -48,10 +48,10 @@ export default {
 
         promoApartment() {
             // Effettua una richiesta HTTP GET all'URL degli appartamenti specificato in store.apartments
-            axios.get(store.apartments)
+            axios.get(store.urlPromoApartmentsForHome)
                 .then(res => {
                     // Quando la richiesta ha successo, assegna i dati ottenuti da res.data a store.apartmentsArray
-                    store.apartmentsArray = res.data;
+                    store.promoApartmentsArray = res.data;
                 })
                 .catch(err => {
                     // Se la richiesta fallisce, registra l'errore nella console per scopi di debug
@@ -102,7 +102,7 @@ export default {
         </div>
 
         <div class="row row-cols-3">
-            <div class="col" v-for="apartment in store.apartmentsArray">
+            <div class="col" v-for="apartment in store.promoApartmentsArray">
                 <!-- <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`"> -->
                 <Card :cardProp="apartment" />
                 <!-- </router-link> -->
@@ -146,8 +146,5 @@ header {
     text-align: center;
 }
 
-.card {
 
-    border: 3px solid $primary;
-}
 </style>

@@ -21,12 +21,11 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        //$apartments = Apartment::all();
-        //mi passo solo gli appartamenti sponsorizzati
-        $sponsoredApartments = Apartment::has('promotions')->get();
+        $apartments = Apartment::all();
 
-        //return view('Apartment.index',compact('apartments'));
-        return view('Apartment.index', ['sponsoredApartments' => $sponsoredApartments]);
+
+        return view('Apartment.index',compact('apartments'));
+
        
 
     }
@@ -236,7 +235,7 @@ class ApartmentController extends Controller
             // Associa l'appartamento alla promozione
             $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate]);
     
-            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo e promozione applicata!');
+            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su ' . $apartment->title . 'e promozione applicata!');
         } else {
             return redirect()->back()->with('error', 'Qualcosa è andato storto durante il pagamento.');
         }
