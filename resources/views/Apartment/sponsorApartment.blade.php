@@ -2,52 +2,97 @@
 @section('content')
 
 <div>
-<h1>Benvenuto nella schermata di pagamento</h1>
-    <div>
-        per procedere con l'attivazione della sponsorizzazione :
-        <strong>{{$promotion->title}}</strong>
+    <h1>Prosegui con il pagamento</h1>
         <div>
-            con la durata di :
-            <strong>{{$promotion->durationInDays}}  giorni</strong>
+            per procedere con l'attivazione della sponsorizzazione :
+            <strong>{{$promotion->title}}</strong>
+            <div>
+                con la durata di :
+                <strong>{{$promotion->durationInDays}}  giorni</strong>
+            </div>
+            <div>
+                al costo di :
+                <strong>{{$promotion->cost}}  Euro</strong>
+            </div>
+            <div>
+                per l'appartamento :
+                <strong>{{$apartment->title}}</strong>
+            </div>
         </div>
-        <div>
-            al costo di :
-            <strong>{{$promotion->cost}}  Euro</strong>
-        </div>
-        <div>
-            per l'appartamento :
-            <strong>{{$apartment->title}}</strong>
-        </div>
-    </div>
 </div>
 
-<!-- Container di Braintree -->
-<div id="dropin-container"></div>
-<button id="submit-button">Effettua il pagamento</button>
 
-<script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.min.js"></script>
 
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        braintree.dropin.create({
-            authorization: 'YOUR_CLIENT_TOKEN_FROM_SERVER', // Sostituire con il token effettivo ottenuto dal server
-            container: document.getElementById('dropin-container'),
-            // ...plus remaining configuration (qui puoi inserire ulteriori configurazioni se necessario)
-        }).then((dropinInstance) => {
-            const button = document.querySelector('#submit-button');
-            button.addEventListener('click', function () {
-                dropinInstance.requestPaymentMethod(function (err, payload) {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    }
-                    // Qui puoi inviare `payload.nonce` al tuo server per elaborare il pagamento
-                });
-            });
-        }).catch((error) => {
-            console.error(error);
-        });
-    });
+
+
+
+
+
+<form action="{{ route('Apartment.payPromotion') }}" method="POST">
+    @csrf
+    <div>
+        <label>Numero Carta:</label>
+        <input type="text" name="card_number" placeholder="1234 5678 1234 5678">
+    </div>
+    <div>
+        <label>Data di Scadenza:</label>
+        <input type="text" name="expiry_date" placeholder="MM/AA">
+    </div>
+    <div>
+        <label>CVV:</label>
+        <input type="text" name="cvv" placeholder="123">
+    </div>
+    <div>
+        <label>Quando vuoi far partire la promozione?</label>
+        <input type="date" name="startDate" placeholder="">
+    </div>
+    <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
+    <input type="hidden" name="promotion_id" value="{{ $promotion->id }}">
+
+    <div>
+        <button id="submit-button" class="button button--small button--green">Purchase</button>
+    </div>
+</form>
+
+
+
+
 </script>
+
+<style>
+    .button {
+  cursor: pointer;
+  font-weight: 500;
+  left: 3px;
+  line-height: inherit;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+}
+
+.button--small {
+  padding: 10px 20px;
+  font-size: 0.875rem;
+}
+
+.button--green {
+  outline: none;
+  background-color: #64d18a;
+  border-color: #64d18a;
+  color: white;
+  transition: all 200ms ease;
+}
+
+.button--green:hover {
+  background-color: #8bdda8;
+  color: white;
+}
+</style>
 
 @endsection
