@@ -92,7 +92,31 @@
         </nav>
 
         <main class="">
-            @yield('content')
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                        <a class="nav-link link-danger" href="http://localhost:5174/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Apartment.myApartments') }}">I tuoi appartamenti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Apartment.myMessages') }}">I tuoi messagi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-md-10">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+            
         </main>
     </div>
 </body>

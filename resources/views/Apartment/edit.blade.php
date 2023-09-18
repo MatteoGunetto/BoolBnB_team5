@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="container text-center">
+<div class="container">
     <h1>
         Modifica Appartamento
     </h1>
@@ -62,7 +62,9 @@
         <!-- Anteprima dell'immagine corrente -->
         <div class="form-group">
             <label>Immagine attuale:</label>
-            <img src="{{ asset('storage/' . $apartment->image) }}" class="img-thumbnail" alt="Apartment Image">
+            <div class="img-container">
+                <img src="{{ asset('storage/' . $apartment->image) }}" class="img-thumbnail" alt="Apartment Image">
+            </div>
         </div>
 
         <!-- Campo di input per il caricamento di una nuova immagine -->
