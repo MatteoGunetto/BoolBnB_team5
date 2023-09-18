@@ -36,9 +36,7 @@ class MessageController extends Controller
     // }
     public function showOnlyYourMessages()
     {
-        $apartment_id = Auth::id();
-        $messages = message::where('apartment_id', $apartment_id)->get();
-
+        $messages = message::all();
         return view('Apartment.myMessages', ['messages' => $messages]);
     }
 

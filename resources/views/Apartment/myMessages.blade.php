@@ -12,7 +12,7 @@
         {{$message->Content}}
     </li>
 </ul> --}}
-<pre>{{$message}}</pre>
+<!-- <pre>{{$message}}</pre> -->
 <div class="container py-4">
     <div class="row">
         <div class="col-md-12">
