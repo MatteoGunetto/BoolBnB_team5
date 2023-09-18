@@ -60,4 +60,13 @@ Route::middleware('auth')->group(function () {
 Route::post('Apartment/show/{apartmentid}/message', [MessageController::class, "store"])->name('message.store')
 ;
 
+
+//apre la pagina dove puoi scegliere la promozione per l'appartamento
+Route::get('Apartment/selectSponsorship/{id}', [ApartmentController::class, "selectSponsorship"])->name('Apartment.selectSponsorship')
+->middleware(['auth', 'verified']);
+
+//qui ti fa vedere opzione selezionata e ti fa compilare il form per il pagamento
+Route::get('Apartment/sponsorApartment/{apartment_id}/{promotion_id}', [ApartmentController::class, "sponsorApartment"])->name('Apartment.sponsorApartment')
+->middleware(['auth', 'verified']);
+
 require __DIR__ . '/auth.php';

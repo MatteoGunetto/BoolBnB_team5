@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Amenity;
 use App\Models\Message;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Storage;
 
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
@@ -191,5 +192,20 @@ class ApartmentController extends Controller
 
     public function myApartments() {
         return view('Apartment.myApartments');
+    }
+
+    public function selectSponsorship($id)
+    {
+        $apartment = Apartment::findOrFail($id);
+        $promotions = Promotion::all();
+        return view('Apartment.selectSponsorship', compact('apartment', 'promotions'));
+    }
+
+    public function sponsorApartment($apartment_id, $promotion_id)
+    {
+        $apartment = Apartment::findOrFail($apartment_id);
+        $promotion = Promotion::findOrFail($promotion_id);
+
+        return view('Apartment.sponsorApartment', compact('apartment', 'promotion') );
     }
 }
