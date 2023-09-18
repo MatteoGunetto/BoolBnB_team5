@@ -1,7 +1,7 @@
 <script>
+import Card from '../components/elements/Card.vue'; // Importa il componente Card
+import axios from 'axios';
 import { store } from '../store';
-import axios from 'axios'
-import Card from '../components/elements/Card.vue';
 import Searchbar from '../components/elements/Searchbar.vue';
 
 export default {
@@ -19,6 +19,7 @@ export default {
     },
 
     methods: {
+
         getApartment() {
 
             //indirizzo inserito nella barra di ricerca che viene mandato al backend per trovare appartamenti in un raggio X (questo X è specificato nel backend)
@@ -40,24 +41,31 @@ export default {
                     console.error(error);
                 });
 
-            //     // chiamata per avere TUTTI gli appartamenti
-            //     axios.get(store.apartments)
-            //         .then(res => {
-            //             store.apartmentsArray = (res.data);
-            //         })
-
-            //         .catch(err => {
-            //             console.log(err);
-            //         });
 
 
-        }
+
+        },
+
+        promoApartment() {
+            // Effettua una richiesta HTTP GET all'URL degli appartamenti specificato in store.apartments
+            axios.get(store.apartments)
+                .then(res => {
+                    // Quando la richiesta ha successo, assegna i dati ottenuti da res.data a store.apartmentsArray
+                    store.apartmentsArray = res.data;
+                })
+                .catch(err => {
+                    // Se la richiesta fallisce, registra l'errore nella console per scopi di debug
+                    console.error(err);
+                });
+        },
 
 
     },
     mounted() {
-        //funzione per consigli indirizzi
-    }
+        // Chiama promoApartment() quando il componente viene montato (pagina caricata)
+        this.promoApartment();
+    },
+
     //     created() {
     // this.getApartment();
     // }
@@ -77,21 +85,7 @@ export default {
                         </div>
                     </div>
                     <div class="d-flex justify-content-center gap-2 mb-5">
-                        <!-- <div class="input-group position-relative">
-                            <span><i class="bi bi-geo-alt"></i></span>
 
-                            <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected">
-
-                            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
-
-                        </div> -->
-                        <!-- <datalist id="datalistOptions">
-                                                <option value="San Francisco">
-                                                <option value="New York">
-                                                <option value="Seattle">
-                                                <option value="Los Angeles">
-                                                <option value="Chicago">
-                                            </datalist> -->
                     </div>
                     <Searchbar />
                 </div>
@@ -101,15 +95,20 @@ export default {
     <!-- Fine Header -->
 
     <!-- In Evidenza -->
+    <!-- <pre>{{ store.apartmentsArray }}</pre> -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <h1>In evidenza</h1>
-            </div>
-            <div class="col-md-4">
-                <Card />
+        <div class="row row-cols-1 py-5">
+            <h3 class="text-center text-primary">Appartamenti in Evidenza </h3>
+        </div>
+
+        <div class="row row-cols-3">
+            <div class="col" v-for="apartment in store.apartmentsArray">
+                <!-- <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`"> -->
+                <Card :cardProp="apartment" />
+                <!-- </router-link> -->
             </div>
         </div>
+
     </div>
     <!-- Fine In Evidenza -->
 
@@ -145,5 +144,10 @@ header {
     color: white;
     padding: 100px;
     text-align: center;
+}
+
+.card {
+
+    border: 3px solid $primary;
 }
 </style>
