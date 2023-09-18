@@ -10,7 +10,7 @@ export default {
             store,
             searchAddress: '',
             prova: ''
-            
+
         }
     },
     components: {
@@ -25,11 +25,11 @@ export default {
             const addressToSend = store.addressSelected;
 
             // Effettua la chiamata API a Laravel e passa il valore come parametro
-            axios.get(store.urlForHomeSearch , {
-                        params: {
-                            address: addressToSend
-                        }
-                    })
+            axios.get(store.urlForHomeSearch, {
+                params: {
+                    address: addressToSend
+                }
+            })
                 .then(response => {
 
                     console.log("dati che mi tornano dal backend dopo ricerca in home", response.data)
@@ -40,20 +40,20 @@ export default {
                     console.error(error);
                 });
 
-        //     // chiamata per avere TUTTI gli appartamenti
-        //     axios.get(store.apartments)
-        //         .then(res => {
-        //             store.apartmentsArray = (res.data);
-        //         })
+            //     // chiamata per avere TUTTI gli appartamenti
+            //     axios.get(store.apartments)
+            //         .then(res => {
+            //             store.apartmentsArray = (res.data);
+            //         })
 
-        //         .catch(err => {
-        //             console.log(err);
-        //         });
+            //         .catch(err => {
+            //             console.log(err);
+            //         });
 
 
         }
 
-        
+
     },
     mounted() {
         //funzione per consigli indirizzi
@@ -67,7 +67,7 @@ export default {
 <template>
     <!-- Hero -->
     <h1>{{ searchAddress }}</h1>
-    <header class="container-fluid px-4 py-5 my-5 text-center">
+    <header class="container-fluid px-4  text-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mx-auto position-relative">
@@ -79,11 +79,11 @@ export default {
                     <div class="d-flex justify-content-center gap-2 mb-5">
                         <!-- <div class="input-group position-relative">
                             <span><i class="bi bi-geo-alt"></i></span>
-    
+
                             <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected">
-    
+
                             <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white rounded btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
-    
+
                         </div> -->
                         <!-- <datalist id="datalistOptions">
                                                 <option value="San Francisco">
@@ -93,26 +93,26 @@ export default {
                                                 <option value="Chicago">
                                             </datalist> -->
                     </div>
-                    <Searchbar />                    
+                    <Searchbar />
                 </div>
             </div>
         </div>
     </header>
     <!-- Fine Header -->
-    
+
     <!-- In Evidenza -->
-    <!-- <div class="container">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <h1>In evidenza</h1>
-                    </div>
-                    <div class="col-md-4" v-for="item in 3" :key="item.id">
-                        <Card />
-                    </div>
-                </div>
-            </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <h1>In evidenza</h1>
+            </div>
+            <div class="col-md-4">
+                <Card />
+            </div>
+        </div>
+    </div>
     <!-- Fine In Evidenza -->
-    
+
     <!-- Inizio Consigliati -->
     <!-- <div class="container">
                 <div class="row">
@@ -130,6 +130,7 @@ export default {
 
 <style lang="scss">
 @import "../../scss/boolBnbStyle.scss";
+
 body {
     padding: 0;
     margin: 0;
