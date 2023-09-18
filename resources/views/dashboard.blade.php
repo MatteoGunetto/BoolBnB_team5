@@ -12,6 +12,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('Apartment.myApartments') }}">I tuoi appartamenti</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('Apartment.myMessages') }}">I tuoi messagi</a>
+                </li>
+
                 <li>
                     <a class="nav-link" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>
                 </li>
