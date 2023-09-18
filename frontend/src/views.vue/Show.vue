@@ -13,6 +13,7 @@ export default {
                 SenderEmail:'',
                 apartment_id: this.$route.params.id,
             } ,
+            feedbackMessage: '',
         }
     },
 
@@ -39,11 +40,28 @@ export default {
             axios.post("http://127.0.0.1:8000/api/allMessages", this.message)
             .then(res => {
                 console.log("log di messaggi in database: ", res.data)
+                this.feedbackMessage = "Messaggio inviato correttamente"
 
             })
-                    .catch(error => {
-                        console.error("C'è stato un errore nell'invio:", error);
-                    });
+            .catch(error => {
+                console.error("C'è stato un errore nell'invio:", error);
+                this.feedbackMessage = "Errore nell'invio del messaggio, riprova"
+            });
+
+            // Resetta i campi dell'oggetto 
+            this.message.Content = '';
+            this.message.Name = '';
+            this.message.SenderEmail = '';
+
+
+            // Chiamo l'elemento #feedbackMessage nel dom
+            var feedbackMessage = document.getElementById("feedbackMessage");
+
+            // Fa sparire il messaggio dopo 4s
+            setTimeout(function() {
+                feedbackMessage.style.display = "none";
+            }, 4000);
+            
         }
     }
 }
@@ -127,6 +145,10 @@ export default {
                                 <textarea v-model="message.Content" class="form-control" id="message" rows="5" placeholder="Scrivi qui il tuo messaggio"></textarea>
                             </div>
 
+                            <div class="success-message">
+                                <p :class="feedbackMessage === 'Messaggio inviato correttamente' ? 'success' : 'danger'" id="feedbackMessage">{{ feedbackMessage }}</p>
+                            </div>
+
                             <button type="submit" class="btn btn-primary text-white" @click.prevent="sendmessage">Invia messaggio</button>
 
                         </form>
@@ -198,6 +220,14 @@ export default {
 
 .map{
     border-radius: 16px!important;
+}
+
+.success{
+    color: $primary;
+}
+
+.danger{
+    color: $danger;
 }
 </style>
 
