@@ -36,9 +36,18 @@ class MessageController extends Controller
     // }
     public function showOnlyYourMessages()
     {
-        $apartment_id = Auth::id();
-        $messages = message::where('apartment_id', $apartment_id)->get();
-
+        // Recupera gli appartamenti associati all'utente
+        $apartments = auth()->user()->apartments;
+    
+        // Inizializza una raccolta di messaggi
+        $messages = collect();
+    
+        // Per ciascun appartamento, ottieni i messaggi associati
+        foreach ($apartments as $apartment) {
+            $messages = $messages->concat($apartment->messages);
+        }
+    
+        // Ora hai una raccolta di messaggi associati agli appartamenti dell'utente
         return view('Apartment.myMessages', ['messages' => $messages]);
     }
 
