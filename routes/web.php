@@ -41,6 +41,8 @@ Route::get('Apartment/edit/{id}', [ApartmentController::class, "edit"])->name('A
 
 Route::get('Apartment/myApartments', [ApartmentController::class, "showOnlyYourApartments"])->name('Apartment.myApartments')
 ->middleware(['auth', 'verified']);
+Route::get('Apartment/myMessages', [MessageController::class, "showOnlyYourMessages"])->name('Apartment.myMessages')
+->middleware(['auth', 'verified']);
 
 Route :: delete('Apartment/destroy/{id}', [ApartmentController :: class, 'destroy'])
     -> name('Apartment.destroy')->middleware(['auth', 'verified']);
