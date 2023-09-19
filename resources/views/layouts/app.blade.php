@@ -91,10 +91,10 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="vh-100">
 
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid h-100">
+                <div class="row h-100">
                     <div class="col-md-2 bg-primary p-4" id="sidebar" style="--bs-bg-opacity: .8;">
                         <ul class="nav flex-column gap-2">
                             <li class="nav-item">

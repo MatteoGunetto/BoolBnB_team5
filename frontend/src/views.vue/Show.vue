@@ -141,7 +141,8 @@ export default {
             <div class="row py-4">
                 <div class="col-lg-3">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item" v-for="amenity in store.singleApartmentArray.amenities ">
+                        <li class="list-group-item d-flex align-items-center" v-for="amenity in store.singleApartmentArray.amenities ">
+                            <i :class="`bi ${ amenity.icon }`" class="me-2" style="font-size: 1.2rem;"></i>
                             <font-awesome-icon :icon="`fa-solid ${ amenity.icon }`" /> {{amenity.name}}
                         </li>
                     </ul>
