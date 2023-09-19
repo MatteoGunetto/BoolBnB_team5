@@ -81,8 +81,37 @@
                             <h5 class="card-title">{{ $apartment->title }}</h5>
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
+
                             <!-- BOTTONE DETTAGLI -->
-                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a>
+
+                            <!-- Modal dettagli -->
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#detailModal-{{ $apartment->id }}">
+                            Dettagli
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="detailModal-{{ $apartment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel"> {{$apartment->title}} </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-icons">
+                                        <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}">
+                                            Letti: {{ $apartment->beds }} <br>
+                                            Bagni: {{ $apartment->bathrooms }} <br>
+                                            Stanze: {{ $apartment->rooms }}
+
+
+                                        </div>
+                                    {{$apartment->description}}
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a> -->
 
                             <!-- BOTTONE SPONSOR -->
                             <a href="{{ route('Apartment.selectSponsorship', $apartment->id) }}" class="btn btn-warning">Sponsor</a>
@@ -90,6 +119,8 @@
 
                         </div>
                     </div>
+                    
+                    
                 </div>
             @endforeach
         </div>

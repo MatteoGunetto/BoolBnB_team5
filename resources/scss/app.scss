@@ -37,8 +37,17 @@ $body-font-family: $font-family-serif;
     color: $light;
 }
 
+.actionPanel{
+    border-top-left-radius: 36px!important;
+    border-bottom-left-radius: 36px!important;
+}
+
 .actionPanel li:first-child{
     padding-top: 36px;
+}
+
+.actionPanel li:last-child{
+    padding-bottom: 16px;
 }
 
 .actionPanel, .actionReveal{
