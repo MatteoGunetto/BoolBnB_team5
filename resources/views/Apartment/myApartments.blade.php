@@ -15,10 +15,7 @@
 
                         <i class="actionReveal bi bi-three-dots position-absolute top-0 end-0 text-white me-2"  data-target="actionPanel-{{ $apartment->id }}" style="font-size: 1.8rem;"></i>
                     <!-- Bottoni edit ed elimina -->
-                    <ul id="actionPanel-{{ $apartment->id }}" class="alert alert-dismissable list-group list-group-flush position-absolute top-0 end-0 d-none">
-                        <li class="list-group-item text-end">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </li>
+                    <ul id="actionPanel-{{ $apartment->id }}" class="list-group list-group-flush position-absolute top-0 end-0 d-none">
                         <li class="list-group-item">
 
                             <!-- BOTTONE EDIT -->
@@ -37,32 +34,32 @@
                                         <i class="bi bi-trash3"></i>
                                         Delete
                                     </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="delete_modal_{{ $apartment->id }}" tabindex="-1" aria-labelledby="deleteModal_{{ $apartment->id }}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="deleteModal_{{ $apartment->id }}">Sei sicuro di voler eliminare l'appartamento:</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <strong>
-                                                    {{$apartment->title}}
-                                                    </strong>
-                                                ?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <!-- bottoni della modale -->
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                                    <button type="submit" class="btn btn-danger">Elimina</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </form>
                         </li>
                     </ul>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete_modal_{{ $apartment->id }}" tabindex="-1" aria-labelledby="deleteModal_{{ $apartment->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="deleteModal_{{ $apartment->id }}">Sei sicuro di voler eliminare l'appartamento:</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <strong>
+                                    {{$apartment->title}}
+                                    </strong>
+                                ?
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- bottoni della modale -->
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                    <button type="submit" class="btn btn-danger">Elimina</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                        
                     <!-- IMMAGINE -->
                         {{-- se l'img è vuota allora mettine una di default --}}
@@ -98,31 +95,61 @@
 
 <script>
 
- // Ottieni tutti gli elementi con la classe "mostra-tabella"
- var buttons = document.querySelectorAll(".actionReveal");
+//  // Ottieni tutti gli elementi con la classe "mostra-tabella"
+//  var buttons = document.querySelectorAll(".actionReveal");
 
-// Aggiungi un gestore di eventi a ciascun pulsante
-buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-        // Ottieni l'ID della tabella target dall'attributo "data-target"
-        var targetId = button.getAttribute("data-target");
+// // Aggiungi un gestore di eventi a ciascun pulsante
+// buttons.forEach(function (button) {
+//     button.addEventListener("click", function () {
+//         // Ottieni l'ID della tabella target dall'attributo "data-target"
+//         var targetId = button.getAttribute("data-target");
 
-        // Ottieni l'elemento tabella target
+//         // Ottieni l'elemento tabella target
+//         var table = document.getElementById(targetId);
+//         table.classList.toggle('d-none');
+//         table.classList.add('is-active');
+
+//     });
+// });
+
+    
+    // // Aggiungi un gestore di eventi al pulsante "Conferma"
+    // document.getElementById("confirmDelete").addEventListener("click", function () {
+    //    // Qui inserisci il codice per l'eliminazione effettiva dell'elemento
+    //    // Puoi utilizzare AJAX, una richiesta HTTP, o qualsiasi altro metodo necessario per l'eliminazione.
+
+    //    // Chiudi la modale dopo l'eliminazione
+    //    $("#myModal").modal("hide");
+    // });
+
+
+    document.body.addEventListener("click", function (event) {
+    var buttons = document.querySelectorAll(".actionReveal");
+    // Verifica se il clic è avvenuto su un pulsante con la classe "actionReveal"
+    if (event.target.classList.contains("actionReveal")) {
+        var targetId = event.target.getAttribute("data-target");
         var table = document.getElementById(targetId);
-        table.classList.toggle('d-none');
-        table.classList.add('is-active');
-
-    });
+        // Chiudi tutti i pannelli delle azioni aperti
+        var closeList = document.querySelectorAll(".is-active");
+        closeList.forEach(function (close) {
+            close.classList.add("d-none");
+            close.classList.remove("is-active");
+        });
+        // Apri il pannello delle azioni corrispondente al pulsante cliccato
+        if (table) {
+            table.classList.toggle("d-none");
+            table.classList.add("is-active");
+        }
+    } else {
+        // Chiudi tutti i pannelli delle azioni aperti se il clic è al di fuori dei pulsanti "actionReveal"
+        var closeList = document.querySelectorAll(".is-active");
+        closeList.forEach(function (close) {
+            close.classList.add("d-none");
+            close.classList.remove("is-active");
+        });
+    }
 });
-
-    // Aggiungi un gestore di eventi al pulsante "Conferma"
-    document.getElementById("confirmDelete").addEventListener("click", function () {
-       // Qui inserisci il codice per l'eliminazione effettiva dell'elemento
-       // Puoi utilizzare AJAX, una richiesta HTTP, o qualsiasi altro metodo necessario per l'eliminazione.
-
-       // Chiudi la modale dopo l'eliminazione
-       $("#myModal").modal("hide");
-    });
+    
 
 </script>
 
