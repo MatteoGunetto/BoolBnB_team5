@@ -149,6 +149,7 @@ export default {
 
 .suggestion{
     border-bottom: 1px solid $light;
+    z-index:100;
 }
 
 .suggestion:hover{
