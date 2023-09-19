@@ -68,7 +68,7 @@ class ApartmentApiController extends Controller
 
         $maxDistanceSelected = $request->selectedDistance;
         // Costruisci la query
-        $query = Apartment::query();
+        $query = Apartment::query(); // Qui chiamiamo il model di Apartment (che ci serve anche per stampare quelli con promotions, utilizzando end date e start date)
 
         // Filtri per numero di stanze, letti e bagni
         if (isset($request->roomsNumber)) {
