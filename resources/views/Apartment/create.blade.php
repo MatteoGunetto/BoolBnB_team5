@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <main>
-        <div class="container py-4">
-            <h3>Inserisci un Appartamento</h3>
+        <div class="container p-5">
+            <h1 class="mb-3">Inserisci un Appartamento</h1>
             {{-- <button type="home" class="btn btn-info"><a href="/Apartment/show"
                     class=" fw-bold text-dark text-decoration-none">appartamenti</a>
             </button> --}}
@@ -15,6 +15,7 @@
                     @endforeach
                 @endif
 
+                <div class="col-lg-8">
                 <!-- form -->
                 <form action="{{ route('Apartment.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -86,8 +87,9 @@
 
 
                     <!-- submit button -->
-                    <button type="submit" class="btn btn-danger">Inserisci appartamento</button>
+                    <button type="submit" class="btn btn-primary text-white">Inserisci appartamento</button>
                 </form>
+                </div>
             </div>
         </div>
     </div>

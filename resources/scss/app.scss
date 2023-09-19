@@ -29,7 +29,13 @@ $headings-font-weight: 600;
 $body-font-family: $font-family-serif;
 
 
+#sidebar a{
+    color: $white;
+}
 
+#sidebar a:hover{
+    color: $light;
+}
 //Versione 2 ------------------------------------------
 
 @import '~bootstrap/scss/bootstrap'

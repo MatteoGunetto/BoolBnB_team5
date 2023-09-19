@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container p-5">
 
-        <h1>I tuoi appartamenti</h1>
+        <h1 class="mb-4">I tuoi appartamenti</h1>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
 
