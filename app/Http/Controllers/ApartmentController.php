@@ -27,17 +27,14 @@ class ApartmentController extends Controller
         $apartments = Apartment::all();
 
 
-        return view('Apartment.index',compact('apartments'));
-
-       
-
+        return view('Apartment.index', compact('apartments'));
     }
 
     public function showOnlyYourApartments()
     {
         $user_id = Auth::id();
         $apartments = Apartment::where('user_id', $user_id)->with('promotions')->get();
-    
+
         return view('Apartment.myApartments', ['apartments' => $apartments]);
     }
 
@@ -105,7 +102,7 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::create($data);
 
-        
+
         // se esistono amenities me le "attacchi", se non esistono non fai niente
         // La funzione isset() è progettata per verificare se una variabile (o una chiave di un array) esiste/ha un valore senza generare un avviso se non lo fa.
         if (isset($data['amenities'])) {
@@ -123,8 +120,8 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($id);
         // Recupera tutti i servizi dal database
         $amenities = Amenity::all();
-         // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
-         return view('Apartment.edit', compact('apartment', 'amenities'));
+        // Carica la vista 'edit' e passa il progetto, i tipi e le tecnologie alla vista
+        return view('Apartment.edit', compact('apartment', 'amenities'));
     }
 
     public function update(Request $request, $id)
@@ -162,12 +159,15 @@ class ApartmentController extends Controller
         $data["latitude"] = $latitude;
         $data["longitude"] = $longitude;
 
- 
+
         // qua meglio sync che attach, attach si può usare in fase di creazione, sync elimina il collegamento con quelle di cui non trova più dopo la creazione
         $apartment->amenities()->sync($request->input('amenities'));
 
+        //Qui permettiamo di fare l'update sugli apparamenti con promozione
+        $apartment->promotions()->sync($request->input('promotions'));
+
         //qua dopo aggiungo commento per spiegare perchè serve questa cosa
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             // Salva il nuovo file e ottieni il percorso
             $path = $request->file('image')->store('uploads', 'public');
 
@@ -177,11 +177,13 @@ class ApartmentController extends Controller
         // Salva le modifiche   
         $apartment->update($data);
 
+
         // Reindirizza all'URL della vista 'show' per visualizzare il progetto modificato
         return redirect()->route('Apartment.index', $apartment->id);
     }
 
-    public function destroy(Request $request, $id) {
+    public function destroy(Request $request, $id)
+    {
         $apartment = Apartment::findOrFail($id);
 
         // Elimina o dissociare le amenità associate all'appartamento
@@ -190,13 +192,17 @@ class ApartmentController extends Controller
         // Elimina o dissociare i messaggi associati all'appartamento
         $apartment->messages()->delete();
 
+        //Elimina l'appartamento con la promozione
+        $apartment->promotions()->detach();
+
         // Elimina l'appartamento
         $apartment->delete();
 
         return redirect()->route('Apartment.myApartments');
     }
 
-    public function myApartments() {
+    public function myApartments()
+    {
         return view('Apartment.myApartments');
     }
 
@@ -212,7 +218,7 @@ class ApartmentController extends Controller
         $apartment = Apartment::findOrFail($apartment_id);
         $promotion = Promotion::findOrFail($promotion_id);
 
-        return view('Apartment.sponsorApartment', compact('apartment', 'promotion') );
+        return view('Apartment.sponsorApartment', compact('apartment', 'promotion'));
     }
 
     public function payPromotion(Request $request)
@@ -223,12 +229,12 @@ class ApartmentController extends Controller
             'expiry_date' => 'required|size:5', // formato MM/AA
             'cvv' => 'required|size:3',
         ]);
-    
+
         // Simula l'elaborazione del pagamento. 
         // In un'applicazione reale, qui chiameresti un gateway di pagamento come Stripe, PayPal, ecc.
         $paymentSuccess = true;  // Assumiamo che il pagamento abbia successo per questa simulazione.
-    
-        if($paymentSuccess) {
+
+        if ($paymentSuccess) {
             // Aggiungi un record nella tua tabella ponte apartment_promotion
             // Assumiamo che tu abbia i modelli Apartment e Promotion e una relazione many-to-many tra di loro.
             $apartment = Apartment::findOrFail($request->input('apartment_id'));
@@ -239,14 +245,13 @@ class ApartmentController extends Controller
             $duration = $promotion->durationInDays; // Supponiamo che tu abbia un campo "duration" nella tabella Promotion
             $endDate = Carbon::parse($startDate)->addDays($duration);
 
-    
+
             // Associa l'appartamento alla promozione
             $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate, 'endDate' => $endDate]);
-    
+
             return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su "' . $apartment->title . '", promozione applicata!');
         } else {
             return redirect()->back()->with('error', 'Qualcosa è andato storto durante il pagamento.');
         }
     }
-    
 }

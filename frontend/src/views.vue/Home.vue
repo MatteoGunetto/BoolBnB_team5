@@ -103,9 +103,9 @@ export default {
 
         <div class="row row-cols-3">
             <div class="col" v-for="apartment in store.promoApartmentsArray">
-                <!-- <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`"> -->
-                <Card :cardProp="apartment" />
-                <!-- </router-link> -->
+                <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
+                    <Card :cardProp="apartment" />
+                </router-link>
             </div>
         </div>
 
@@ -145,6 +145,4 @@ header {
     padding: 100px;
     text-align: center;
 }
-
-
 </style>

@@ -39,20 +39,20 @@ class ApartmentApiController extends Controller
         return response()->json([
             'apartments' => $apartments
         ]);
-
     }
 
-    public function apartmentsShow($id) {
+    public function apartmentsShow($id)
+    {
         $apartment = Apartment::findOrFail($id);
         $apartment->load('amenities');
 
         return response()->json([
             'apartment' => $apartment
         ]);
-
     }
 
-    public function getVueAddress(Request $request){
+    public function getVueAddress(Request $request)
+    {
         $searchAddress = $request->query('searchAddress');
 
         return response()->json([
@@ -60,7 +60,8 @@ class ApartmentApiController extends Controller
         ]);
     }
 
-    public function filterApartments(Request $request) {
+    public function filterApartments(Request $request)
+    {
 
         // Converti la stringa 'selectedAmenities' in un array
         $amenityIds = json_decode($request->selectedAmenities, true);
@@ -68,7 +69,7 @@ class ApartmentApiController extends Controller
         $maxDistanceSelected = $request->selectedDistance;
         // Costruisci la query
         $query = Apartment::query();
-    
+
         // Filtri per numero di stanze, letti e bagni
         if (isset($request->roomsNumber)) {
             if ($request->roomsNumber == 4) {
@@ -77,7 +78,7 @@ class ApartmentApiController extends Controller
                 $query->where('rooms', $request->roomsNumber);
             }
         }
-    
+
         if (isset($request->bedsNumber)) {
             if ($request->bedsNumber == 4) {
                 $query->where('beds', '>=', 4);
@@ -85,7 +86,7 @@ class ApartmentApiController extends Controller
                 $query->where('beds', $request->bedsNumber);
             }
         }
-    
+
         if (isset($request->bathroomsNumber)) {
             if ($request->bathroomsNumber == 4) {
                 $query->where('bathrooms', '>=', 4);
@@ -105,8 +106,8 @@ class ApartmentApiController extends Controller
 
         $distance = $maxDistanceSelected;
         $query->select(DB::raw("*, ST_Distance_Sphere(POINT(longitude, latitude), POINT($lon, $lat)) / 1000 AS distance"))
-        ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
-        ->orderBy('distance');
+            ->whereRaw('ST_Distance_Sphere(POINT(longitude, latitude), POINT(?, ?)) < ?', [$lon, $lat, $distance * 1000])
+            ->orderBy('distance');
 
         // Filtro per le amenities
         if (!empty($amenityIds)) {
@@ -116,29 +117,20 @@ class ApartmentApiController extends Controller
                 });
             }
         }
-    
-        // Ottieni i risultati e dammi anche le associazioni con amenities
+
+        // Ottieni i risultati e dammi anche le associazioni con amenities e con le promotions
         $apartments = $query->with('amenities')->with('promotions')->get();
 
         // Manda i risultati
         return response()->json($apartments);
     }
 
-    public function promoApartmentsForHome () {
+    public function promoApartmentsForHome()
+    {
 
         $sponsoredApartments = Apartment::has('promotions')->get();
 
-    
+
         return response()->json($sponsoredApartments);
     }
-    
 }
-
-
-        
-
-
-
-
-    
-

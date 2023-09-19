@@ -11,7 +11,7 @@ export default {
             filtro: {
                 //questo non funziona se lo passo al backend, quindi al backend gli passo direttamente store.addressSelected
                 //addressInAdvancedSearch: store.addressSelected,
-               
+
                 roomsNumber: null, // Numero di stanze selezionato
                 bedsNumber: null, // Numero di letti selezionato
                 bathroomsNumber: null, // Numero di bagni selezionato
@@ -33,12 +33,12 @@ export default {
             });
     },
     components: {
-    Card,
-    Searchbar
-},
+        Card,
+        Searchbar
+    },
     methods: {
         filterApartments() {
-            axios.get(store.urlForFilteredSearch ,  {
+            axios.get(store.urlForFilteredSearch, {
                 params: {
                     addressInAdvancedSearch: this.store.addressSelected,
                     roomsNumber: this.filtro.roomsNumber,
@@ -46,20 +46,40 @@ export default {
                     bathroomsNumber: this.filtro.bathroomsNumber,
                     selectedDistance: this.filtro.selectedDistance,
                     selectedAmenities: JSON.stringify(this.filtro.selectedAmenities), // se desideri inviare un array come parametro, potrebbe essere utile trasformarlo in stringa
-                    
                 }
             })
-            .then(response => {
+                .then(response => {
 
-                console.log("AAArisposta tornata con successo", response.data)
-                store.apartmentsInAdvancedSearch = (response.data);
-                
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }
+                    console.log("AAArisposta tornata con successo", response.data)
+                    store.apartmentsInAdvancedSearch = (response.data);
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+
+        // Questo metodo non serve più perchè non lo richiami (lo usi in home ma qui no)
+        // promoApartment() {
+        //     // Effettua una richiesta HTTP GET all'URL degli appartamenti specificato in store.apartments
+        //     axios.get(store.urlPromoApartmentsForHome)
+        //         .then(res => {
+        //             // Quando la richiesta ha successo, assegna i dati ottenuti da res.data a store.apartmentsArray
+        //             store.promoApartmentsArray = res.data;
+        //         })
+        //         .catch(err => {
+        //             // Se la richiesta fallisce, registra l'errore nella console per scopi di debug
+        //             console.error(err);
+        //         });
+        // },
+
+
     },
+    // Questo metodo non serve più perchè non lo richiami (lo usi in home ma qui no)
+    // mounted() {
+    //     // Chiama promoApartment() quando il componente viene montato (pagina caricata)
+    //     this.promoApartment();
+    // },
     // computed: {
     //     // Puoi aggiungere calcoli basati su dati reattivi qui, se necessario
     // }
@@ -74,23 +94,25 @@ export default {
             <div class="col-lg-4">
 
 
-                
+
                 <!-- address -->
                 <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
                         <form class="d-flex" role="search">
 
-                            <input class="form-control me-2" type="search" v-model="store.addressSelected" aria-label="Search">
-                            
-                            <button class="btn btn-outline-success" type="submit" @click.prevent="filterApartments">Search</button>
-                        
+                            <input class="form-control me-2" type="search" v-model="store.addressSelected"
+                                aria-label="Search">
+
+                            <button class="btn btn-outline-success" type="submit"
+                                @click.prevent="filterApartments">Search</button>
+
                         </form>
                     </div>
                 </nav>
                 <!-- search bar
                 <Searchbar /> -->
 
-                
+
 
                 <!-- FILTERS -->
 
@@ -208,10 +230,31 @@ export default {
                 </section>
 
             </div>
+
+
+            <!-- In Evidenza: così stampa tutti quelli in evidenza ma nel div sotto te li ristampa tutti (sia quelli in evidenza che quelli non in evidenza) -->
+            <!-- <pre>{{ store.apartmentsArray }}</pre> -->
+            <!-- <div class="col-lg-8">
+                <div class="row">
+                    <h3 class="text-center text-primary">Appartamenti in Evidenza </h3>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.promoApartmentsArray">
+                        <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
+                            <Card :cardProp="apartment" />
+                        </router-link>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <!-- In evidenza: qui stampa tutti gli appartamenti: sia in evidenza che non. Bisogna fargli stampare prima gli appartamenti sponsorizzati. -->
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none" v-for="apartment in store.apartmentsInAdvancedSearch">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none"
+                        v-for="apartment in store.apartmentsInAdvancedSearch">
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
                         </router-link>
