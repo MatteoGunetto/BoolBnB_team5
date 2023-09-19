@@ -20,7 +20,9 @@ class Apartment extends Model
     }
     // Un appartamento può avere diverse promozioni.
     public function promotions() {
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsToMany(Promotion::class)
+        ->withPivot('startDate')
+        ->withTimestamps();
     }
 
       // Un determinato appartamento ha una sola view.
