@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link link-danger" href="http://localhost:5174/">Home</a>
-                </li>
+                </li> -->
                 <!-- La rotta che porta alla lista degli appartamenti degli utenti loggati è da rivedere, la lascio vuota -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('Apartment.myApartments') }}">I tuoi appartamenti</a>
                 </li>
                 <li class="nav-item">
@@ -21,6 +21,6 @@
                 </li>
             </ul>
         </div>
-    </div>
-</nav>
+    </div> -->
+<!-- </nav> -->
 @endsection
