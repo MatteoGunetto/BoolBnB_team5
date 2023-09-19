@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     
-                    
+                  <pre>{{$apartment}}</pre>  
                 </div>
             @endforeach
         </div>

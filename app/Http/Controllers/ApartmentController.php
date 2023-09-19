@@ -33,7 +33,7 @@ class ApartmentController extends Controller
     public function showOnlyYourApartments()
     {
         $user_id = Auth::id();
-        $apartments = Apartment::where('user_id', $user_id)->with('promotions')->get();
+        $apartments = Apartment::where('user_id', $user_id)->with('promotions', 'amenities' )->get();
 
         return view('Apartment.myApartments', ['apartments' => $apartments]);
     }
