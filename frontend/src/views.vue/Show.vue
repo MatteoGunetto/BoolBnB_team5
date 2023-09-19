@@ -68,7 +68,12 @@ export default {
 
 </script>
 
+
+
 <template>
+
+
+
     <section class="container-fluid hero d-flex align-items-end text-white mb-5 p-0">
         <img class="cover" :src="`${store.urlImg}${store.singleApartmentArray.image}`" alt="cover-apartment">
         <div class="container pb-4">
@@ -99,9 +104,25 @@ export default {
         </div>
 
     </section>
+
     <section class="container">
 
-        <!-- <pre>{{ store.singleApartmentArray }}</pre> -->
+        <!-- aggiunto questo, probabilmente da sistemare -->
+        <div>
+            <h3>
+                Host: {{store.singleApartmentArray.user.name}}
+            </h3>
+        </div>
+
+        <!-- aggiunto anche questo, probabilmente da sistemare -->
+        <section class="my-3">
+            <span>Rooms: {{ store.singleApartmentArray.rooms }} &middot; </span>
+            <span>Beds: {{ store.singleApartmentArray.beds }} &middot; </span>
+            <span>Bathrooms: {{ store.singleApartmentArray.bathrooms }} &middot; </span>
+            <span>{{ store.singleApartmentArray.squareMeters }} mq</span>
+        </section>
+
+       
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
