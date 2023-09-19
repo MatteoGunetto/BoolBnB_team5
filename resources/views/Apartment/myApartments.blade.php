@@ -15,7 +15,7 @@
 
                         <i class="actionReveal bi bi-three-dots text-white position-absolute top-0 end-0 me-2"  data-target="actionPanel-{{ $apartment->id }}" style="font-size: 1.8rem; z-index:20;"></i>
                     <!-- Bottoni edit ed elimina -->
-                    <ul id="actionPanel-{{ $apartment->id }}" class="actionPanel list-group list-group-flush position-absolute top-0 end-0 d-none" style="z-index:10">
+                    <ul id="actionPanel-{{ $apartment->id }}" class="actionPanel list-group list-group-flush position-absolute top-0 end-0 d-none">
                         <li class="list-group-item">
 
                             <!-- BOTTONE EDIT -->
@@ -80,7 +80,7 @@
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
                             <!-- BOTTONE DETTAGLI -->
-                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-info">Dettagli</a>
+                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a>
                             
                             <!-- BOTTONE SPONSOR -->
                             <a href="{{ route('Apartment.selectSponsorship', $apartment->id) }}" class="btn btn-warning">Sponsor</a>
