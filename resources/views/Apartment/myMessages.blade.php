@@ -29,7 +29,7 @@
                         <span class="w-100 text-end pe-3">{{$message->created_at}}</span>
                     </button>
                   </h2>
-                  <div id="collapseOne{{ $message->id }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ $message->id }}" data-bs-parent="#accordionExample">
+                  <div id="collapseOne{{ $message->id }}" class="accordion-collapse collapse close" aria-labelledby="heading{{ $message->id }}" data-bs-parent="#accordionExample">
                     <div class="accordion-body p-5">
                       <strong>{{$message->Name}}</strong>
                       <p>
