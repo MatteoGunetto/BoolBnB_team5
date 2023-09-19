@@ -36,6 +36,14 @@ $body-font-family: $font-family-serif;
 #sidebar a:hover{
     color: $light;
 }
+
+.actionPanel li:first-child{
+    padding-top: 36px;
+}
+
+.actionPanel, .actionReveal{
+    cursor: pointer;
+}
 //Versione 2 ------------------------------------------
 
 @import '~bootstrap/scss/bootstrap';
