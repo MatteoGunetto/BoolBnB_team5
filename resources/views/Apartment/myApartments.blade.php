@@ -23,8 +23,7 @@
 
             @foreach ($apartments as $apartment)
                 <div class="col">
-                    <div class="card {{ $apartment->promotions->isNotEmpty() ? 'sponsored' : '' }}">
-                       
+                <div class="card {{ $apartment->hasActivePromotion() ? 'sponsored' : '' }}">                       
                     <!-- IMMAGINE -->
                         {{-- se l'img è vuota allora mettine una di default --}}
                         @if (!empty($apartment->image))

@@ -18,6 +18,7 @@ return new class extends Migration
 
             // qui devo inserire StartDate della promtion x del'apartmanento x
             $table->dateTime('startDate');
+            $table->dateTime('endDate');
 
 
             $table->timestamps();

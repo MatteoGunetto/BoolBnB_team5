@@ -44,7 +44,7 @@
     </div>
     <div>
         <label>Quando vuoi far partire la promozione?</label>
-        <input type="date" name="startDate" placeholder="">
+        <input type="datetime-local" name="startDate" placeholder="">
     </div>
     <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
     <input type="hidden" name="promotion_id" value="{{ $promotion->id }}">

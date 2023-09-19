@@ -9,6 +9,9 @@ use App\Models\Message;
 use App\Models\Promotion;
 use Illuminate\Support\Facades\Storage;
 
+//mi serve per gestire endDate, utile per gestire date/ore
+use Carbon\Carbon;
+
 //questo lo aggiungiamo per poter passare l'id dell utente loggato alla create
 use Illuminate\Support\Facades\Auth;
 
@@ -231,11 +234,16 @@ class ApartmentController extends Controller
             $apartment = Apartment::findOrFail($request->input('apartment_id'));
             $promotion = Promotion::findOrFail($request->input('promotion_id'));
             $startDate = $request->input('startDate');
+
+            // Calcola l'endDate in base a startDate e duration
+            $duration = $promotion->durationInDays; // Supponiamo che tu abbia un campo "duration" nella tabella Promotion
+            $endDate = Carbon::parse($startDate)->addDays($duration);
+
     
             // Associa l'appartamento alla promozione
-            $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate]);
+            $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate, 'endDate' => $endDate]);
     
-            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su ' . $apartment->title . 'e promozione applicata!');
+            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su "' . $apartment->title . '", promozione applicata!');
         } else {
             return redirect()->back()->with('error', 'Qualcosa è andato storto durante il pagamento.');
         }
