@@ -118,10 +118,9 @@ export default {
 
     <div class="d-flex justify-content-center position-relative gap-2 mb-5">
         <div class="input-group">
-            <span><i class="bi bi-geo-alt"></i></span>
-
-                <input class="form-control w-50 rounded-3 input-lg" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected" @input="getHints">
-            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white  btn-search" role="button" @click.prevent="getApartment">Cerca</RouterLink>
+            <input class="mainSearch form-control w-50 rounded-3 input-lg position-relative" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected" @input="getHints">
+            <i class="bi bi-geo-alt" style="font-size: 1.3em"></i>
+            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white  btn-search" role="button" @click.prevent="getApartment"><i class="bi bi-search"></i> Cerca</RouterLink>
 
         </div>
 
@@ -142,6 +141,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../scss/boolBnbStyle.scss";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 .btn-search {
     z-index: 100;
@@ -156,6 +156,23 @@ export default {
    opacity: $primary-bg-subtle;
    color: $white;
    cursor: pointer;
+}
+
+.mainSearch{
+    padding-left: 40px;
+}
+
+.bi-geo-alt{
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    z-index: 20;
 }
 
 </style>

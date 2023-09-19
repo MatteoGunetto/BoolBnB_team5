@@ -4,8 +4,8 @@
 <head>
 
     <!-- script per Braintree -->
+    <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.min.js"></script>
 
-    <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.js"></script>
     <!-- CDN AXIOS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -32,9 +32,9 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md text-white bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-danger" href="http://localhost:5174/">BoolBNB</a>
+                <a class="navbar-brand text-white" href="http://localhost:5174/">BoolBNB</a>
 
                 <div class="logo_laravel">
 
@@ -73,7 +73,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
+                                {{-- <a class="dropdown-item" href="{{ url('Apartment/myApartments') }}">{{ __('My Apartment') }}</a> --}}
                                 <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -91,8 +91,30 @@
             </div>
         </nav>
 
-        <main class="">
-            @yield('content')
+        <main class="vh-100">
+
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <div class="col-md-2 bg-primary p-4" id="sidebar" style="--bs-bg-opacity: .8;">
+                        <ul class="nav flex-column gap-2">
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
+                                    <i class="bi bi-house me-2"></i>Appartamenti
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
+                                    <i class="bi bi-envelope-paper me-2"></i> Messagi
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-10">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>

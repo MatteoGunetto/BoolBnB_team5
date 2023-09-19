@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-<div>
-    <h1>Prosegui con il pagamento</h1>
-    <div>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mb-3">Benvenuto nella schermata di pagamento</h1>
+            <div>
         per procedere con l'attivazione della sponsorizzazione :
         <strong>{{$promotion->title}}</strong>
         <div>
@@ -19,8 +21,11 @@
             <strong>{{$apartment->title}}</strong>
         </div>
     </div>
-</div>
-
+        </div>
+        <div class="col-lg-12">
+            <!-- Container di Braintree -->
+<div id="dropin-container"></div>
+<button id="submit-button">Effettua il pagamento</button>
 
 
 
@@ -73,6 +78,13 @@
 
 
 </script>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+
+
 
 <style>
     .button {
