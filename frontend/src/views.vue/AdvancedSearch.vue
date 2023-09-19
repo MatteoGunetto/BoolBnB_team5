@@ -253,12 +253,23 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none"
-                        v-for="apartment in store.apartmentsInAdvancedSearch">
+                    <div class="col-md-6 g-3 p-3 text-decoration-none carta"
+                        v-for="apartment in store.apartmentsInAdvancedSearch" :key="apartment.id">
+
+
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                             <Card :cardProp="apartment" />
                         </router-link>
+                        <!-- Badge "In Evidenza" -->
+                        <span v-if="apartment.promotions.length > 0" class="badge badge-success">In Evidenza</span>
                     </div>
+                    <!-- <div class="col-md-6 g-3 p-3 text-decoration-none"
+                        v-for="apartment in store.apartmentsInAdvancedSearch">
+                        <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`" 
+                        v-if="(now()->between($startDate, $endDate)) ? '' : ''">
+                            <Card :cardProp="apartment" />
+                        </router-link>
+                    </div> -->
 
                 </div>
             </div>
@@ -270,6 +281,32 @@ export default {
 <style lang="scss">
 .list-group {
     --bs-list-group-border-color: none;
+}
+
+/* Stile per il badge "In Evidenza" */
+.badge-success {
+    background-color: #4CAF50;
+    /* Colore verde */
+    color: #fff;
+    /* Testo bianco */
+    padding: 5px 10px;
+    /* Spaziatura interna */
+    border-radius: 5px;
+    /* Bordo arrotondato */
+    font-size: 14px;
+    /* Dimensione del testo */
+    font-weight: bold;
+    /* Testo in grassetto */
+    margin-top: 10px;
+    /* Spaziatura superiore */
+    position: absolute;
+    right: 30px;
+    top: 20px;
+
+}
+
+.carta {
+    position: relative;
 }
 </style>
 
