@@ -31,19 +31,24 @@ class MessageController extends Controller
         return redirect()->route('Apartment.index');
         //return redirect()->route('Apartments.show', $apartment->id);
     }
-    // public function showOnlyYourMessages() {
-    //     return view('Apartment.myMessages');
-    // }
+
     public function showOnlyYourMessages()
     {
         $messages = message::all();
         return view('Apartment.myMessages', ['messages' => $messages]);
     }
 
-    // public function show($id)
-    // {
-    //     // $apartment = Apartment::findOrFail($id);
-    //     // $amenities = $messages->amenities; // Recupera i servizi collegati all'appartamento
-    //     // return view('Apartment.show', compact('apartment', 'amenities'));
-    // }
+        public function apartment()
+    {
+        return $this->belongsTo(Apartment::class);
+    }
+
+public function index()
+{
+    $messages = Message::with('apartment')->get();
+
+    return view('myMessages', compact('messages'));
+}
+
+
 }
