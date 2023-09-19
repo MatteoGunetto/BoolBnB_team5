@@ -3,22 +3,22 @@
 
 <div>
     <h1>Prosegui con il pagamento</h1>
+    <div>
+        per procedere con l'attivazione della sponsorizzazione :
+        <strong>{{$promotion->title}}</strong>
         <div>
-            per procedere con l'attivazione della sponsorizzazione :
-            <strong>{{$promotion->title}}</strong>
-            <div>
-                con la durata di :
-                <strong>{{$promotion->durationInDays}}  giorni</strong>
-            </div>
-            <div>
-                al costo di :
-                <strong>{{$promotion->cost}}  Euro</strong>
-            </div>
-            <div>
-                per l'appartamento :
-                <strong>{{$apartment->title}}</strong>
-            </div>
+            con la durata di :
+            <strong>{{$promotion->durationInDays}} giorni</strong>
         </div>
+        <div>
+            al costo di :
+            <strong>{{$promotion->cost}} Euro</strong>
+        </div>
+        <div>
+            per l'appartamento :
+            <strong>{{$apartment->title}}</strong>
+        </div>
+    </div>
 </div>
 
 
@@ -32,15 +32,30 @@
     @csrf
     <div>
         <label>Numero Carta:</label>
-        <input type="text" name="card_number" placeholder="1234 5678 1234 5678">
+        <input type="text" name="card_number" class="form-control @error('card_number') is-invalid @enderror" placeholder="1234 5678 1234 5678">
+        @error('card_number')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
     <div>
         <label>Data di Scadenza:</label>
-        <input type="text" name="expiry_date" placeholder="MM/AA">
+        <input type="text" class="form-control @error('expiry_date') is-invalid @enderror" name="expiry_date" placeholder="MM/AA">
+        @error('expiry_date')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
     <div>
         <label>CVV:</label>
-        <input type="text" name="cvv" placeholder="123">
+        <input type="text" class="form-control @error('cvv') is-invalid @enderror" name="cvv" placeholder="123">
+        @error('cvv')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
     <div>
         <label>Quando vuoi far partire la promozione?</label>
@@ -61,38 +76,38 @@
 
 <style>
     .button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: inline-block;
-}
+        cursor: pointer;
+        font-weight: 500;
+        left: 3px;
+        line-height: inherit;
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: inline-block;
+    }
 
-.button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
-}
+    .button--small {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+    }
 
-.button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
-}
+    .button--green {
+        outline: none;
+        background-color: #64d18a;
+        border-color: #64d18a;
+        color: white;
+        transition: all 200ms ease;
+    }
 
-.button--green:hover {
-  background-color: #8bdda8;
-  color: white;
-}
+    .button--green:hover {
+        background-color: #8bdda8;
+        color: white;
+    }
 </style>
 
 @endsection
