@@ -15,7 +15,10 @@
 
                         <i class="actionReveal bi bi-three-dots position-absolute top-0 end-0 text-white me-2"  data-target="actionPanel-{{ $apartment->id }}" style="font-size: 1.8rem;"></i>
                     <!-- Bottoni edit ed elimina -->
-                    <ul id="actionPanel-{{ $apartment->id }}" class="list-group list-group-flush position-absolute top-0 end-0 d-none">
+                    <ul id="actionPanel-{{ $apartment->id }}" class="alert alert-dismissable list-group list-group-flush position-absolute top-0 end-0 d-none">
+                        <li class="list-group-item text-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </li>
                         <li class="list-group-item">
 
                             <!-- BOTTONE EDIT -->
@@ -104,15 +107,13 @@ buttons.forEach(function (button) {
         // Ottieni l'ID della tabella target dall'attributo "data-target"
         var targetId = button.getAttribute("data-target");
 
-        
-
         // Ottieni l'elemento tabella target
         var table = document.getElementById(targetId);
         table.classList.toggle('d-none');
+        table.classList.add('is-active');
+
     });
 });
-
-                                
 
     // Aggiungi un gestore di eventi al pulsante "Conferma"
     document.getElementById("confirmDelete").addEventListener("click", function () {
