@@ -46,7 +46,6 @@ export default {
                     bathroomsNumber: this.filtro.bathroomsNumber,
                     selectedDistance: this.filtro.selectedDistance,
                     selectedAmenities: JSON.stringify(this.filtro.selectedAmenities), // se desideri inviare un array come parametro, potrebbe essere utile trasformarlo in stringa
-
                 }
             })
                 .then(response => {
@@ -73,6 +72,8 @@ export default {
         //             console.error(err);
         //         });
         // },
+
+
     },
     // Questo metodo non serve più perchè non lo richiami (lo usi in home ma qui no)
     // mounted() {
