@@ -7,7 +7,7 @@
         Modifica Appartamento
     </h1>
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-8">
         <form method="post" enctype="multipart/form-data" action="{{ route('Apartment.update', $apartment->id)}}">
         @csrf
         @method("PUT")

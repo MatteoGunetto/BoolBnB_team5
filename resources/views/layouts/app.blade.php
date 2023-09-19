@@ -95,23 +95,21 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2 bg-primary" id="sidebar" style="--bs-bg-opacity: .8;">
-                        <ul class="nav flex-column">
+                    <div class="col-md-2 bg-primary p-4" id="sidebar" style="--bs-bg-opacity: .8;">
+                        <ul class="nav flex-column gap-2">
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="http://localhost:5174/">Home</a>
+                                <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
+                                    <i class="bi bi-house me-2"></i>Appartamenti
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">I tuoi appartamenti</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">I tuoi messagi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ route('Apartment.create') }}">Aggiungi un appartamento</a>
+                                <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
+                                    <i class="bi bi-envelope-paper me-2"></i> Messagi
+                                </a>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-12 col-md-10">
                         @yield('content')
                     </div>
                 </div>
