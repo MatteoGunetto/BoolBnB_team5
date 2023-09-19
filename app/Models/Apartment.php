@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Carbon;
+
 class Apartment extends Model
 {
     use HasFactory;
@@ -50,4 +52,24 @@ class Apartment extends Model
         'visible',
         'user_id',
     ];
+
+    public function hasActivePromotion()
+    {
+        // Recupera tutte le promozioni associate a questo appartamento
+        $promotions = $this->promotions;
+
+        // Ora, verifica se c'è almeno una promozione attiva tra quelle associate
+        foreach ($promotions as $promotion) {
+            $startDate = Carbon::parse($promotion->pivot->startDate);
+            $endDate = $startDate->copy()->addDays($promotion->durationInDays);
+
+            // Verifica se la data corrente è compresa tra startDate e endDate
+            if (now()->between($startDate, $endDate)) {
+                return true;
+            }
+        }
+
+        // Se non ci sono promozioni attive, restituisci false
+        return false;
+    }
 }

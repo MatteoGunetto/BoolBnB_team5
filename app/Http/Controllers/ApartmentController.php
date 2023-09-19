@@ -243,7 +243,7 @@ class ApartmentController extends Controller
             // Associa l'appartamento alla promozione
             $apartment->promotions()->attach($promotion->id, ['startDate' => $startDate, 'endDate' => $endDate]);
     
-            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su ' . $apartment->title . 'e promozione applicata!');
+            return redirect()->route('Apartment.myApartments')->with('success', 'Pagamento effettuato con successo su "' . $apartment->title . '", promozione applicata!');
         } else {
             return redirect()->back()->with('error', 'Qualcosa è andato storto durante il pagamento.');
         }
