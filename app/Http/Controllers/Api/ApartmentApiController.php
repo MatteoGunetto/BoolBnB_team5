@@ -43,7 +43,12 @@ class ApartmentApiController extends Controller
 
     public function apartmentsShow($id)
     {
-        $apartment = Apartment::findOrFail($id);
+        // $apartment = Apartment::findOrFail($id);
+
+        //mi passo anche i dati dell'utente associato, ma mi passo solo il name per non esporre mail e password
+        $apartment = Apartment::with(['user' => function ($query) {
+            $query->select('id', 'name'); // Specifica le colonne che desideri caricare
+        }])->findOrFail($id);
         $apartment->load('amenities');
 
         return response()->json([
