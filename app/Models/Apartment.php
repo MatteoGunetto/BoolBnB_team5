@@ -23,7 +23,8 @@ class Apartment extends Model
     // Un appartamento può avere diverse promozioni.
     public function promotions() {
         return $this->belongsToMany(Promotion::class)
-        ->withPivot('startDate')
+        ->withPivot('startDate', 'endDate')
+        //capire se mi mette created at nel database anche senza questo.
         ->withTimestamps();
     }
 
