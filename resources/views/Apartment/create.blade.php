@@ -52,7 +52,7 @@
                             value="{{ old('squareMeters') }}">
                     </div>
                     <!-- address -->
-                    <div class="mb-3">
+                    <div class=>
                         <label for="address" class="form-label">indirizzo:</label>
                         <input required type="text" name="address" class="form-control" id="address"
                             placeholder="Inserisci indirizzo" value="{{ old('address') }}">
@@ -66,7 +66,7 @@
                     <div class="address-option"></div>
 
                     <!-- immagine -->
-                    <div class="mb-3">
+                    <div class="my-3">
                         <label for="image" class="form-label">selezionare immagine:</label>
                         <input required type="file" name="image" class="form-control" id="image"
                             placeholder="selezionare immagine" value="{{ old('image') }}">
@@ -104,31 +104,31 @@
     document.addEventListener("DOMContentLoaded", function() {
         searchBarDom = document.getElementById("address");
 
-        //questo è un controllo aggiuntivo che non serve nemmno, perchè sappiamo che esiste un id="address" nel nostro codice
         if (!searchBarDom) {
             console.error("Elemento 'address' non trovato");
-            return; // Se l'elemento non esiste, esci dalla funzione
+            return;
         }
 
-        // Ottieni un riferimento agli elementi con la classe address-option
         const addressOptionElements = document.querySelectorAll(".address-option");
 
-        // Imposta il testo consigliato come ricerca del indirizzo
-        addressOptionElements.forEach(function(indirizzo){
-            indirizzo.addEventListener("click", function(){
-                searchBarDom.value=indirizzo.textContent
-            });
-        })
+        addressOptionElements.forEach(function(indirizzo) {
+            indirizzo.addEventListener("click", function() {
+                searchBarDom.value = indirizzo.textContent;
 
+                // Imposta il valore del campo di input e nascondi i suggerimenti
+                searchBarDom.value = indirizzo.textContent;
+                addressOptionElements.forEach(function(element) {
+                    element.style.display = "none";
+                });
+            });
+        });
 
         let debounceTimer;
 
-        //eventlistener che si attiva quando cambia il valore di searchBarDom che sarebbe il nostro campo input
         searchBarDom.addEventListener("input", function() {
-            clearTimeout(debounceTimer); // Cancella qualsiasi timer esistente
-            debounceTimer = setTimeout(() => { // Imposta un nuovo timer
-
-                if  (searchBarDom.value.length > 4 ) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                if (searchBarDom.value.length > 4) {
                     const addressSearched = searchBarDom.value;
 
                     axios.get('/api/tomtom-proxy', {
@@ -137,35 +137,29 @@
                         }
                     })
                     .then(response => {
-                        console.log(searchBarDom.value, "search value")
                         let suggestedAddresses = response.data.results;
 
-                        addressOptionElements[0].innerHTML = suggestedAddresses[0].address.freeformAddress + ", " + suggestedAddresses[0].address.country;
-                        addressOptionElements[1].innerHTML = suggestedAddresses[1].address.freeformAddress + ", " + suggestedAddresses[1].address.country;
-                        addressOptionElements[2].innerHTML = suggestedAddresses[2].address.freeformAddress + ", " + suggestedAddresses[2].address.country;
+                        // Nascondi tutti i suggerimenti prima di aggiornarli
+                        addressOptionElements.forEach(function(element) {
+                            element.style.display = "none";
+                        });
+
+                        // Aggiorna i suggerimenti solo con quelli disponibili
+                        for (let i = 0; i < Math.min(suggestedAddresses.length, addressOptionElements.length); i++) {
+                            addressOptionElements[i].innerHTML = suggestedAddresses[i].address.freeformAddress + ", " + suggestedAddresses[i].address.country;
+                            addressOptionElements[i].style.display = "block";
+                        }
                     })
                     .catch(error => {
                         console.error("C'è stato un errore:", error);
                     });
-
-                    addressOptionElements.forEach(function(element) {
-                        element.style.display = "block";
-                    });
-                }
-
-            
-                else {
+                } else {
+                    // Nascondi tutti i suggerimenti se la lunghezza della ricerca è inferiore a 5
                     addressOptionElements.forEach(function(element) {
                         element.style.display = "none";
-
-                        // questa è una porcheria, per' "quasi" funziona, lascia i bordi dei div
-                        // addressOptionElements[0].innerHTML = ""
-                        // addressOptionElements[1].innerHTML = ""
-                        // addressOptionElements[2].innerHTML = ""
                     });
                 }
-            }, 500); // Il timer è impostato per mezzo secondo (500 millisecondi)
-
+            }, 500);
         });
 
     });
@@ -173,11 +167,19 @@
 
 <style>
     .address-option {
-        display:none;
-        border: var(--bs-border-width) solid var(--bs-border-color);
+        display: none;
+        border: 1px solid #ccc; /* Aggiungi uno stile di bordo */
+        padding: 8px; /* Aggiungi spazio intorno ai suggerimenti */
+        cursor: pointer; /* Cambia il cursore al passaggio del mouse */
     }
-    .option_none{
-        display:none;
-        cursor: pointer
+
+    .address-option:hover {
+        background-color: #f0f0f0; /* Cambia il colore di sfondo al passaggio del mouse */
+    }
+
+    .option_none {
+        display: none;
+        cursor: pointer;
     }
 </style>
+
