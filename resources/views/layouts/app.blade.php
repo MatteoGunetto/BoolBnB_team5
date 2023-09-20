@@ -125,7 +125,7 @@
                 </ul>
             </div> --}}
 
-            <main class=" vh-100 d-flex">
+            <main class=" vh-100 w-100 ">
                 @yield('content')
             </main>
 
