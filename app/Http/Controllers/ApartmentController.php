@@ -110,7 +110,7 @@ class ApartmentController extends Controller
         }
 
 
-        return redirect()->route('Apartment.index');
+        return redirect()->route('Apartment.myApartments');
         //return redirect()->route('Apartments.show', $apartment->id);
     }
 
@@ -179,7 +179,7 @@ class ApartmentController extends Controller
 
 
         // Reindirizza all'URL della vista 'show' per visualizzare il progetto modificato
-        return redirect()->route('Apartment.index', $apartment->id);
+        return redirect()->route('Apartment.myApartments', $apartment->id);
     }
 
     public function destroy(Request $request, $id)
