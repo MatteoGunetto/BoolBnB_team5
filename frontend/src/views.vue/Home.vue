@@ -99,11 +99,11 @@ export default {
         <div class="row row-cols-1 py-5">
             <h3 class="text-center text-primary">Appartamenti in Evidenza </h3>
         </div>
-        <div class="card-group">
+        <div class="card-group h-100">
             <div class="row row-cols-3">
                 <div class="col d-flex" v-for="apartment in store.promoApartmentsArray">
                     <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
-                        <Card :cardProp="apartment" class="min-height-card" />
+                        <Card :cardProp="apartment" class="h-100" />
                     </router-link>
                 </div>
             </div>
