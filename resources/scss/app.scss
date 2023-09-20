@@ -55,6 +55,22 @@ $body-font-family: $font-family-serif;
         align-items: center;
     }
 
+    .img_messaggio img{
+        object-fit: cover;
+        width: 36px!important;
+        height: 36px!important;
+        border-radius: 50%;
+    }
+
+    .accordion-button{
+        flex-direction: column;
+    }
+
+    .accordion-button div:last-child{
+        font-size: 12px;
+        text-align: left!important;
+    }
+
 
   }
 
@@ -103,6 +119,11 @@ $body-font-family: $font-family-serif;
 .actionPanel, .actionReveal{
     cursor: pointer;
 }
+
+.img_messaggio{
+    margin-bottom: 8px!important;
+}
+
 
 .img_messaggio img{
     object-fit: cover;
