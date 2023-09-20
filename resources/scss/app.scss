@@ -72,15 +72,11 @@ $body-font-family: $font-family-serif;
     cursor: pointer;
 }
 
-.img_messaggio{
-    height: 92px;
-    width: 92px;
-}
 .img_messaggio img{
     object-fit: cover;
-    width: 100%;
-    height: 100%;
-
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
 }
 
 .detailModal .modal-header{

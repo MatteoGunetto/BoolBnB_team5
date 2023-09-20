@@ -25,11 +25,11 @@
                     <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ $message->id }}" aria-expanded="true" aria-controls="collapseOne{{ $message->id }}">
                         {{-- {{$apartment->image}} --}}
-                        <div class="img_messaggio">
+                        <div class="img_messaggio me-2">
                             <img src="{{ asset('storage/' . $message->apartment->image) }}" class="card-img-top"
                                     alt="Apartment Image">
                         </div>
-                                <p><strong>Appartamento:</strong>  {{ $message->apartment->title }}</p>
+                                <p class="m-0"><strong>Appartamento:</strong>  {{ $message->apartment->title }}</p>
                         <span class="w-100 text-end pe-3"> Ricevuto:{{$message->created_at}}</span>
                     </button>
                   </h2>
