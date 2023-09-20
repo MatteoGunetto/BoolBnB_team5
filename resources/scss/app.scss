@@ -37,23 +37,58 @@ $body-font-family: $font-family-serif;
     color: $light;
 }
 
+.navbar-brand{
+    font-weight: 800;
+}
+
+.card{
+    border-radius: 24px!important;
+    overflow: hidden;
+}
+
+.auth{
+    background: linear-gradient(216deg, rgba(37,174,74,0.8) 0%, rgba(37,174,74,1) 100%), url('https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+}
+
+.auth label{
+    font-size: 12px;
+}
+
+.actionPanel{
+    border-top-left-radius: 36px!important;
+    border-bottom-left-radius: 36px!important;
+}
+
 .actionPanel li:first-child{
     padding-top: 36px;
+}
+
+.actionPanel li:last-child{
+    padding-bottom: 16px;
 }
 
 .actionPanel, .actionReveal{
     cursor: pointer;
 }
 
-.img_messaggio{
-    height: 92px;
-    width: 92px;
-}
 .img_messaggio img{
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
 
+.detailModal .modal-header{
+    min-height: 150px;
+    background-size: cover;
+}
+
+.detailModal button.btn-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: block;
 }
 
 // .card-img-top{

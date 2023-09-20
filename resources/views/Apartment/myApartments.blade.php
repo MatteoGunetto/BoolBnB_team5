@@ -81,8 +81,43 @@
                             <h5 class="card-title">{{ $apartment->title }}</h5>
 
                             <p class="card-text">Location: {{ $apartment->address }}</p>
+
                             <!-- BOTTONE DETTAGLI -->
-                            <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a>
+
+                            <!-- Modal dettagli -->
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#detailModal-{{ $apartment->id }}">
+                            Dettagli
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="detailModal modal fade" id="detailModal-{{ $apartment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header flex-column justify-content-end align-items-start" style="background-image: linear-gradient(216deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5998993347338936) 100%), url('{{ asset('storage/' . $apartment->image) }}');">
+                                        <h1 class="modal-title fs-3 text-white" id="exampleModalLabel"> {{$apartment->title}} </h1>
+                                        <div class="modal-icons d-flex gap-2 text-white">
+                                            <div class="service-container">
+                                                Letti: {{ $apartment->beds }}
+                                            </div>
+                                            <div class="service-container">
+                                                Bagni: {{ $apartment->bathrooms }}
+                                            </div>
+                                            <div class="service-container">
+                                                Stanze: {{ $apartment->rooms }}
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Da rivedere -->
+                                        {{$apartment->amenities}}
+                                        <h5>Descrizione</h5>
+                                        {{$apartment->description}}
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a> -->
 
                             <!-- BOTTONE SPONSOR -->
                             <a href="{{ route('Apartment.selectSponsorship', $apartment->id) }}" class="btn btn-warning">Sponsor</a>

@@ -74,9 +74,8 @@ export default {
 
 <template>
     <!-- Hero -->
-    <h1>{{ searchAddress }}</h1>
     <header class="container-fluid px-4  text-center">
-        <div class="container">
+        <div class="container mt-5 pt-4">
             <div class="row">
                 <div class="col-md-6 mx-auto position-relative">
                     <div class="mb-4">
@@ -144,5 +143,6 @@ header {
     color: white;
     padding: 100px;
     text-align: center;
+    padding-top: 56px;
 }
 </style>
