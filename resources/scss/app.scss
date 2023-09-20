@@ -30,9 +30,9 @@ $body-font-family: $font-family-serif;
 
 
 
-.dash-nav{
-    width: 250px!important;
-}
+// .dash-nav{
+//     width: 250px!important;
+// }
 
 .dash-main{
     width: calc(100% - 250px);
@@ -40,7 +40,7 @@ $body-font-family: $font-family-serif;
 
 
 
-// Media queries x navbar responsive
+// // Media queries x navbar responsive
 @media only screen and (max-width: 768px) {
     .dash-nav{
         width: 80px!important;
