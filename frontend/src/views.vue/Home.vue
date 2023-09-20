@@ -99,12 +99,13 @@ export default {
         <div class="row row-cols-1 py-5">
             <h3 class="text-center text-primary">Appartamenti in Evidenza </h3>
         </div>
-
-        <div class="row row-cols-3">
-            <div class="col" v-for="apartment in store.promoApartmentsArray">
-                <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
-                    <Card :cardProp="apartment" />
-                </router-link>
+        <div class="card-group h-100">
+            <div class="row row-cols-3">
+                <div class="col d-flex" v-for="apartment in store.promoApartmentsArray">
+                    <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
+                        <Card :cardProp="apartment" class="h-100" />
+                    </router-link>
+                </div>
             </div>
         </div>
 
@@ -144,5 +145,10 @@ header {
     padding: 100px;
     text-align: center;
     padding-top: 56px;
+}
+
+.min-height-card {
+    min-height: 400px;
+    /* Imposta l'altezza minima desiderata */
 }
 </style>
