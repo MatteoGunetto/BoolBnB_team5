@@ -37,6 +37,10 @@ $body-font-family: $font-family-serif;
     color: $light;
 }
 
+.navbar-brand{
+    font-weight: 800;
+}
+
 .card{
     border-radius: 24px!important;
     overflow: hidden;
