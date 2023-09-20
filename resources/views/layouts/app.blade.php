@@ -90,6 +90,7 @@
             </div>
         </nav>
 
+        
         <main class="vh-100">
 
             <div class="container-fluid h-100">
@@ -108,7 +109,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-10">
+                    <div class="col-12 col-md-10 p-0">
                         @yield('content')
                     </div>
                 </div>

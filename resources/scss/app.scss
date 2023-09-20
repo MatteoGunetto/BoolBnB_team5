@@ -42,10 +42,14 @@ $body-font-family: $font-family-serif;
     overflow: hidden;
 }
 
-// .card img{
-//     border-top-left-radius: 22px!important;
-//     border-top-right-radius: 22px!important;
-// }
+.auth{
+    background: linear-gradient(216deg, rgba(37,174,74,0.8) 0%, rgba(37,174,74,1) 100%), url('https://images.pexels.com/photos/584399/living-room-couch-interior-room-584399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover;
+}
+
+.auth label{
+    font-size: 12px;
+}
 
 .actionPanel{
     border-top-left-radius: 36px!important;
