@@ -99,7 +99,7 @@
 
 <!-- Barra laterale -->
 
-<div class="dash-nav bg-primary p-md-4 py-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
+            {{-- <div class="dash-nav bg-primary p-md-4 py-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
                 <ul class="nav flex-column  gap-2">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
@@ -112,16 +112,12 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
 
             <main class="dash-main vh-100">
         @yield('content')
         </main>
 
-</div>
-
-
-    </div>
 </body>
 
 </html>
