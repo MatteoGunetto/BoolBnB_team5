@@ -7,7 +7,7 @@
                 <a class="btn btn-outline-primary" href="{{ route('Apartment.create') }}">Aggiungi un appartamento  <i class="bi bi-plus-lg"></i></a>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
 
 
