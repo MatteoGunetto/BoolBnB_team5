@@ -40,7 +40,7 @@ export default {
                     </div>
                     <div class="icon d-flex align-items-center ms-2">
                         <img src="../../../public/icon-rooms.svg" alt="icona-appartamento">
-                        <span class="ms-2">{{ cardProp.squareMeters }}</span>
+                        <span class="ms-2">{{ cardProp.squareMeters }} Mq</span>
                     </div>
 
 
@@ -83,5 +83,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.card {
+    margin-bottom: 50px;
 }
 </style>
