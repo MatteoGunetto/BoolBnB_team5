@@ -22,10 +22,7 @@
         </div>
     </div>
         </div>
-        <div class="col-lg-12">
-            <!-- Container di Braintree -->
-<div id="dropin-container"></div>
-<button id="submit-button">Effettua il pagamento</button>
+
 
 
 

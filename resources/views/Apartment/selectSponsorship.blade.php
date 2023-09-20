@@ -19,7 +19,6 @@
         @foreach ($promotions as $promotion)
         <div class="col-lg-4 mb-lg-0 mb-3">
             <div class="card">
-                <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{$promotion->title}}</h5>
                     <p class="card-text">{{$promotion->cost}} €</p>
