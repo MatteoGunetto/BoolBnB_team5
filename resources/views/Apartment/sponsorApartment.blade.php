@@ -34,7 +34,7 @@
     @csrf
     <div>
         <label>Numero Carta:</label>
-        <input type="text" name="card_number" class="form-control @error('card_number') is-invalid @enderror" placeholder="1234 5678 1234 5678">
+        <input required type="text" name="card_number" class="form-control @error('card_number') is-invalid @enderror" placeholder="1234 5678 1234 5678" >
         @error('card_number')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
     </div>
     <div>
         <label>Data di Scadenza:</label>
-        <input type="text" class="form-control @error('expiry_date') is-invalid @enderror" name="expiry_date" placeholder="MM/AA">
+        <input required type="text" class="form-control @error('expiry_date') is-invalid @enderror" name="expiry_date" placeholder="MM/AA">
         @error('expiry_date')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
     </div>
     <div>
         <label>CVV:</label>
-        <input type="text" class="form-control @error('cvv') is-invalid @enderror" name="cvv" placeholder="123">
+        <input required type="text" class="form-control @error('cvv') is-invalid @enderror" name="cvv" placeholder="123">
         @error('cvv')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
     </div>
     <div>
         <label>Quando vuoi far partire la promozione?</label>
-        <input type="datetime-local" name="startDate" placeholder="">
+        <input required type="datetime-local" name="startDate" placeholder="">
     </div>
     <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
     <input type="hidden" name="promotion_id" value="{{ $promotion->id }}">
