@@ -88,6 +88,10 @@ export default {
                     <div class="apt-icons d-flex gap-3 align-items-center">
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-bed.svg">
+                            <span class="ms-2">{{ store.singleApartmentArray.rooms }}</span>
+                        </div>
+                        <div class="icon-group d-flex justify-content-center align-items-center">
+                            <img src="../../../public/people-icon.svg">
                             <span class="ms-2">{{store.singleApartmentArray.beds}}</span>
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
@@ -96,7 +100,7 @@ export default {
                         </div>
                         <div class="icon-group d-flex justify-content-center align-items-center">
                             <img src="../../../public/icon-rooms.svg">
-                            <span class="ms-2">{{ store.singleApartmentArray.rooms }}</span>
+                            <span class="ms-2">{{ store.singleApartmentArray.squareMeters }}<span style="font-size: 10px;"> /Mq</span></span>
                         </div>
                     </div>
                 </div>
@@ -107,26 +111,18 @@ export default {
 
     <section class="container">
 
-        <!-- aggiunto questo, probabilmente da sistemare -->
-        <div>
-            <h3>
-                Host: {{store.singleApartmentArray.user.name}}
-            </h3>
-        </div>
 
-        <!-- aggiunto anche questo, probabilmente da sistemare -->
-        <section class="my-3">
-            <span>Rooms: {{ store.singleApartmentArray.rooms }} &middot; </span>
-            <span>Beds: {{ store.singleApartmentArray.beds }} &middot; </span>
-            <span>Bathrooms: {{ store.singleApartmentArray.bathrooms }} &middot; </span>
-            <span>{{ store.singleApartmentArray.squareMeters }} mq</span>
-        </section>
-
-       
         <!-- Descrizione -->
         <section class="row justify-content-between">
             <div class="col-lg-7">
-                <h2>Description</h2>
+                <h2 class="mb-0">Description</h2>
+                        <!-- aggiunto anche questo, probabilmente da sistemare -->
+                <section class="mb-3" style="font-size:12px">
+                    <span>Rooms: {{ store.singleApartmentArray.rooms }} &middot; </span>
+                    <span>Beds: {{ store.singleApartmentArray.beds }} &middot; </span>
+                    <span>Bathrooms: {{ store.singleApartmentArray.bathrooms }} &middot; </span>
+                    <span>{{ store.singleApartmentArray.squareMeters }} mq</span>
+                </section>
                 <p>{{ store.singleApartmentArray.description }}</p>
 
 
@@ -177,6 +173,14 @@ export default {
                 </div>
             </div>
         </section>
+
+                <!-- aggiunto questo, probabilmente da sistemare -->
+                <div>
+            <h3>
+                Host:
+            </h3>
+            <p>{{store.singleApartmentArray.user.name}}</p>
+        </div>
 
         <!-- Amenities -->
         <section>
