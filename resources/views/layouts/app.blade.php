@@ -99,16 +99,16 @@
 
 <!-- Barra laterale -->
 
-<div class="dash-nav bg-primary p-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
-                <ul class="nav flex-column gap-2">
+<div class="dash-nav bg-primary p-md-4 py-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
+                <ul class="nav flex-column  gap-2">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
-                            <i class="bi bi-house me-2"></i><span>Appartamenti</span>
+                            <i class="bi bi-house me-md-2"></i><span>Appartamenti</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
-                            <i class="bi bi-envelope-paper me-2"></i> <span>Messagi</span>
+                            <i class="bi bi-envelope-paper me-md-2"></i> <span>Messagi</span>
                         </a>
                     </li>
                 </ul>
