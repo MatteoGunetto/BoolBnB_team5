@@ -3,11 +3,13 @@
 
 <div class="container p-5">
     <div class="row">
+
         <div class="col-lg-12">
             <h1 class="mb-3">Benvenuto nella schermata di pagamento</h1>
             <div>
         per procedere con l'attivazione della sponsorizzazione :
         <strong>{{$promotion->title}}</strong>
+
         <div>
             con la durata di :
             <strong>{{$promotion->durationInDays}} giorni</strong>
@@ -20,17 +22,22 @@
             per l'appartamento :
             <strong>{{$apartment->title}}</strong>
         </div>
-    </div>
+        <div>
+            compilare il seguente form per il pagamento:
         </div>
 
 
+    </div>
+    
 
 
 
 
 
 
-<form action="{{ route('Apartment.payPromotion') }}" method="POST">
+
+
+<form action="{{ route('Apartment.payPromotion') }}" method="POST" class="my-5">
     @csrf
     <div>
         <label>Numero Carta:</label>
