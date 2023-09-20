@@ -103,12 +103,12 @@
                 <ul class="nav flex-column gap-2">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
-                            <i class="bi bi-house me-2"></i>Appartamenti
+                            <i class="bi bi-house me-2"></i><span>Appartamenti</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
-                            <i class="bi bi-envelope-paper me-2"></i> Messagi
+                            <i class="bi bi-envelope-paper me-2"></i> <span>Messagi</span>
                         </a>
                     </li>
                 </ul>
@@ -120,7 +120,7 @@
 
 </div>
 
-        
+
     </div>
 </body>
 
