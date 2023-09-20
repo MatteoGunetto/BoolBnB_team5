@@ -22,27 +22,27 @@ class AmenityTableSeeder extends Seeder
         Amenity::insert([
             [
                 'name' => 'Wifi',
-                'icon' => 'fa-wifi',
+                'icon' => 'bi-wifi',
             ],
             [
                 'name' => 'Parking',
-                'icon' => 'fa-square-parking',
+                'icon' => 'bi-p-circle',
             ],
             [
-                'name' => 'Swimming Pool',
-                'icon' => 'fa-person-swimming',
+                'name' => 'Swimming pool',
+                'icon' => 'bi-water',
             ],
             [
                 'name' => 'Concierge',
-                'icon' => 'fa-bell-concierge',
+                'icon' => 'bi-file-person',
             ],
             [
-                'name' => 'Sauna',
-                'icon' => 'fa-spa',
+                'name' => 'sauna',
+                'icon' => 'bi-thermometer-sun',
             ],
             [
                 'name' => 'Sea View',
-                'icon' => 'fa-water',
+                'icon' => 'bi-brightness-alt-high',
             ],
         ]);
     }
