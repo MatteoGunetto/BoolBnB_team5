@@ -16,7 +16,7 @@
                 </ul>
             </div>
         {{-- contenuto --}}
-        <div class="content p-4">
+        <div class="content p-5">
             {{-- titolo i tuoi appartamenti --}}
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
