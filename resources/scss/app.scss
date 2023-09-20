@@ -29,6 +29,22 @@ $headings-font-weight: 600;
 $body-font-family: $font-family-serif;
 
 
+
+.dash-nav{
+    width: 250px!important;
+}
+
+.dash-main{
+    width: calc(100% - 250px);
+}
+
+
+
+// Media queries x navbar responsive
+
+
+// Media queries x navbar responsive
+
 #sidebar a{
     color: $white;
 }

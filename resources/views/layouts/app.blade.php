@@ -90,32 +90,37 @@
             </div>
         </nav>
 
-        
-        <main class="vh-100">
-
-            <div class="container-fluid h-100">
+        <!-- <div class="container-fluid h-100">
                 <div class="row h-100">
-                    <div class="col-md-2 bg-primary p-4" id="sidebar" style="--bs-bg-opacity: .8;">
-                        <ul class="nav flex-column gap-2">
-                            <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
-                                    <i class="bi bi-house me-2"></i>Appartamenti
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
-                                    <i class="bi bi-envelope-paper me-2"></i> Messagi
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 col-md-10 p-0">
-                        @yield('content')
-                    </div>
+
                 </div>
+            </div> -->
+<div class="dasboard d-flex">
+
+<!-- Barra laterale -->
+
+<div class="dash-nav bg-primary p-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
+                <ul class="nav flex-column gap-2">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ route('Apartment.myApartments') }}">
+                            <i class="bi bi-house me-2"></i>Appartamenti
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ route('Apartment.myMessages') }}">
+                            <i class="bi bi-envelope-paper me-2"></i> Messagi
+                        </a>
+                    </li>
+                </ul>
             </div>
 
+            <main class="dash-main vh-100">
+        @yield('content')
         </main>
+
+</div>
+
+        
     </div>
 </body>
 
