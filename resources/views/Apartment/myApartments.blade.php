@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row ">
         {{-- side bar --}}
-        <div class="col-lg-2 col-sm-2">
             <div class="dash-nav bg-primary p-md-4 py-4 vh-100" id="sidebar" style="--bs-bg-opacity: .8;">
                 <ul class="nav flex-column  gap-2">
                     <li class="nav-item">
@@ -17,9 +15,8 @@
                     </li>
                 </ul>
             </div>
-        </div>
         {{-- contenuto --}}
-        <div class="col-lg-10 col-sm-10 g-4">
+        <div class="content p-4">
             {{-- titolo i tuoi appartamenti --}}
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -33,7 +30,7 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {{-- cards dei miei appartamenti --}}
                 @foreach ($apartments as $apartment)
-                    <div class="col col-sm-6">
+                    <div class="col">
                         <div class="card">
 
                             <i class="actionReveal bi bi-three-dots text-white position-absolute top-0 end-0 me-2"
@@ -166,7 +163,6 @@
                 @endforeach
             </div>
         </div>
-    </div>
 
     <script>
         // Ottieni tutti gli elementi con la classe "mostra-tabella"

@@ -30,11 +30,11 @@ $body-font-family: $font-family-serif;
 
 
 
-// .dash-nav{
-//     width: 250px!important;
-// }
+.dash-nav{
+    width: 250px!important;
+}
 
-.dash-main{
+.content{
     width: calc(100% - 250px);
 }
 
@@ -45,7 +45,7 @@ $body-font-family: $font-family-serif;
     .dash-nav{
         width: 80px!important;
     }
-    .dash-main{
+    .content{
         width: calc(100% - 80px);
     }
     .dash-nav span{
