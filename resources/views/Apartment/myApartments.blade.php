@@ -112,12 +112,12 @@
                     <p class="card-text">Location: {{ $apartment->address }}</p>
                     <!-- BOTTONE DETTAGLI -->
                     <!-- Modal dettagli -->
-                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                    {{-- <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
                         data-bs-target="#detailModal-{{ $apartment->id }}">
                         Dettagli
-                    </button>
+                    </button> --}}
                     <!-- Modal -->
-                    <div class="detailModal modal fade" id="detailModal-{{ $apartment->id }}" tabindex="-1"
+                    {{-- <div class="detailModal modal fade" id="detailModal-{{ $apartment->id }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -147,8 +147,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a> -->
+                    </div> --}}
+                    <a href="{{ route('Apartment.show', $apartment->id) }}" class="btn btn-outline-info">Dettagli</a>
                     <!-- Verifica se l'appartamento ha promozioni e nascondi il bottone "Sponsor" -->
                     @if (!$apartment->promotions->isNotEmpty())
                     <a href="{{ route('Apartment.selectSponsorship', $apartment->id) }}"
