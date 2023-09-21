@@ -253,7 +253,7 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none"
+                    <div class="col-md-6 g-3 p-3 text-decoration-none carta"
                         v-for="apartment in store.apartmentsInAdvancedSearch" :key="apartment.id">
 
 
