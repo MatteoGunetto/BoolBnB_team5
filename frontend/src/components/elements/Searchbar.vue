@@ -118,9 +118,9 @@ export default {
 
     <div class="d-flex justify-content-center position-relative gap-2 mb-5">
         <div class="input-group">
-            <input class="mainSearch form-control w-50 rounded-3 input-lg position-relative" list="datalistOptions" id="exampleDataList" placeholder="Dove vuoi andare?" v-model="store.addressSelected" @input="getHints">
+            <input class="mainSearch form-control w-50 rounded-pill input-lg" list="datalistOptions" id="exampleDataList"  placeholder="Dove vuoi andare?" v-model="store.addressSelected" @input="getHints">
             <i class="bi bi-geo-alt" style="font-size: 1.3em"></i>
-            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white  btn-search" role="button" @click.prevent="getApartment"><i class="bi bi-search"></i> Cerca</RouterLink>
+            <RouterLink to="/list" class="btn btn-primary btn-lg px-4 gap-3 text-white btn-search rounded-pill" id="button-search" role="button" @click.prevent="getApartment"><i class="bi bi-search"></i> Cerca</RouterLink>
 
         </div>
 
@@ -130,7 +130,6 @@ export default {
         </ul>
     
     </div>
-
 
                     <!-- <div v-for="suggestion in store.suggestedAddresses">
                         <input type="text" @click.prevent="suggestionValue" :value="`${ suggestion.address.freeformAddress }, ${ suggestion.address.country }`">
@@ -143,7 +142,8 @@ export default {
 @import "../../../scss/boolBnbStyle.scss";
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
-.btn-search {
+a#button-search {
+    margin-left: -100px;
     z-index: 100;
 }
 
