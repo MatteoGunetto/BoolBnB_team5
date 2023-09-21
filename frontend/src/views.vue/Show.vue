@@ -138,11 +138,11 @@ export default {
 
             <div class="col">
                 <!-- Messaggio -->
-                <div class="card">
-                    <div class="card-header">
+                <div class="card mb-3">
+                    <div class="card-header py-3">
                         Manda un messaggio
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-3">
                         <form>
                             <!-- Nome form -->
                             <div class="mb-3">
@@ -254,6 +254,11 @@ export default {
 
 .danger{
     color: $danger;
+}
+
+.card{
+    border-radius: 24px!important;
+    overflow: hidden;
 }
 </style>
 
