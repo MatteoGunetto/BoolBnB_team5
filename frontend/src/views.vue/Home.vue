@@ -100,8 +100,8 @@ export default {
             <h3 class="text-center text-primary">Appartamenti in Evidenza </h3>
         </div>
         <div class="card-group h-100">
-            <div class="row row-cols-3">
-                <div class="col d-flex" v-for="apartment in store.promoApartmentsArray">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 d-flex mb-4" v-for="apartment in store.promoApartmentsArray">
                     <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
                         <Card :cardProp="apartment" class="h-100" />
                     </router-link>

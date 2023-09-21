@@ -253,12 +253,12 @@ export default {
             <!-- card -->
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 g-3 p-3 text-decoration-none carta"
+                    <div class="col-md-6 g-3 p-3 text-decoration-none"
                         v-for="apartment in store.apartmentsInAdvancedSearch" :key="apartment.id">
 
 
                         <router-link style="text-decoration: none;" :to="`/show/${apartment.id}`">
-                            <Card :cardProp="apartment" />
+                            <Card :cardProp="apartment" class="h-100 m-0"/>
                         </router-link>
                         <!-- Badge "In Evidenza" -->
                         <span v-if="apartment.promotions.length > 0" class="badge badge-success">In Evidenza</span>

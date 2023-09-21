@@ -47,7 +47,7 @@ export default {
                     <div v-if="cardProp.distance" class="icon d-flex align-items-center ms-2 align-self-end">
                         <span class="ms-2">
                             <span>
-                                Distance:
+                                <i class="bi bi-geo" style="font-size: 1.3em;"></i>
                             </span>
                             {{ cardProp.distance.toFixed(2) }} km
                         </span>
